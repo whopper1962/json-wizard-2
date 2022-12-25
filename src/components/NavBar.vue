@@ -64,6 +64,7 @@ export default {
 .app-title {
   font-family: 'Trattatello';
   font-size: 30px;
+  margin-left: 15px;
   font-weight: bold;
 }
 .title-logo {

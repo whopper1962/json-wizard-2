@@ -6,50 +6,91 @@
           <thead>
             <tr>
               <th></th>
-              <th>cell_01-02</th>
-              <th>cell_01-03</th>
-              <th>cell_01-04</th>
-              <th>cell_01-05</th>
-              <th>cell_01-06</th>
-              <th>cell_01-07</th>
-              <th>cell_01-08</th>
-              <th>cell_01-09</th>
-              <th>cell_01-06</th>
-              <th>cell_01-07</th>
-              <th>cell_01-08</th>
-              <th>cell_01-09</th>
-              <th class="border-right">cell_01-10</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th>Add to keys</th>
+              <th class="border-right">Add to keys</th>
             </tr>
             <tr>
               <th></th>
-              <th>cell_02-02</th>
-              <th>cell_02-03</th>
-              <th>cell_02-04</th>
-              <th>cell_02-05</th>
-              <th>cell_02-06</th>
-              <th>cell_02-07</th>
-              <th>cell_02-08</th>
-              <th>cell_02-09</th>
-              <th>cell_01-06</th>
-              <th>cell_01-07</th>
-              <th>cell_01-08</th>
-              <th>cell_01-09</th>
-              <th class="border-right">cell_02-10</th>
+              <th>
+                Set as value
+              </th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th>Set as value</th>
+              <th class="border-right">Set as value</th>
             </tr>
             <tr>
               <th class="border-bottom"></th>
-              <th>cell_02-02</th>
-              <th>cell_02-03</th>
-              <th>cell_02-04</th>
-              <th>cell_02-05</th>
-              <th>cell_02-06</th>
-              <th>cell_02-07</th>
-              <th>cell_02-08</th>
-              <th>cell_02-09</th>
-              <th>cell_01-06</th>
-              <th>cell_01-07</th>
-              <th>cell_01-08</th>
-              <th>cell_01-09</th>
+              <th>Column1</th>
+              <th>Column2</th>
+              <th>Column3</th>
+              <th>Column4</th>
+              <th>Column5</th>
+              <th>Column6</th>
+              <th>Column7</th>
+              <th>Column8</th>
+              <th>Column9</th>
+              <th>Column10</th>
+              <th>Column11</th>
+              <th>Column12</th>
+              <th>Column1</th>
+              <th>Column2</th>
+              <th>Column3</th>
+              <th>Column4</th>
+              <th>Column5</th>
+              <th>Column6</th>
+              <th>Column7</th>
+              <th>Column8</th>
+              <th>Column9</th>
+              <th>Column10</th>
+              <th>Column11</th>
+              <th>Column12</th>
+              <th>Column12</th>
               <th class="border-right">cell_02-10</th>
             </tr>
           </thead>
@@ -60,9 +101,454 @@
                   class="garbage-button"
                   @click="onClickGarbageButton(0)"
                 >
-                  hello
+                  <font-awesome-icon icon="fa-solid fa-trash" />
                 </button>
               </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+            </tr>
+            <tr>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  <font-awesome-icon icon="fa-solid fa-trash" />
+                </button>
+              </th>
+              <td>cell_03-02</td>
+              <td>cell_03-03</td>
+              <td>cell_03-04</td>
+              <td>cell_03-05</td>
+              <td>cell_03-06</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
+              <td>cell_03-07</td>
+              <td>cell_03-08</td>
+              <td>cell_03-09</td>
+              <td>cell_03-10</td>
               <td>cell_03-02</td>
               <td>cell_03-03</td>
               <td>cell_03-04</td>
@@ -144,7 +630,7 @@ export default {
 }
 .xlsx-csv-table-outer {
   max-width: 100%;
-  max-height: 500px;
+  max-height: 400px;
   overflow: scroll;
 }
 .xlsx-csv-table-content th,
@@ -234,7 +720,8 @@ export default {
   font-size: 14px;
   line-height: 1.15;
   overflow: visible;
-  padding: 5px;
+  padding: 3px;
+  height: 100%;
   position: relative;
   text-align: center;
   text-transform: none;
