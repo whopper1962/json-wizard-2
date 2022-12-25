@@ -55,151 +55,14 @@
           </thead>
           <tbody>
             <tr>
-              <th class="border-bottom">cell_03-01</th>
-              <td>cell_03-02</td>
-              <td>cell_03-03</td>
-              <td>cell_03-04</td>
-              <td>cell_03-05</td>
-              <td>cell_03-06</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-            </tr>
-            <tr>
-              <th class="border-bottom">cell_03-01</th>
-              <td>cell_03-02</td>
-              <td>cell_03-03</td>
-              <td>cell_03-04</td>
-              <td>cell_03-05</td>
-              <td>cell_03-06</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-            </tr>
-            <tr>
-              <th class="border-bottom">cell_03-01</th>
-              <td>cell_03-02</td>
-              <td>cell_03-03</td>
-              <td>cell_03-04</td>
-              <td>cell_03-05</td>
-              <td>cell_03-06</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-            </tr>
-            <tr>
-              <th class="border-bottom">cell_03-01</th>
-              <td>cell_03-02</td>
-              <td>cell_03-03</td>
-              <td>cell_03-04</td>
-              <td>cell_03-05</td>
-              <td>cell_03-06</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-            </tr>
-            <tr>
-              <th class="border-bottom">cell_03-01</th>
-              <td>cell_03-02</td>
-              <td>cell_03-03</td>
-              <td>cell_03-04</td>
-              <td>cell_03-05</td>
-              <td>cell_03-06</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-            </tr>
-            <tr>
-              <th class="border-bottom">cell_03-01</th>
-              <td>cell_03-02</td>
-              <td>cell_03-03</td>
-              <td>cell_03-04</td>
-              <td>cell_03-05</td>
-              <td>cell_03-06</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-            </tr>
-            <tr>
-              <th class="border-bottom">cell_03-01</th>
-              <td>cell_03-02</td>
-              <td>cell_03-03</td>
-              <td>cell_03-04</td>
-              <td>cell_03-05</td>
-              <td>cell_03-06</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-            </tr>
-            <tr>
-              <th class="border-bottom">cell_03-01</th>
-              <td>cell_03-02</td>
-              <td>cell_03-03</td>
-              <td>cell_03-04</td>
-              <td>cell_03-05</td>
-              <td>cell_03-06</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-            </tr>
-            <tr>
-              <th class="border-bottom">cell_03-01</th>
-              <td>cell_03-02</td>
-              <td>cell_03-03</td>
-              <td>cell_03-04</td>
-              <td>cell_03-05</td>
-              <td>cell_03-06</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-              <td>cell_03-07</td>
-              <td>cell_03-08</td>
-              <td>cell_03-09</td>
-              <td>cell_03-10</td>
-            </tr>
-            <tr>
-              <th class="border-bottom">cell_03-01</th>
+              <th class="border-bottom">
+                <button
+                  class="garbage-button"
+                  @click="onClickGarbageButton(0)"
+                >
+                  hello
+                </button>
+              </th>
               <td>cell_03-02</td>
               <td>cell_03-03</td>
               <td>cell_03-04</td>
@@ -249,6 +112,9 @@ export default {
   },
   computed: {},
   methods: {
+    onClickGarbageButton (index) {
+      console.error(index);
+    },
     async fileInputed(event) {
       this.isFileSelected = false;
       const fileContents = event.target.files ? event.target.files[0] : null;
@@ -354,5 +220,45 @@ export default {
 }
 .xlsx-csv-table-content thead tr th:nth-child(1) {
   z-index: 3;
+}
+.garbage-button {
+  width: 100%;
+  appearance: button;
+  background-color: #969ba7;
+  border: 1px solid #969ba7;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-family: Graphik,-apple-system,system-ui,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-size: 14px;
+  line-height: 1.15;
+  overflow: visible;
+  padding: 5px;
+  position: relative;
+  text-align: center;
+  text-transform: none;
+  transition: all 80ms ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.garbage-button:disabled {
+  opacity: .5;
+}
+
+.garbage-button:focus {
+  outline: 0;
+}
+
+.garbage-button:hover {
+  background-color: #848893;
+  border-color: #848893;
+}
+
+.garbage-button:active {
+  background-color: #969ba7;
+  border-color: #969ba7;
 }
 </style>
