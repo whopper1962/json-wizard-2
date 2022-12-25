@@ -22,13 +22,18 @@
       </ul>
     </div>
     <div class="current-tab">
-      hello
+      <XlsxCsvTable/>
     </div>
   </div>
 </template>
 
 <script>
+import XlsxCsvTable from '@/components/XlsxCsvTable.vue';
+
 export default {
+  components: {
+    XlsxCsvTable
+  },
   data () {
     return {
       xlsxCsvList: [
