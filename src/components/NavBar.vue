@@ -6,6 +6,11 @@
         name: 'HOME_VIEW'
       }"
     >
+      <!-- <img
+        src="wizard.png"
+        alt="" width="40"
+        class="img-fluid title-logo"
+      > -->
       JSON WIZARD
     </router-link>
 
@@ -60,5 +65,8 @@ export default {
   font-family: 'Trattatello';
   font-size: 30px;
   font-weight: bold;
+}
+.title-logo {
+  margin-right: 5px;
 }
 </style>

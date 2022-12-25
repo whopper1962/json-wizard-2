@@ -1,18 +1,18 @@
 <template>
   <div>
-    <XlsxCsvTable/>
-    <JsonTable/>
+    <XlsxCsvBase/>
+    <JsonBase/>
   </div>
 </template>
 
 <script>
-import XlsxCsvTable from '@/components/XlsxCsvTable.vue';
-import JsonTable from '@/components/JsonTable.vue';
+import XlsxCsvBase from '@/components/XlsxCsvBase.vue';
+import JsonBase from '@/components/JsonBase.vue';
 
 export default {
   components: {
-    XlsxCsvTable,
-    JsonTable
+    XlsxCsvBase,
+    JsonBase
   },
   data () {
     return {};
