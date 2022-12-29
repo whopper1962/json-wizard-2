@@ -4,17 +4,23 @@
       JSON
     </div>
     <div class="card-body">
-      <h5 class="card-title">Special title treatment</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+      <JsonEditor
+        v-model="code"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import JsonEditor from '@/components/CodeEditor.vue';
 export default {
+  components: {
+    JsonEditor
+  },
   data () {
-    return {};
+    return {
+      code: `console.log('Hello World!');`
+    };
   },
   computed: {},
   methods: {}
