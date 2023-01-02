@@ -623,7 +623,7 @@ export default {
 
 <style scoped>
 .xlsx-csv-table-main {
-  margin: 0px 20px;
+  margin-left: 5px;
 }
 .btn-area {
   align-content: left;

@@ -21,18 +21,27 @@
         </template>
       </ul>
     </div>
-    <div class="current-tab">
-      <XlsxCsvTable/>
+    <div class="current-tab container-fluid">
+      <div class="row">
+        <div class="col-8">
+          <XlsxCsvTable/>
+        </div>
+        <div class="col-4">
+          <XlsxCsvColumnSelector/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import XlsxCsvTable from '@/components/XlsxCsvTable.vue';
+import XlsxCsvColumnSelector from '@/components/XlsxCsvColumnSelector.vue';
 
 export default {
   components: {
-    XlsxCsvTable
+    XlsxCsvTable,
+    XlsxCsvColumnSelector
   },
   data () {
     return {
@@ -71,5 +80,8 @@ export default {
 }
 .link-cursor {
   cursor: pointer;
+}
+.current-tab {
+  width: 100%;
 }
 </style>
