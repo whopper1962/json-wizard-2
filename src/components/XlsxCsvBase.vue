@@ -4,6 +4,14 @@
       XLSX / CSV
     </div>
     <div class="card-body">
+      <div class="execute-conversion-button-wrapper">
+        <button
+          class="btn btn-primary"
+          @click="executeConversion()"
+        >
+          Execute conversion
+        </button>
+      </div>
       <ul class="nav nav-tabs">
         <template v-for="(xlsxCsc, index) in xlsxCsvList">
           <li class="nav-item" :key="`xlsx_csv_${index}`">
@@ -23,10 +31,10 @@
     </div>
     <div class="current-tab container-fluid">
       <div class="row">
-        <div class="col-8">
+        <div class="col-9">
           <XlsxCsvTable/>
         </div>
-        <div class="col-4">
+        <div class="col-3">
           <XlsxCsvColumnSelector/>
         </div>
       </div>
@@ -63,6 +71,9 @@ export default {
   methods: {
     onClickTab (index) {
       this.selectedXlsxCsvIndex = index;
+    },
+    executeConversion () {
+      console.error('executeConversion');
     }
   }
 }
@@ -83,5 +94,9 @@ export default {
 }
 .current-tab {
   width: 100%;
+}
+.execute-conversion-button-wrapper {
+  text-align: left;
+  margin-bottom: 20px;
 }
 </style>
