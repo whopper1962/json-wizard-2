@@ -6,7 +6,7 @@
     <div class="card-body">
       <div class="execute-conversion-button-wrapper">
         <button
-          class="btn btn-primary"
+          class="btn btn-primary font-weight-bold"
           @click="executeConversion()"
         >
           Execute conversion
@@ -23,7 +23,7 @@
               aria-current="page"
               @click="onClickTab(index)"
             >
-              Tab{{ index + 1 }}
+              ({{ index + 1 }}) xlsx-test-file.xlsx
             </div>
           </li>
         </template>

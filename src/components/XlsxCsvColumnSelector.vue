@@ -15,7 +15,9 @@
             :key="`elem_${index}`"
           >
             <div class="column-card-inner">
-              {{element.name}}
+              <span class="font-weight-bold">
+                {{ element.name }}
+              </span>
             </div>
           </div>
         </template>
