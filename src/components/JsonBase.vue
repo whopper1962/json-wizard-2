@@ -4,7 +4,7 @@
       JSON
     </div>
     <div class="card-body">
-      <div class="copy-button-wrapper">
+      <div class="option-button-wrapper">
         <button
           class="btn btn-secondary"
           @click="copyToClipboard()"
@@ -18,6 +18,27 @@
         >
           Invalid JSON format!
         </span>
+      </div>
+      <div class="form-inline option-button-wrapper">
+        <button
+          class="btn btn-info mb-2"
+          @click="formatJsonSpace()"
+          :disabled="numberOfSpaces < 0 || invalidJsonFormat"
+        >
+          Format JSON spaces
+        </button>
+        <div class="form-group mx-sm-3 mb-2">
+          <span class="spaces-form-text">
+            Number of spaces:
+          </span>
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Number of spaces"
+            min="0"
+            v-model="numberOfSpaces"
+          >
+        </div>
       </div>
       <JsonEditor
         v-model="inputedJson"
@@ -35,7 +56,8 @@ export default {
   data () {
     return {
       inputedJson: `{\n"hello": "json"\n}`,
-      invalidJsonFormat: false
+      invalidJsonFormat: false,
+      numberOfSpaces: null
     };
   },
   watch: {
@@ -63,6 +85,11 @@ export default {
       .catch((error) => {
         console.error(error);
       });
+    },
+    formatJsonSpace () {
+      console.error(`Format spaces: ${this.numberOfSpaces}`);
+      // let formattedJson = JSON.stringify(this.inputedJson, null, this.numberOfSpaces);
+      // this.inputedJson = formattedJson;
     }
   }
 }
@@ -77,11 +104,17 @@ export default {
 .json-card {
   align-content: left;
 }
-.copy-button-wrapper {
+.option-button-wrapper {
   text-align: left;
   margin-bottom: 10px;
 }
 .invalid-json-format-error {
   margin-left: 15px;
+}
+.format-json-spaces-area {
+  display: inline-block;
+}
+.spaces-form-text {
+  margin-right: 5px;
 }
 </style>
