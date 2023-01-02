@@ -32,6 +32,7 @@
     <div class="current-tab container-fluid">
       <div class="row">
         <div class="col-9">
+          <XlsxCsvOptions/>
           <XlsxCsvTable/>
         </div>
         <div class="col-3">
@@ -45,11 +46,13 @@
 <script>
 import XlsxCsvTable from '@/components/XlsxCsvTable.vue';
 import XlsxCsvColumnSelector from '@/components/XlsxCsvColumnSelector.vue';
+import XlsxCsvOptions from '@/components/XlsxCsvOptions.vue';
 
 export default {
   components: {
     XlsxCsvTable,
-    XlsxCsvColumnSelector
+    XlsxCsvColumnSelector,
+    XlsxCsvOptions
   },
   data () {
     return {
