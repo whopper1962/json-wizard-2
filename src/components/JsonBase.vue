@@ -1,11 +1,26 @@
 <template>
-  <div class="card">
+  <div class="card json-card">
     <div class="card-header card-header-title">
       JSON
     </div>
     <div class="card-body">
+      <div class="copy-button-wrapper">
+        <button
+          class="btn btn-secondary"
+          @click="copyToClipboard()"
+          :disabled="invalidJsonFormat"
+        >
+          Copy to Clipboard
+        </button>
+        <span
+          class="invalid-json-format-error text-danger"
+          v-if="invalidJsonFormat"
+        >
+          Invalid JSON format!
+        </span>
+      </div>
       <JsonEditor
-        v-model="code"
+        v-model="inputedJson"
       />
     </div>
   </div>
@@ -19,11 +34,37 @@ export default {
   },
   data () {
     return {
-      code: `console.log('Hello World!');`
+      inputedJson: `{\n"hello": "json"\n}`,
+      invalidJsonFormat: false
     };
   },
+  watch: {
+    inputedJson (inputed) {
+      try {
+        this.invalidJsonFormat = false;
+        JSON.parse(inputed);
+      } catch {
+        this.invalidJsonFormat = true;
+      }
+    }
+  },
   computed: {},
-  methods: {}
+  methods: {
+    copyToClipboard () {
+      const jsonToCopy = JSON.stringify(
+        JSON.parse(this.inputedJson),
+        null,
+        4
+      );
+      navigator.clipboard.writeText(jsonToCopy)
+      .then(() => {
+        console.log("Copied!");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    }
+  }
 }
 </script>
 
@@ -32,5 +73,15 @@ export default {
   font-family: 'Trattatello';
   font-size: 18px;
   font-weight: bold;
+}
+.json-card {
+  align-content: left;
+}
+.copy-button-wrapper {
+  text-align: left;
+  margin-bottom: 10px;
+}
+.invalid-json-format-error {
+  margin-left: 15px;
 }
 </style>
