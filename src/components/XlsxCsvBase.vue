@@ -29,8 +29,9 @@
         </template>
       </ul>
     </div>
+    <!-- Main xlsx csv area -->
     <div class="current-tab container-fluid">
-      <div class="row">
+      <div class="row" v-if="!xlsxCsvInputed">
         <div class="col-9">
           <XlsxCsvOptions/>
           <XlsxCsvTable/>
@@ -41,6 +42,9 @@
           />
         </div>
       </div>
+      <div v-else>
+        <SourceFileForm/>
+      </div>
     </div>
   </div>
 </template>
@@ -49,12 +53,14 @@
 import XlsxCsvTable from '@/components/XlsxCsvTable.vue';
 import XlsxCsvColumnSelector from '@/components/XlsxCsvColumnSelector.vue';
 import XlsxCsvOptions from '@/components/XlsxCsvOptions.vue';
+import SourceFileForm from '@/components/SourceFileForm.vue';
 
 export default {
   components: {
     XlsxCsvTable,
     XlsxCsvColumnSelector,
-    XlsxCsvOptions
+    XlsxCsvOptions,
+    SourceFileForm
   },
   data () {
     return {
@@ -73,7 +79,8 @@ export default {
         ]
       },
       selectedXlsxCsv: {},
-      selectedXlsxCsvIndex: 0
+      selectedXlsxCsvIndex: 0,
+      xlsxCsvInputed: false
     };
   },
   computed: {
