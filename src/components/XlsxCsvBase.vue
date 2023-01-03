@@ -40,6 +40,7 @@
           <XlsxCsvColumnSelector
             v-model="currentXlsxCsvTab"
           />
+          <XlsxCsvExternalFilesInfo/>
         </div>
       </div>
       <div v-else>
@@ -53,12 +54,14 @@
 import XlsxCsvTable from '@/components/XlsxCsvTable.vue';
 import XlsxCsvColumnSelector from '@/components/XlsxCsvColumnSelector.vue';
 import XlsxCsvOptions from '@/components/XlsxCsvOptions.vue';
+import XlsxCsvExternalFilesInfo from '@/components/XlsxCsvExternalFilesInfo.vue';
 import SourceFileForm from '@/components/SourceFileForm.vue';
 
 export default {
   components: {
     XlsxCsvTable,
     XlsxCsvColumnSelector,
+    XlsxCsvExternalFilesInfo,
     XlsxCsvOptions,
     SourceFileForm
   },

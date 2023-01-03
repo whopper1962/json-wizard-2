@@ -65,7 +65,8 @@ export default {
 <style scoped>
 .xlsx-csv-column-selector-outer {
   margin-right: 5px;
-  height: 100%;
+  margin-bottom: 3%;
+  height: 69%;
 }
 .xlsx-csv-column-selector-inner {
   height: 200px;
