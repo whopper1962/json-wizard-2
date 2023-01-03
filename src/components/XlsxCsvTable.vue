@@ -218,21 +218,28 @@ export default {
 .xlsx-csv-table-content thead tr th:nth-child(1) {
   z-index: 3;
 }
+.garbage-button-wrapper {
+  position: relative;
+  align-content: center;
+}
 .garbage-button {
+  position:absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
   width: 100%;
   appearance: button;
-  background-color: #6C757D;
-  border: 1px solid #6C757D;
+  background-color: #94D364;
+  border: 1px solid #94D364;
   border-radius: 4px;
   box-sizing: border-box;
-  color: #FFFFFF;
+  color: black;
   cursor: pointer;
   font-family: Graphik,-apple-system,system-ui,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
   font-size: 14px;
   line-height: 1.15;
   overflow: visible;
   padding: 3px;
-  position: relative;
   text-align: center;
   text-transform: none;
   transition: all 80ms ease-in-out;
@@ -250,13 +257,13 @@ export default {
 }
 
 .garbage-button:hover {
-  background-color: #848893;
-  border-color: #848893;
+  background-color: #83ba59;
+  border-color: #83ba59;
 }
 
 .garbage-button:active {
-  background-color: #969ba7;
-  border-color: #969ba7;
+  background-color: #94D364;
+  border-color: #94D364;
 }
 .th-button {
   width: 100%;
