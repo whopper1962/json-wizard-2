@@ -4,7 +4,7 @@
       <table class="xlsx-csv-table-content">
         <thead>
           <tr>
-            <th class="th-button-area"></th>
+            <th class="th-button-area void-area"></th>
             <template v-for="num of selectedSheetMaxLen">
               <th
                 :key="num"
@@ -31,10 +31,11 @@
             </template>
           </tr>
           <tr>
-            <th></th>
+            <th class="border-bottom void-area"></th>
             <template v-for="num of selectedSheetMaxLen">
               <th
                 :key="num"
+                class="text-center"
                 :class="{
                   'border-right': num === selectedSheetMaxLen
                 }"
@@ -49,7 +50,7 @@
             v-for="(row, rowIndex) in currentSheet"
             :key="`row_${rowIndex}`"
           >
-            <th class="border-bottom">
+            <th class="border-bottom void-area garbage-button-wrapper">
               <button
                 class="garbage-button"
                 @click="onClickGarbageButton(rowIndex)"
@@ -140,18 +141,17 @@ export default {
   align-content: left;
 }
 .xlsx-csv-table-outer {
-  max-width: 100%;
   max-height: 450px;
   overflow: scroll;
 }
 .xlsx-csv-table-content th,
 .xlsx-csv-table-content td {
-  max-width: 6rem;
-  min-width: 6rem;
+  max-width: 13rem;
+  min-width: 13rem;
   padding: 0.5rem;
   max-height: 2rem;
   min-height: 2rem;
-  font-size: 0.85rem;
+  word-break : break-all;
   line-height: 1rem;
   text-align: left;
 }
@@ -232,7 +232,6 @@ export default {
   line-height: 1.15;
   overflow: visible;
   padding: 3px;
-  height: 100%;
   position: relative;
   text-align: center;
   text-transform: none;
@@ -268,5 +267,12 @@ export default {
 }
 .content-cell {
   cursor: pointer;
+}
+.void-area {
+  max-width: 4rem !important;
+  min-width: 4rem !important;
+}
+.text-center {
+  text-align: center;
 }
 </style>
