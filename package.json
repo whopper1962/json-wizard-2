@@ -14,11 +14,14 @@
     "@fortawesome/vue-fontawesome": "^2.0.9",
     "bootstrap": "^4.6.0",
     "core-js": "^3.8.3",
+    "read-excel-file": "^5.5.3",
     "simple-code-editor": "^1.2.2",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",
     "vuedraggable": "^2.24.3",
-    "vuex": "^3.6.2"
+    "vuex": "^3.6.2",
+    "write-excel-file": "^1.4.17",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
