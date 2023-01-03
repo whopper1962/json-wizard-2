@@ -16,7 +16,7 @@
           >
             <div class="column-card-inner">
               <span class="font-weight-bold">
-                {{ column.name }}
+                Column{{ column }}
               </span>
             </div>
           </div>

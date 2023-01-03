@@ -14,7 +14,7 @@
                 }"
               >
                 <button
-                  v-if="stagedNum.includes(num)"
+                  v-if="currentColumnOrder.includes(num)"
                   class="btn btn-secondary btn-sm th-button font-weight-bold"
                   @click="onClickStageButton(num)"
                 >
@@ -92,7 +92,14 @@ export default {
     };
   },
   computed: {
-
+    currentColumnOrder: {
+      get () {
+        return this.$store.getters['getCurrentTabContents'].columnOrders;
+      },
+      set (columnOrders) {
+        this.$store.dispatch('modifyColumnOrder', columnOrders);
+      }
+    }
   },
   created () {
     // TEST
@@ -109,12 +116,14 @@ export default {
       console.error(index);
     },
     onClickStageButton (columnNum) {
-      if (this.stagedNum.includes(columnNum)) {
-        const foundIndex = this.stagedNum.indexOf(columnNum);
-        this.stagedNum.splice(foundIndex, 1);
+      let clonedColumnOrder = this.currentColumnOrder.slice();
+      if (clonedColumnOrder.includes(columnNum)) {
+        const foundIndex = clonedColumnOrder.indexOf(columnNum);
+        clonedColumnOrder.splice(foundIndex, 1);
       } else {
-        this.stagedNum.push(columnNum)
+        clonedColumnOrder.push(columnNum)
       }
+      this.currentColumnOrder = clonedColumnOrder;
     },
     async execConversion() {
       this.isExecuted = true;

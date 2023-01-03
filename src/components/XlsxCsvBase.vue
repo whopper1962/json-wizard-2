@@ -38,7 +38,7 @@
         </div>
         <div class="col-3">
           <XlsxCsvColumnSelector
-            v-model="currentXlsxCsv.columnOrder"
+            v-model="currentXlsxCsvTab"
           />
         </div>
       </div>
@@ -65,19 +65,6 @@ export default {
   data () {
     return {
       xlsxCsvList: [{}],
-      currentXlsxCsv: {
-        columnOrder: [
-          {
-            name: 'Column1'
-          },
-          {
-            name: 'Column2'
-          },
-          {
-            name: 'Column3'
-          }
-        ]
-      },
       selectedXlsxCsv: {},
       selectedXlsxCsvIndex: 0,
       xlsxCsvInputed: false
@@ -88,6 +75,14 @@ export default {
       return function (index) {
         return this.selectedXlsxCsvIndex === index;
       };
+    },
+    currentXlsxCsvTab: {
+      get () {
+        return this.$store.getters['getCurrentTabContents'].columnOrders;
+      },
+      set (orders) {
+        this.$store.dispatch('modifyCurrentXlsxCsvColumnOrder', orders);
+      }
     }
   },
   methods: {

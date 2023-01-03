@@ -8,7 +8,6 @@ const tabData = {
   xlsxCsvSheets: {},
   selectedSheet: '',
   currentXlsxCsvContents: [],
-  stagedColumn: [],
   columnOrders: [],
   isRootArray: false,
   numberOfElements: 0
@@ -22,7 +21,6 @@ export default new Vuex.Store({
         xlsxCsvSheets: {},
         selectedSheet: '',
         currentXlsxCsvContents: [],
-        stagedColumn: [],
         columnOrders: [],
         isRootArray: false,
         numberOfElements: 0
@@ -33,7 +31,7 @@ export default new Vuex.Store({
   },
   getters: {
     getCurrentTabContents (state) {
-      return state.currentTabContents;
+      return state.xlsxCsvTabs[state.selectedTabIndex];
     },
     getXlsxCsvTabs (state) {
       return state.xlsxCsvTabs;
@@ -47,16 +45,29 @@ export default new Vuex.Store({
       state.currentTabContents = state.xlsxCsvTabs[selectedTabIndex];
       state.selectedTabIndex = selectedTabIndex;
     },
+    MODIFY_CURRENT_XLSX_CSV_COLUMN_ORDER (state, orders) {
+      state.xlsxCsvTabs[state.selectedTabIndex].columnOrders = orders;
+    },
+    MODIFY_COLUMN_ORDER (state, columnOrders) {
+      const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      currentTabContents.columnOrders = columnOrders;
+    },
     ADD_TAB (state) {
       state.xlsxCsvTabs.push(tabData);
-    }
+    },
   },
   actions: {
     setCurrentTabContents (context, selectedTabIndex) {
       context.commit('SET_CURRENT_TAB_CONTENTS', selectedTabIndex)
     },
+    modifyCurrentXlsxCsvColumnOrder (context, orders) {
+      context.commit('MODIFY_CURRENT_XLSX_CSV_COLUMN_ORDER', orders);
+    },
+    modifyColumnOrder (context, columnOrders) {
+      context.commit('MODIFY_COLUMN_ORDER', columnOrders);
+    },
     addTab (context) {
       context.commit('ADD_TAB');
-    }
+    },
   }
 });
