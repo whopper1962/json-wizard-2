@@ -4,28 +4,29 @@
       <table class="xlsx-csv-table-content">
         <thead>
           <tr>
-            <th></th>
+            <th class="th-button-area"></th>
             <template v-for="num of selectedSheetMaxLen">
               <th
                 :key="num"
+                class="th-button-area"
                 :class="{
                   'border-right': num === selectedSheetMaxLen
                 }"
               >
-                Add to keys
-              </th>
-            </template>
-          </tr>
-          <tr>
-            <th></th>
-            <template v-for="num of selectedSheetMaxLen">
-              <th
-                :key="num"
-                :class="{
-                  'border-right': num === selectedSheetMaxLen
-                }"
-              >
-                Set as value
+                <button
+                  v-if="stagedNum.includes(num)"
+                  class="btn btn-secondary btn-sm th-button font-weight-bold"
+                  @click="onClickStageButton(num)"
+                >
+                  Staged
+                </button>
+                <button
+                  v-else
+                  class="btn btn-info btn-sm th-button font-weight-bold"
+                  @click="onClickStageButton(num)"
+                >
+                  Stage
+                </button>
               </th>
             </template>
           </tr>
@@ -59,6 +60,7 @@
             <td
               v-for="(content, index) in row"
               :key="`content_${index}`"
+              class="content-cell"
             >
               {{ content }}
             </td>
@@ -71,6 +73,8 @@
 </template>
 
 <script>
+import test from '@/assets/test.json';
+
 export default {
   data() {
     return {
@@ -82,14 +86,35 @@ export default {
         sheetNames: [],
         contents: {}
       },
+      stagedNum: [],
       selectedSheetMaxLen: 0,
       currentSheet: []
     };
   },
-  computed: {},
+  computed: {
+
+  },
+  created () {
+    // TEST
+    this.currentSheet = test;
+    this.currentSheet.splice();
+    let lengths = [];
+    for (const row of this.currentSheet) {
+      lengths.push(row.length);
+    }
+    this.selectedSheetMaxLen = Math.max(...lengths);
+  },
   methods: {
     onClickGarbageButton (index) {
       console.error(index);
+    },
+    onClickStageButton (columnNum) {
+      if (this.stagedNum.includes(columnNum)) {
+        const foundIndex = this.stagedNum.indexOf(columnNum);
+        this.stagedNum.splice(foundIndex, 1);
+      } else {
+        this.stagedNum.push(columnNum)
+      }
     },
     async execConversion() {
       this.isExecuted = true;
@@ -176,7 +201,7 @@ export default {
   top: 0;
 }
 .xlsx-csv-table-content thead tr:nth-child(2) th {
-  top: 2rem;
+  top: 2.95rem;
 }
 .xlsx-csv-table-content thead tr:nth-child(3) th {
   top: 4rem;
@@ -224,5 +249,15 @@ export default {
 .garbage-button:active {
   background-color: #969ba7;
   border-color: #969ba7;
+}
+.th-button {
+  width: 100%;
+  height: 100%;
+}
+.th-button-area {
+  height: 35px;
+}
+.content-cell {
+  cursor: pointer;
 }
 </style>
