@@ -3,7 +3,10 @@
     <div class="card-header">
       Drag and choose the column order
     </div>
-    <div class="card-body xlsx-csv-column-selector-inner">
+    <div
+      v-if="columnOrder.length > 0"
+      class="card-body xlsx-csv-column-selector-inner"
+    >
       <Draggable v-model="columnOrder">
         <template v-for="(column, index) in columnOrder">
           <div
@@ -22,6 +25,12 @@
           </div>
         </template>
       </Draggable>
+    </div>
+    <div
+      v-else
+      class="area-placeholder"
+    >
+      Click "Stage" to add column to here.
     </div>
   </div>
 </template>
@@ -75,5 +84,8 @@ export default {
 }
 .bg-yellowgreen {
   background-color: yellowgreen;
+}
+.area-placeholder {
+  margin: auto;
 }
 </style>
