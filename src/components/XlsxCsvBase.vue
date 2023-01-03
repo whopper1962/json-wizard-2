@@ -36,7 +36,9 @@
           <XlsxCsvTable/>
         </div>
         <div class="col-3">
-          <XlsxCsvColumnSelector/>
+          <XlsxCsvColumnSelector
+            v-model="currentXlsxCsv.columnOrder"
+          />
         </div>
       </div>
     </div>
@@ -56,10 +58,20 @@ export default {
   },
   data () {
     return {
-      xlsxCsvList: [
-        {},
-        {}
-      ],
+      xlsxCsvList: [{}],
+      currentXlsxCsv: {
+        columnOrder: [
+          {
+            name: 'Column1'
+          },
+          {
+            name: 'Column2'
+          },
+          {
+            name: 'Column3'
+          }
+        ]
+      },
       selectedXlsxCsv: {},
       selectedXlsxCsvIndex: 0
     };

@@ -4,8 +4,8 @@
       Drag and choose the column order
     </div>
     <div class="card-body xlsx-csv-column-selector-inner">
-      <Draggable v-model="myArray">
-        <template v-for="(element, index) in myArray">
+      <Draggable v-model="columnOrder">
+        <template v-for="(column, index) in columnOrder">
           <div
             class="card column-card-outer"
             :class="{
@@ -16,7 +16,7 @@
           >
             <div class="column-card-inner">
               <span class="font-weight-bold">
-                {{ element.name }}
+                {{ column.name }}
               </span>
             </div>
           </div>
@@ -33,22 +33,22 @@ export default {
   components: {
     Draggable
   },
-  data () {
-    return {
-      myArray: [
-        {
-          name: 'Column1'
-        },
-        {
-          name: 'Column2'
-        },
-        {
-          name: 'Column3'
-        }
-      ]
-    };
+  props: {
+    value: {
+      type: Array,
+      default: () => []
+    }
   },
-  computed: {},
+  computed: {
+    columnOrder: {
+      get () {
+        return this.value;
+      },
+      set (order) {
+        this.$emit('input', order);
+      }
+    }
+  },
   methods: {}
 }
 </script>
