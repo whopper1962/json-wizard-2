@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const tabData = {
+  fileInputed: false,
   selectedFileName: '',
   xlsxCsvSheets: {},
   selectedSheet: '',
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   state: {
     xlsxCsvTabs: [
       {
+        fileInputed: false,
         selectedFileName: '',
         xlsxCsvSheets: {},
         selectedSheet: '',

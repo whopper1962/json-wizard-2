@@ -70,7 +70,6 @@ export default {
       xlsxCsvList: [{}],
       selectedXlsxCsv: {},
       selectedXlsxCsvIndex: 0,
-      xlsxCsvInputed: false
     };
   },
   computed: {
@@ -78,6 +77,9 @@ export default {
       return function (index) {
         return this.selectedXlsxCsvIndex === index;
       };
+    },
+    xlsxCsvInputed () {
+      return this.$store.getters['getCurrentTabContents'].fileInputed;
     },
     currentXlsxCsvTab: {
       get () {
