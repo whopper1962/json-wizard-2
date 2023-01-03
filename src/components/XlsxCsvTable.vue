@@ -630,7 +630,7 @@ export default {
 }
 .xlsx-csv-table-outer {
   max-width: 100%;
-  max-height: 400px;
+  max-height: 450px;
   overflow: scroll;
 }
 .xlsx-csv-table-content th,

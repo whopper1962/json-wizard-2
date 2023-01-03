@@ -1,6 +1,19 @@
 <template>
   <div class="xlsx-csv-option-area">
     <div class="form-inline">
+      <div class="form-group mb-2">
+        <span class="spaces-form-text">
+          Selected sheet:
+        </span>
+        <select
+          class="form-control selected-sheet-form"
+          v-model="selectedSheet"
+        >
+          <option>testsheet</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-inline">
       <button
         class="btn btn-success mb-2 root-array-button"
         @click="isRootArray = !isRootArray"
@@ -28,7 +41,8 @@
 export default {
   data () {
     return {
-      isRootArray: false
+      isRootArray: false,
+      selectedSheet: ''
     };
   }
 }
@@ -45,5 +59,8 @@ export default {
 .root-array-button {
   text-align: left;
   width: 150px;
+}
+.selected-sheet-form {
+  width: 150px !important;
 }
 </style>
