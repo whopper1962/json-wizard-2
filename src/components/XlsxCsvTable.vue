@@ -221,8 +221,8 @@ export default {
 .garbage-button {
   width: 100%;
   appearance: button;
-  background-color: #969ba7;
-  border: 1px solid #969ba7;
+  background-color: #6C757D;
+  border: 1px solid #6C757D;
   border-radius: 4px;
   box-sizing: border-box;
   color: #FFFFFF;
