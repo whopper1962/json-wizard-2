@@ -31,6 +31,7 @@
           class="form-control"
           placeholder="Number of elements"
           min="0"
+          v-model="numberOfElements"
         >
       </div>
     </div>
@@ -41,9 +42,26 @@
 export default {
   data () {
     return {
-      isRootArray: false,
       selectedSheet: ''
     };
+  },
+  computed: {
+    isRootArray: {
+      get () {
+        return this.$store.getters['getCurrentTabContents'].isRootArray;
+      },
+      set (status) {
+        this.$store.dispatch('setRootArrayStatus', status);
+      }
+    },
+    numberOfElements: {
+      get () {
+        return this.$store.getters['getCurrentTabContents'].numberOfElements;
+      },
+      set (num) {
+        this.$store.dispatch('setNumberOfArrayElements', num);
+      }
+    }
   }
 }
 </script>

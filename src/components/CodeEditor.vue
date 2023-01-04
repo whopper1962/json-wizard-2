@@ -6,6 +6,7 @@
     :hide_header="true"
     height="450px"
     v-model="inputedCode"
+    :read_only="true"
   />
 </template>
 

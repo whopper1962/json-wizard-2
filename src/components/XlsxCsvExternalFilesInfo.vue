@@ -4,10 +4,10 @@
       Cells refering to external file
     </div>
     <div class="card-body">
-      <ul class="list">
+      <!-- <ul class="list">
         <li>Column7(25) ▶︎ test-xlsx.csv</li>
         <li>Column7(26) ▶︎ test-xlsx2.csv</li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </template>

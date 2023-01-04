@@ -19,7 +19,7 @@
           >
             <div class="column-card-inner">
               <span class="font-weight-bold">
-                Column{{ column }}
+                Column{{ column + 1 }}
               </span>
             </div>
           </div>

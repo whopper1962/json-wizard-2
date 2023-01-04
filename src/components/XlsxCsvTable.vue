@@ -10,20 +10,20 @@
                 :key="num"
                 class="th-button-area"
                 :class="{
-                  'border-right': num === selectedSheetMaxLen
+                  'border-right': (num - 1) === selectedSheetMaxLen
                 }"
               >
                 <button
-                  v-if="currentColumnOrder.includes(num)"
+                  v-if="currentColumnOrder.includes(num - 1)"
                   class="btn btn-secondary btn-sm th-button font-weight-bold"
-                  @click="onClickStageButton(num)"
+                  @click="onClickStageButton(num - 1)"
                 >
                   Staged
                 </button>
                 <button
                   v-else
                   class="btn btn-info btn-sm th-button font-weight-bold"
-                  @click="onClickStageButton(num)"
+                  @click="onClickStageButton(num - 1)"
                 >
                   Stage
                 </button>

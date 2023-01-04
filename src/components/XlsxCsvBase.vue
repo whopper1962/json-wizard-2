@@ -51,11 +51,13 @@
 </template>
 
 <script>
+import xlsxToJson from '@/lib/json-wizard/xlsx-to-json';
 import XlsxCsvTable from '@/components/XlsxCsvTable.vue';
 import XlsxCsvColumnSelector from '@/components/XlsxCsvColumnSelector.vue';
 import XlsxCsvOptions from '@/components/XlsxCsvOptions.vue';
 import XlsxCsvExternalFilesInfo from '@/components/XlsxCsvExternalFilesInfo.vue';
 import SourceFileForm from '@/components/SourceFileForm.vue';
+
 
 export default {
   components: {
@@ -91,11 +93,32 @@ export default {
     }
   },
   methods: {
+    currentXlsxCsv () {
+      const currentTabContents = this.$store.getters['getCurrentTabContents'];
+      let columnOrder = currentTabContents.columnOrders.slice();
+      const valueIndex = columnOrder.shift();
+      const parentKeys = columnOrder.reverse();
+      return {
+        parentKeys,
+        valueIndex,
+        contents: currentTabContents.currentXlsxCsvContents,
+        excludes: [],
+        isArray: currentTabContents.isRootArray,
+        numberOfElements: currentTabContents.numberOfElements,
+      };
+    },
     onClickTab (index) {
       this.selectedXlsxCsvIndex = index;
     },
     executeConversion () {
-      console.error('executeConversion');
+      try {
+        const props = this.currentXlsxCsv();
+        const generatedJson = xlsxToJson(props);
+        this.$store.dispatch('setGeneratedJson', generatedJson);
+        console.error(generatedJson);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 }

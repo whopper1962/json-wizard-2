@@ -55,7 +55,7 @@ export default {
   },
   data () {
     return {
-      inputedJson: `{\n"hello": "json"\n}`,
+      inputedJson: ``,
       invalidJsonFormat: false,
       numberOfSpaces: null
     };
@@ -68,9 +68,17 @@ export default {
       } catch {
         this.invalidJsonFormat = true;
       }
+    },
+    generatedJson (json) {
+      this.inputedJson = json; 
     }
   },
-  computed: {},
+  computed: {
+    generatedJson () {
+      const json = this.$store.getters['getGeneratedJson'];
+      return JSON.stringify(json, null, 4);
+    }
+  },
   methods: {
     copyToClipboard () {
       const jsonToCopy = JSON.stringify(
