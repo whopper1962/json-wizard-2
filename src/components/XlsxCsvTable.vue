@@ -5,6 +5,7 @@
         <thead>
           <tr>
             <th class="th-button-area void-area"></th>
+            <th class="th-button-area void-area border-right"></th>
             <template v-for="num of selectedSheetMaxLen">
               <th
                 :key="num"
@@ -32,6 +33,7 @@
           </tr>
           <tr>
             <th class="border-bottom void-area"></th>
+            <th class="th-button-area void-area border-right"></th>
             <template v-for="num of selectedSheetMaxLen">
               <th
                 :key="num"
@@ -58,6 +60,9 @@
                 <font-awesome-icon icon="fa-solid fa-trash" />
               </button>
             </th>
+            <td class="row-number-cell void-area font-weight-bold border-right">
+              {{ rowIndex + 1 }}
+            </td>
             <td
               v-for="(content, index) in row"
               :key="`content_${index}`"
@@ -162,7 +167,7 @@ export default {
   border-bottom: 1px solid rgb(113, 113, 113) !important;
 }
 .xlsx-csv-table-content thead th {
-  border-left: 1px solid rgb(113, 113, 113);
+  /* border-left: 1px solid rgb(113, 113, 113); */
   background-color: rgb(148, 211, 100);
 }
 .xlsx-csv-table-content thead th:first-child {
@@ -177,7 +182,7 @@ export default {
 .xlsx-csv-table-content thead tr td:nth-child(1),
 .xlsx-csv-table-content tbody tr td:nth-child(1),
 .xlsx-csv-table-content thead tr th:nth-child(2),
-.xlsx-csv-table-content tbody tr th:nth-child(2),
+.xlsx-csv-table-content tbody tr td:nth-child(2),
 .xlsx-csv-table-content thead tr th:nth-child(3),
 .xlsx-csv-table-content tbody tr th:nth-child(3) {
   position: sticky;
@@ -194,6 +199,9 @@ export default {
 .xlsx-csv-table-content thead tr td:nth-child(2),
 .xlsx-csv-table-content tbody tr td:nth-child(2) {
   left: 6rem;
+}
+.xlsx-csv-table-content tbody tr td:nth-child(2) {
+  left: 2rem !important;
 }
 .border-right {
   border-right: 1px solid rgb(113, 113, 113) !important;
@@ -276,10 +284,16 @@ export default {
   cursor: pointer;
 }
 .void-area {
-  max-width: 4rem !important;
-  min-width: 4rem !important;
+  max-width: 2rem !important;
+  min-width: 2rem !important;
 }
 .text-center {
   text-align: center;
+}
+.row-number-cell {
+  max-width: 4rem !important;
+  min-width: 4rem !important;
+  background-color: #94D364;
+  text-align: center !important;
 }
 </style>
