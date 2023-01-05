@@ -8,9 +8,16 @@
         <button
           class="btn btn-primary font-weight-bold"
           @click="executeConversion()"
+          :disabled="!isValueAndKeySelected"
         >
           Execute conversion
         </button>
+        <span
+          v-if="!isValueAndKeySelected"
+          class="value-and-key-not-selected-error text-danger"
+        >
+          At least one key and one value should be selected.
+        </span>
       </div>
       <ul class="nav nav-tabs">
         <template v-for="(xlsxCsc, index) in xlsxCsvList">
@@ -90,6 +97,10 @@ export default {
       set (orders) {
         this.$store.dispatch('modifyCurrentXlsxCsvColumnOrder', orders);
       }
+    },
+    isValueAndKeySelected () {
+      const currentContents = this.$store.getters['getCurrentTabContents'];
+      return currentContents.columnOrders.length > 1;
     }
   },
   methods: {
@@ -143,5 +154,8 @@ export default {
 .execute-conversion-button-wrapper {
   text-align: left;
   margin-bottom: 20px;
+}
+.value-and-key-not-selected-error {
+  margin-left: 10px;
 }
 </style>

@@ -4,7 +4,7 @@
     font_size="14px"
     :language_selector="false"
     :hide_header="true"
-    height="450px"
+    height="600px"
     v-model="inputedCode"
     :read_only="true"
   />

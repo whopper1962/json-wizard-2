@@ -161,8 +161,8 @@ export default {
 }
 .xlsx-csv-table-content th,
 .xlsx-csv-table-content td {
-  max-width: 13rem;
-  min-width: 13rem;
+  max-width: 16rem;
+  min-width: 16rem;
   padding: 0.5rem;
   max-height: 2rem;
   min-height: 2rem;
