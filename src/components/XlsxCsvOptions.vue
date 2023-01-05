@@ -9,13 +9,15 @@
           class="form-control selected-sheet-form"
           v-model="selectedSheet"
         >
-          <option>testsheet</option>
+          <template v-for="(sheet, index) in currentContents.sheetNames">
+            <option :key="`sheet_${index}`">{{ sheet }}</option>
+          </template>
         </select>
         <span class="sheet-info">
-          Number of rows: {{ numberOfRows }}
+          Number of rows: {{ currentContents.currentXlsxCsvContents.length }}
         </span>
         <span class="sheet-info">
-          Number of trashed rows: {{ numberOfTrashedRows }}
+          Number of trashed rows: {{ currentContents.trashedRows.length }}
         </span>
       </div>
     </div>
@@ -46,11 +48,6 @@
 
 <script>
 export default {
-  data () {
-    return {
-      selectedSheet: ''
-    };
-  },
   computed: {
     isRootArray: {
       get () {
@@ -68,13 +65,16 @@ export default {
         this.$store.dispatch('setNumberOfArrayElements', num);
       }
     },
-    numberOfRows () {
-      const currentContents = this.$store.getters['getCurrentTabContents'];
-      return currentContents.currentXlsxCsvContents.length;
+    currentContents () {
+      return this.$store.getters['getCurrentTabContents'];
     },
-    numberOfTrashedRows () {
-      const currentContents = this.$store.getters['getCurrentTabContents'];
-      return currentContents.trashedRows.length;
+    selectedSheet: {
+      get () {
+        return this.currentContents.selectedSheet;
+      },
+      set (selectedSheet) {
+        this.$store.dispatch('setSelectedSheet', selectedSheet);
+      }
     }
   }
 }

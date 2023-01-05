@@ -8,11 +8,13 @@ const tabData = {
   fileInputed: false,
   selectedFileName: '',
   xlsxCsvSheets: {},
+  sheetNames: [],
   selectedSheet: '',
-  currentXlsxCsvContents: [],
+  currentXlsxCsvContents: {},
   columnOrders: [],
+  trashedRows: [],
   isRootArray: false,
-  numberOfElements: 0
+  numberOfElements: 1
 };
 
 export default new Vuex.Store({
@@ -22,6 +24,7 @@ export default new Vuex.Store({
         fileInputed: false,
         selectedFileName: '',
         xlsxCsvSheets: {},
+        sheetNames: [],
         selectedSheet: '',
         currentXlsxCsvContents: test,
         columnOrders: [],
@@ -74,6 +77,10 @@ export default new Vuex.Store({
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       currentTabContents.numberOfElements = num;
     },
+    SET_SELECTED_SHEET (state, sheetName) {
+      const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      currentTabContents.selectedSheet = sheetName;
+    },
     MODIFY_TRASHED_ROWS (state, index) {
       const currentTrashedRows = state.xlsxCsvTabs[state.selectedTabIndex].trashedRows;
       if (currentTrashedRows.includes(index)) {
@@ -102,6 +109,9 @@ export default new Vuex.Store({
     },
     setNumberOfArrayElements (context, num) {
       context.commit('SET_NUMBER_OF_ARRAY_ELEMENTS', num);
+    },
+    setSelectedSheet (context, sheetName) {
+      context.commit('SET_SELECTED_SHEET', sheetName);
     },
     modifyTrashedRows (context, index) {
       context.commit('MODIFY_TRASHED_ROWS', index);
