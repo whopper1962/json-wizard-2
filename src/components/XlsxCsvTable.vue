@@ -49,13 +49,23 @@
           <tr
             v-for="(row, rowIndex) in currentSheet"
             :key="`row_${rowIndex}`"
+            :class="{
+              'trashed-row': trashedRows.includes(rowIndex)
+            }"
           >
             <th class="border-bottom void-area garbage-button-wrapper">
               <button
                 class="garbage-button"
                 @click="onClickGarbageButton(rowIndex)"
               >
-                <font-awesome-icon icon="fa-solid fa-trash" />
+                <font-awesome-icon
+                  v-if="trashedRows.includes(rowIndex)"
+                  icon="fa-solid fa-trash-arrow-up"
+                />
+                <font-awesome-icon
+                  v-else
+                  icon="fa-solid fa-trash"
+                />
               </button>
             </th>
             <td
@@ -100,6 +110,11 @@ export default {
       set (columnOrders) {
         this.$store.dispatch('modifyColumnOrder', columnOrders);
       }
+    },
+    trashedRows: {
+      get () {
+        return this.$store.getters['getCurrentTabContents'].trashedRows;
+      }
     }
   },
   created () {
@@ -114,7 +129,7 @@ export default {
   },
   methods: {
     onClickGarbageButton (index) {
-      console.error(index);
+      this.$store.dispatch('modifyTrashedRows', index);
     },
     onClickStageButton (columnNum) {
       let clonedColumnOrder = this.currentColumnOrder.slice();
@@ -236,10 +251,9 @@ export default {
   color: black;
   cursor: pointer;
   font-family: Graphik,-apple-system,system-ui,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
-  font-size: 14px;
   line-height: 1.15;
   overflow: visible;
-  padding: 3px;
+  /* padding: 3px; */
   text-align: center;
   text-transform: none;
   transition: all 80ms ease-in-out;
@@ -281,5 +295,8 @@ export default {
 }
 .text-center {
   text-align: center;
+}
+.trashed-row {
+  background-color: rgb(176, 176, 176) !important;
 }
 </style>

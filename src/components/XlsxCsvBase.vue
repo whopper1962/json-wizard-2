@@ -102,7 +102,7 @@ export default {
         parentKeys,
         valueIndex,
         contents: currentTabContents.currentXlsxCsvContents,
-        excludes: [],
+        excludes: currentTabContents.trashedRows,
         isArray: currentTabContents.isRootArray,
         numberOfElements: currentTabContents.numberOfElements,
       };

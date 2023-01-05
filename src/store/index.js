@@ -25,6 +25,7 @@ export default new Vuex.Store({
         selectedSheet: '',
         currentXlsxCsvContents: test,
         columnOrders: [],
+        trashedRows: [],
         isRootArray: false,
         numberOfElements: 1
       }
@@ -72,6 +73,15 @@ export default new Vuex.Store({
     SET_NUMBER_OF_ARRAY_ELEMENTS (state, num) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       currentTabContents.numberOfElements = num;
+    },
+    MODIFY_TRASHED_ROWS (state, index) {
+      const currentTrashedRows = state.xlsxCsvTabs[state.selectedTabIndex].trashedRows;
+      if (currentTrashedRows.includes(index)) {
+        const foundIndex = currentTrashedRows.indexOf(index);
+        currentTrashedRows.splice(foundIndex, 1);
+      } else {
+        currentTrashedRows.push(index);
+      }
     }
   },
   actions: {
@@ -92,6 +102,9 @@ export default new Vuex.Store({
     },
     setNumberOfArrayElements (context, num) {
       context.commit('SET_NUMBER_OF_ARRAY_ELEMENTS', num);
+    },
+    modifyTrashedRows (context, index) {
+      context.commit('MODIFY_TRASHED_ROWS', index);
     },
     addTab (context) {
       context.commit('ADD_TAB');
