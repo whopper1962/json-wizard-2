@@ -11,6 +11,12 @@
         >
           <option>testsheet</option>
         </select>
+        <span class="sheet-info">
+          Number of rows: {{ numberOfRows }}
+        </span>
+        <span class="sheet-info">
+          Number of trashed rows: {{ numberOfTrashedRows }}
+        </span>
       </div>
     </div>
     <div class="form-inline">
@@ -61,6 +67,14 @@ export default {
       set (num) {
         this.$store.dispatch('setNumberOfArrayElements', num);
       }
+    },
+    numberOfRows () {
+      const currentContents = this.$store.getters['getCurrentTabContents'];
+      return currentContents.currentXlsxCsvContents.length;
+    },
+    numberOfTrashedRows () {
+      const currentContents = this.$store.getters['getCurrentTabContents'];
+      return currentContents.trashedRows.length;
     }
   }
 }
@@ -80,5 +94,8 @@ export default {
 }
 .selected-sheet-form {
   width: 150px !important;
+}
+.sheet-info {
+  margin-left: 15px;
 }
 </style>
