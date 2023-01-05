@@ -5,6 +5,18 @@
       accept=".xls,.xlsx,.csv"
       @change="xlsxCsvFileInputed"
     >
+    <p v-if="invalidFile" class="read-button-wrapper text-danger">
+      Invalid file
+    </p>
+    <div class="read-button-wrapper">
+      <button
+        class="btn btn-success"
+        :disabled="invalidFile || !fileInputed"
+        @click="readSourceFile()"
+      >
+        READ
+      </button>
+    </div>
   </div>
 </template>
 
@@ -17,7 +29,9 @@ export default {
   data () {
     return {
       sheetNames: [],
-      xlsxContents: {}
+      xlsxContents: {},
+      fileInputed: false,
+      invalidFile: false
     };
   },
   methods: {
@@ -38,6 +52,7 @@ export default {
     async readXlsx (fileContents) {
       await this.getSheetNames(fileContents);
       await this.fetchXlsx(fileContents, this.sheetNames);
+      this.fileInputed = true;
       console.error(this.xlsxContents);
     },
     getSheetNames (fileContents) {
@@ -70,13 +85,19 @@ export default {
           console.error(error);
         });
       }
+    },
+    readSourceFile () {
+      this.$store.dispatch('addSourceData', {
+        sheetNames: this.sheetNames,
+        xlsxContents: this.xlsxContents
+      })
     }
   },
 }
 </script>
 
 <style scoped>
-.xlsx-csv-file-input-form-main {
-  height: 400px;
+.read-button-wrapper {
+  margin-top: 20px;
 }
 </style>

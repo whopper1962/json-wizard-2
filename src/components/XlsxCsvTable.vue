@@ -1,6 +1,6 @@
 <template>
   <div class="xlsx-csv-table-main">
-    <div class="xlsx-csv-table-outer" v-if="selectedSheetMaxLen > 0">
+    <div class="xlsx-csv-table-outer" v-if="selectedSheetMaxLen > 0 && currentColumnOrder">
       <table class="xlsx-csv-table-content">
         <thead>
           <tr>
@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import test from '@/assets/test.json';
+// import test from '@/assets/test.json';
 
 export default {
   data() {
@@ -98,18 +98,29 @@ export default {
         contents: {}
       },
       stagedNum: [],
-      selectedSheetMaxLen: 0,
-      currentSheet: []
+      // selectedSheetMaxLen: 0,
+      // currentSheet: []
     };
   },
   computed: {
     currentColumnOrder: {
       get () {
-        return this.$store.getters['getCurrentTabContents'].columnOrders;
+        return this.$store.getters['getCurrentTabContents']?.columnOrders;
       },
       set (columnOrders) {
         this.$store.dispatch('modifyColumnOrder', columnOrders);
       }
+    },
+    currentSheet () {
+      return this.$store.getters['getCurrentTabContents'].currentXlsxCsvContents;
+    },
+    selectedSheetMaxLen () {
+      const current = this.$store.getters['getCurrentTabContents'].currentXlsxCsvContents;
+      let lengths = [];
+      for (const row of current) {
+        lengths.push(row.length);
+      }
+      return Math.max(...lengths);
     },
     trashedRows: {
       get () {
@@ -119,13 +130,13 @@ export default {
   },
   created () {
     // TEST
-    this.currentSheet = test;
-    this.currentSheet.splice();
-    let lengths = [];
-    for (const row of this.currentSheet) {
-      lengths.push(row.length);
-    }
-    this.selectedSheetMaxLen = Math.max(...lengths);
+    // this.currentSheet = test;
+    // this.currentSheet.splice();
+    // let lengths = [];
+    // for (const row of this.currentSheet) {
+    //   lengths.push(row.length);
+    // }
+    // this.selectedSheetMaxLen = Math.max(...lengths);
   },
   methods: {
     onClickGarbageButton (index) {

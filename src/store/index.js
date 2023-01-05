@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import test from '@/assets/test.json';
+// import test from '@/assets/test.json';
 
 Vue.use(Vuex);
 
@@ -26,7 +26,7 @@ export default new Vuex.Store({
         xlsxCsvSheets: {},
         sheetNames: [],
         selectedSheet: '',
-        currentXlsxCsvContents: test,
+        currentXlsxCsvContents: [],
         columnOrders: [],
         trashedRows: [],
         isRootArray: false,
@@ -56,11 +56,25 @@ export default new Vuex.Store({
       state.currentTabContents = state.xlsxCsvTabs[selectedTabIndex];
       state.selectedTabIndex = selectedTabIndex;
     },
+    ADD_SOURCE_DATA (state, data) {
+      const { sheetNames, xlsxContents } = data;
+      let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      currentTabContents.fileInputed = true;
+      currentTabContents.sheetNames = sheetNames;
+      currentTabContents.xlsxCsvSheets = xlsxContents;
+      currentTabContents.selectedSheet = sheetNames[0];
+      currentTabContents.currentXlsxCsvContents = xlsxContents[sheetNames[0]];
+      // if (xlsxCsvTabs[xlsxCsvTabs]) {}
+    },
+    SET_TAB_INDEX (state, index) {
+      state.selectedTabIndex = index;
+    },
     MODIFY_CURRENT_XLSX_CSV_COLUMN_ORDER (state, orders) {
       state.xlsxCsvTabs[state.selectedTabIndex].columnOrders = orders;
     },
     MODIFY_COLUMN_ORDER (state, columnOrders) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      if (!currentTabContents) return;
       currentTabContents.columnOrders = columnOrders;
     },
     SET_GENERATED_JSON (state, json) {
@@ -71,18 +85,22 @@ export default new Vuex.Store({
     },
     SET_ROOT_ARRAY_STATUS (state, status) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      if (!currentTabContents) return;
       currentTabContents.isRootArray = status;
     },
     SET_NUMBER_OF_ARRAY_ELEMENTS (state, num) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      if (!currentTabContents) return;
       currentTabContents.numberOfElements = num;
     },
     SET_SELECTED_SHEET (state, sheetName) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      if (!currentTabContents) return;
       currentTabContents.selectedSheet = sheetName;
     },
     MODIFY_TRASHED_ROWS (state, index) {
       const currentTrashedRows = state.xlsxCsvTabs[state.selectedTabIndex].trashedRows;
+      if (!currentTrashedRows) return;
       if (currentTrashedRows.includes(index)) {
         const foundIndex = currentTrashedRows.indexOf(index);
         currentTrashedRows.splice(foundIndex, 1);
@@ -94,6 +112,12 @@ export default new Vuex.Store({
   actions: {
     setCurrentTabContents (context, selectedTabIndex) {
       context.commit('SET_CURRENT_TAB_CONTENTS', selectedTabIndex)
+    },
+    setTabIndex (context, index) {
+      context.commit('SET_TAB_INDEX', index);
+    },
+    addSourceData (context, data) {
+      context.commit('ADD_SOURCE_DATA', data);
     },
     modifyCurrentXlsxCsvColumnOrder (context, orders) {
       context.commit('MODIFY_CURRENT_XLSX_CSV_COLUMN_ORDER', orders);

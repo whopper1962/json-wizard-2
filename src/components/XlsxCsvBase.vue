@@ -38,7 +38,7 @@
     </div>
     <!-- Main xlsx csv area -->
     <div class="current-tab container-fluid">
-      <div class="row" v-if="!xlsxCsvInputed">
+      <div class="row" v-if="xlsxCsvInputed">
         <div class="col-9">
           <XlsxCsvOptions/>
           <XlsxCsvTable/>
@@ -50,8 +50,10 @@
           <XlsxCsvExternalFilesInfo/>
         </div>
       </div>
-      <div v-else>
-        <SourceFileForm/>
+      <div class="source-file-form-wrapper" v-else>
+        <div class="source-file-form-contents">
+          <SourceFileForm/>
+        </div>
       </div>
     </div>
   </div>
@@ -76,7 +78,7 @@ export default {
   },
   data () {
     return {
-      xlsxCsvList: [{}],
+      xlsxCsvList: [{}, {}, {}],
       selectedXlsxCsv: {},
       selectedXlsxCsvIndex: 0,
     };
@@ -84,29 +86,38 @@ export default {
   computed: {
     isCurrentTab () {
       return function (index) {
-        return this.selectedXlsxCsvIndex === index;
+        console.error(this.selectedTab);
+        return this.selectedTab === index;
       };
     },
     xlsxCsvInputed () {
-      return this.$store.getters['getCurrentTabContents'].fileInputed;
+      return this.$store.getters['getCurrentTabContents']?.fileInputed;
     },
     currentXlsxCsvTab: {
       get () {
-        return this.$store.getters['getCurrentTabContents'].columnOrders;
+        return this.$store.getters['getCurrentTabContents']?.columnOrders;
       },
       set (orders) {
         this.$store.dispatch('modifyCurrentXlsxCsvColumnOrder', orders);
       }
     },
+    selectedTab: {
+      get () {
+        return this.$store.getters['getSelectedTabIndex'];
+      },
+      set (index) {
+        this.$store.dispatch('setTabIndex', index);
+      }
+    },
     isValueAndKeySelected () {
       const currentContents = this.$store.getters['getCurrentTabContents'];
-      return currentContents.columnOrders.length > 1;
+      return currentContents?.columnOrders.length > 1;
     }
   },
   methods: {
     currentXlsxCsv () {
       const currentTabContents = this.$store.getters['getCurrentTabContents'];
-      let columnOrder = currentTabContents.columnOrders.slice();
+      let columnOrder = currentTabContents?.columnOrders.slice();
       const valueIndex = columnOrder.shift();
       const parentKeys = columnOrder.reverse();
       return {
@@ -119,7 +130,7 @@ export default {
       };
     },
     onClickTab (index) {
-      this.selectedXlsxCsvIndex = index;
+      this.selectedTab = index;
     },
     executeConversion () {
       try {
@@ -157,5 +168,14 @@ export default {
 }
 .value-and-key-not-selected-error {
   margin-left: 10px;
+}
+.source-file-form-wrapper {
+  height: 450px;
+  display: table;
+  width: 100%;
+}
+.source-file-form-contents {
+  display: table-cell;
+  vertical-align: middle;
 }
 </style>

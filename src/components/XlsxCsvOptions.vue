@@ -1,7 +1,7 @@
 <template>
   <div class="xlsx-csv-option-area">
     <div class="form-inline">
-      <div class="form-group mb-2">
+      <div class="form-group mb-2" v-if="currentContents">
         <span class="spaces-form-text">
           Selected sheet:
         </span>
@@ -51,7 +51,7 @@ export default {
   computed: {
     isRootArray: {
       get () {
-        return this.$store.getters['getCurrentTabContents'].isRootArray;
+        return this.$store.getters['getCurrentTabContents']?.isRootArray;
       },
       set (status) {
         this.$store.dispatch('setRootArrayStatus', status);
@@ -59,7 +59,7 @@ export default {
     },
     numberOfElements: {
       get () {
-        return this.$store.getters['getCurrentTabContents'].numberOfElements;
+        return this.$store.getters['getCurrentTabContents']?.numberOfElements;
       },
       set (num) {
         this.$store.dispatch('setNumberOfArrayElements', num);
@@ -70,7 +70,7 @@ export default {
     },
     selectedSheet: {
       get () {
-        return this.currentContents.selectedSheet;
+        return this.currentContents?.selectedSheet;
       },
       set (selectedSheet) {
         this.$store.dispatch('setSelectedSheet', selectedSheet);
