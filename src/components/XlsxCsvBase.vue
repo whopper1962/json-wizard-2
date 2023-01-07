@@ -6,7 +6,11 @@
     <div class="card-body">
       <ul class="nav nav-tabs">
         <template v-for="(xlsxCsc, index) in xlsxCsvList">
-          <li class="nav-item" :key="`xlsx_csv_${index}`">
+          <li
+            class="nav-item"
+            :key="`xlsx_csv_${index}`"
+            @contextmenu.prevent="$refs.ctxMenu.open($event, {index})"
+          >
             <div
               class="nav-link link-cursor"
               :class="{
@@ -14,7 +18,6 @@
               }"
               aria-current="page"
               @click="onClickTab(index)"
-              @dblclick="onDoubleClickTab(index)"
             >
               Select source file
             </div>
@@ -29,6 +32,19 @@
           </button>
         </li>
       </ul>
+      <ContextMenu
+        id="context-menu"
+        @ctx-open="onCtxOpen"
+        ref="ctxMenu"
+        class="hello"
+      >
+        <li
+          class="context-menu-item"
+          @click="deleteTab()"
+        >
+          Delete Tab
+        </li>
+      </ContextMenu>
     </div>
     <!-- Main xlsx csv area -->
     <div class="current-tab container-fluid">
@@ -59,7 +75,7 @@ import XlsxCsvColumnSelector from '@/components/XlsxCsvColumnSelector.vue';
 import XlsxCsvOptions from '@/components/XlsxCsvOptions.vue';
 import XlsxCsvExternalFilesInfo from '@/components/XlsxCsvExternalFilesInfo.vue';
 import SourceFileForm from '@/components/SourceFileForm.vue';
-
+import ContextMenu from 'vue-context-menu'
 
 export default {
   components: {
@@ -67,12 +83,14 @@ export default {
     XlsxCsvColumnSelector,
     XlsxCsvExternalFilesInfo,
     XlsxCsvOptions,
+    ContextMenu,
     SourceFileForm
   },
   data () {
     return {
       selectedXlsxCsv: {},
       selectedXlsxCsvIndex: 0,
+      ctxOpendTabIndex: 0,
     };
   },
   computed: {
@@ -109,6 +127,9 @@ export default {
     }
   },
   methods: {
+    onCtxOpen (locals) {
+      this.ctxOpendTabIndex = locals.index;
+    },
     onClickTab (index) {
       this.selectedTab = index;
     },
@@ -117,6 +138,9 @@ export default {
     },
     onDoubleClickTab () {
       console.error('Double')
+    },
+    deleteTab () {
+      this.$store.dispatch('deleteTab', this.ctxOpendTabIndex);
     }
   }
 }
@@ -158,5 +182,9 @@ export default {
 .delete-file {
   margin-top: 2px;
   margin-left: 51px !important;
+}
+.context-menu-item {
+  cursor: pointer;
+  margin-left: 10px;
 }
 </style>

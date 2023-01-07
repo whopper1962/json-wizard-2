@@ -53,7 +53,6 @@ export default {
       await this.getSheetNames(fileContents);
       await this.fetchXlsx(fileContents, this.sheetNames);
       this.fileInputed = true;
-      console.error(this.xlsxContents);
     },
     getSheetNames (fileContents) {
       return new Promise((resolve) => {

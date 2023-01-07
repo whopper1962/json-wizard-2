@@ -112,6 +112,9 @@ export default new Vuex.Store({
       } else {
         currentTrashedRows.push(index);
       }
+    },
+    DELETE_TAB (state, index) {
+      state.xlsxCsvTabs.splice(index, 1);
     }
   },
   actions: {
@@ -148,5 +151,8 @@ export default new Vuex.Store({
     addTab (context) {
       context.commit('ADD_TAB');
     },
+    deleteTab (context, index) {
+      context.commit('DELETE_TAB', index);
+    }
   }
 });
