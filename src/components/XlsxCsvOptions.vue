@@ -1,25 +1,19 @@
 <template>
   <div class="xlsx-csv-option-area">
     <div class="form-inline">
-      <div class="form-group mb-2" v-if="currentContents">
-        <span class="spaces-form-text">
-          Selected sheet:
-        </span>
-        <select
-          class="form-control selected-sheet-form"
-          v-model="selectedSheet"
-        >
-          <template v-for="(sheet, index) in currentContents.sheetNames">
-            <option :key="`sheet_${index}`">{{ sheet }}</option>
-          </template>
-        </select>
-        <span class="sheet-info">
-          Number of rows: {{ currentContents.currentXlsxCsvContents.length }}
-        </span>
-        <span class="sheet-info">
-          Number of trashed rows: {{ currentContents.trashedRows.length }}
-        </span>
-      </div>
+      <button
+        class="btn btn-primary mb-2 font-weight-bold"
+        @click="executeConversion()"
+        :disabled="!isValueAndKeySelected"
+      >
+        Execute conversion
+      </button>
+      <span
+        v-if="!isValueAndKeySelected"
+        class="value-and-key-not-selected-error text-danger"
+      >
+        At least one key and one value should be selected.
+      </span>
     </div>
     <div class="form-inline">
       <button
@@ -43,10 +37,32 @@
         >
       </div>
     </div>
+    <div class="form-inline">
+      <div class="form-group mb-2" v-if="currentContents">
+        <span class="spaces-form-text">
+          Selected sheet:
+        </span>
+        <select
+          class="form-control selected-sheet-form"
+          v-model="selectedSheet"
+        >
+          <template v-for="(sheet, index) in currentContents.sheetNames">
+            <option :key="`sheet_${index}`">{{ sheet }}</option>
+          </template>
+        </select>
+        <span class="sheet-info">
+          Number of rows: {{ currentContents.currentXlsxCsvContents.length }}
+        </span>
+        <span class="sheet-info">
+          Number of trashed rows: {{ currentContents.trashedRows.length }}
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import xlsxToJson from '@/lib/json-wizard/xlsx-to-json';
 export default {
   computed: {
     isRootArray: {
@@ -75,7 +91,37 @@ export default {
       set (selectedSheet) {
         this.$store.dispatch('setSelectedSheet', selectedSheet);
       }
+    },
+    isValueAndKeySelected () {
+      const currentContents = this.$store.getters['getCurrentTabContents'];
+      return currentContents?.columnOrders.length > 1;
     }
+  },
+  methods: {
+    currentXlsxCsv () {
+      const currentTabContents = this.$store.getters['getCurrentTabContents'];
+      let columnOrder = currentTabContents?.columnOrders.slice();
+      const valueIndex = columnOrder.shift();
+      const parentKeys = columnOrder.reverse();
+      return {
+        parentKeys,
+        valueIndex,
+        contents: currentTabContents.currentXlsxCsvContents,
+        excludes: currentTabContents.trashedRows,
+        isArray: currentTabContents.isRootArray,
+        numberOfElements: currentTabContents.numberOfElements,
+      };
+    },
+    executeConversion () {
+      try {
+        const props = this.currentXlsxCsv();
+        const generatedJson = xlsxToJson(props);
+        this.$store.dispatch('setGeneratedJson', generatedJson);
+        console.error(generatedJson);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   }
 }
 </script>
@@ -97,5 +143,8 @@ export default {
 }
 .sheet-info {
   margin-left: 15px;
+}
+.value-and-key-not-selected-error {
+  margin-left: 10px;
 }
 </style>

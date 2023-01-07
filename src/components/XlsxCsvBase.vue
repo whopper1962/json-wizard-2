@@ -4,21 +4,6 @@
       SOURCE
     </div>
     <div class="card-body">
-      <div class="execute-conversion-button-wrapper">
-        <button
-          class="btn btn-primary font-weight-bold"
-          @click="executeConversion()"
-          :disabled="!isValueAndKeySelected"
-        >
-          Execute conversion
-        </button>
-        <span
-          v-if="!isValueAndKeySelected"
-          class="value-and-key-not-selected-error text-danger"
-        >
-          At least one key and one value should be selected.
-        </span>
-      </div>
       <ul class="nav nav-tabs">
         <template v-for="(xlsxCsc, index) in xlsxCsvList">
           <li class="nav-item" :key="`xlsx_csv_${index}`">
@@ -29,11 +14,20 @@
               }"
               aria-current="page"
               @click="onClickTab(index)"
+              @dblclick="onDoubleClickTab(index)"
             >
-              ({{ index + 1 }}) xlsx-test-file.xlsx
+              Select source file
             </div>
           </li>
         </template>
+        <li class="nav-item">
+          <button
+            class="btn new-tab-button"
+            @click="addNewTab()"
+          >
+            Add file
+          </button>
+        </li>
       </ul>
     </div>
     <!-- Main xlsx csv area -->
@@ -60,7 +54,6 @@
 </template>
 
 <script>
-import xlsxToJson from '@/lib/json-wizard/xlsx-to-json';
 import XlsxCsvTable from '@/components/XlsxCsvTable.vue';
 import XlsxCsvColumnSelector from '@/components/XlsxCsvColumnSelector.vue';
 import XlsxCsvOptions from '@/components/XlsxCsvOptions.vue';
@@ -116,32 +109,14 @@ export default {
     }
   },
   methods: {
-    currentXlsxCsv () {
-      const currentTabContents = this.$store.getters['getCurrentTabContents'];
-      let columnOrder = currentTabContents?.columnOrders.slice();
-      const valueIndex = columnOrder.shift();
-      const parentKeys = columnOrder.reverse();
-      return {
-        parentKeys,
-        valueIndex,
-        contents: currentTabContents.currentXlsxCsvContents,
-        excludes: currentTabContents.trashedRows,
-        isArray: currentTabContents.isRootArray,
-        numberOfElements: currentTabContents.numberOfElements,
-      };
-    },
     onClickTab (index) {
       this.selectedTab = index;
     },
-    executeConversion () {
-      try {
-        const props = this.currentXlsxCsv();
-        const generatedJson = xlsxToJson(props);
-        this.$store.dispatch('setGeneratedJson', generatedJson);
-        console.error(generatedJson);
-      } catch (error) {
-        console.error(error);
-      }
+    addNewTab () {
+      this.$store.dispatch('addTab');
+    },
+    onDoubleClickTab () {
+      console.error('Double')
     }
   }
 }
@@ -167,9 +142,6 @@ export default {
   text-align: left;
   margin-bottom: 20px;
 }
-.value-and-key-not-selected-error {
-  margin-left: 10px;
-}
 .source-file-form-wrapper {
   height: 450px;
   display: table;
@@ -178,5 +150,13 @@ export default {
 .source-file-form-contents {
   display: table-cell;
   vertical-align: middle;
+}
+.new-tab-button {
+  margin-left: 10px;
+  background-color: rgb(218, 218, 218);
+}
+.delete-file {
+  margin-top: 2px;
+  margin-left: 51px !important;
 }
 </style>

@@ -64,7 +64,6 @@ export default new Vuex.Store({
       currentTabContents.xlsxCsvSheets = xlsxContents;
       currentTabContents.selectedSheet = sheetNames[0];
       currentTabContents.currentXlsxCsvContents = xlsxContents[sheetNames[0]];
-      // if (xlsxCsvTabs[xlsxCsvTabs]) {}
     },
     SET_TAB_INDEX (state, index) {
       state.selectedTabIndex = index;
@@ -81,7 +80,8 @@ export default new Vuex.Store({
       state.generatedJson = json;
     },
     ADD_TAB (state) {
-      state.xlsxCsvTabs.push(tabData);
+      const clonedTabData = {...tabData};
+      state.xlsxCsvTabs.push(clonedTabData);
     },
     SET_ROOT_ARRAY_STATUS (state, status) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
