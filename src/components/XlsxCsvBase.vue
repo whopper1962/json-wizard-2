@@ -9,17 +9,40 @@
           <li
             class="nav-item"
             :key="`xlsx_csv_${index}`"
-            @contextmenu.prevent="$refs.ctxMenu.open($event, {index})"
           >
             <div
-              class="nav-link link-cursor"
+              class="nav-link link-cursor tab-item"
+              v-if="isChangingTabName(index)"
               :class="{
                 'active': isCurrentTab(index)
               }"
               aria-current="page"
+            >
+              <input
+                type="text"
+                class="tab-name-form"
+                :class="{
+                  'invalid-name': invalidTabName
+                }"
+                :placeholder="invalidTabName ? 'Invalid tab name' : ''"
+                v-model="tabName"
+                v-focus
+                v-click-outside="clickOutside"
+                @keydown.enter.prevent="submitTabName()"
+              >
+            </div>
+            <div
+              class="nav-link link-cursor tab-item"
+              v-else
+              :class="{
+                'active': isCurrentTab(index)
+              }"
+              aria-current="page"
+              @contextmenu.prevent="$refs.ctxMenu.open($event, {index})"
+              @dblclick="changeTabName(index)"
               @click="onClickTab(index)"
             >
-              Select source file
+              {{ xlsxCsc.tabName }}
             </div>
           </li>
         </template>
@@ -28,7 +51,7 @@
             class="btn new-tab-button"
             @click="addNewTab()"
           >
-            Add file
+            Add source file
           </button>
         </li>
       </ul>
@@ -40,9 +63,16 @@
       >
         <li
           class="context-menu-item"
+          @click="changeTabName()"
+        >
+          <span class="ctx-title">Change tab name</span>
+        </li>
+        <li
+          v-if="ctxOpendTabIndex !== 0"
+          class="context-menu-item"
           @click="deleteTab()"
         >
-          Delete Tab
+          <span class="ctx-title">Delete tab</span>
         </li>
       </ContextMenu>
     </div>
@@ -75,7 +105,7 @@ import XlsxCsvColumnSelector from '@/components/XlsxCsvColumnSelector.vue';
 import XlsxCsvOptions from '@/components/XlsxCsvOptions.vue';
 import XlsxCsvExternalFilesInfo from '@/components/XlsxCsvExternalFilesInfo.vue';
 import SourceFileForm from '@/components/SourceFileForm.vue';
-import ContextMenu from 'vue-context-menu'
+import ContextMenu from 'vue-context-menu';
 
 export default {
   components: {
@@ -91,9 +121,22 @@ export default {
       selectedXlsxCsv: {},
       selectedXlsxCsvIndex: 0,
       ctxOpendTabIndex: 0,
+      changingTabNameIndex: null,
+      invalidTabName: false,
+      tabName: ''
     };
   },
+  watch: {
+    tabName () {
+      this.invalidTabName = false;
+    }
+  },
   computed: {
+    isChangingTabName () {
+      return function (index) {
+        return this.changingTabNameIndex === index;
+      };
+    },
     isCurrentTab () {
       return function (index) {
         return this.selectedTab === index;
@@ -141,6 +184,26 @@ export default {
     },
     deleteTab () {
       this.$store.dispatch('deleteTab', this.ctxOpendTabIndex);
+    },
+    changeTabName (index = null) {
+      if (index !== null) this.ctxOpendTabIndex = index;
+      const currentTabName = this.$store.getters.getContentsByIndex(this.ctxOpendTabIndex);
+      this.tabName = currentTabName.tabName.slice();
+      this.changingTabNameIndex = this.ctxOpendTabIndex;
+    },
+    submitTabName () {
+      if (this.tabName.length === 0) {
+        this.invalidTabName = true;
+        return;
+      }
+      this.$store.dispatch('modifyTabNameByIndex', {
+        index: this.changingTabNameIndex,
+        name: this.tabName.trim()
+      });
+      this.changingTabNameIndex = null;
+    },
+    clickOutside () {
+      this.changingTabNameIndex = null;
     }
   }
 }
@@ -177,6 +240,7 @@ export default {
 }
 .new-tab-button {
   margin-left: 10px;
+  height: 95%;
   background-color: rgb(218, 218, 218);
 }
 .delete-file {
@@ -185,6 +249,24 @@ export default {
 }
 .context-menu-item {
   cursor: pointer;
-  margin-left: 10px;
+  margin: 5px 10px;
+}
+.context-menu-item:hover {
+  background-color: rgb(215, 214, 214);
+}
+.ctx-title {
+  margin: 10px 5px;
+}
+.tab-item {
+  width: fit-content;
+  min-width: 200px;
+  font-size: 20px;
+  height: 50px;
+}
+.tab-name-form {
+  height: 30px;
+}
+.invalid-name {
+  background-color: rgb(255, 161, 161);
 }
 </style>

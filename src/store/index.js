@@ -5,6 +5,8 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const tabData = {
+  tabName: 'Awesome file',
+  fileName: '',
   fileInputed: false,
   selectedFileName: '',
   xlsxCsvSheets: {},
@@ -21,6 +23,8 @@ export default new Vuex.Store({
   state: {
     xlsxCsvTabs: [
       {
+        tabName: 'Awesome file',
+        fileName: '',
         fileInputed: false,
         selectedFileName: '',
         xlsxCsvSheets: {},
@@ -49,6 +53,13 @@ export default new Vuex.Store({
     },
     getGeneratedJson (state) {
       return state.generatedJson;
+    },
+    getTabNameByIndex: (state) => (index) => {
+      console.error(index);
+      return state.xlsxCsvTabs[index].tabName;
+    },
+    getContentsByIndex: (state) => (index) => {
+      return state.xlsxCsvTabs[index];
     }
   },
   mutations: {
@@ -80,7 +91,7 @@ export default new Vuex.Store({
       state.generatedJson = json;
     },
     ADD_TAB (state) {
-      const clonedTabData = {...tabData};
+      let clonedTabData = {...tabData};
       state.xlsxCsvTabs.push(clonedTabData);
     },
     SET_ROOT_ARRAY_STATUS (state, status) {
@@ -112,6 +123,10 @@ export default new Vuex.Store({
       } else {
         currentTrashedRows.push(index);
       }
+    },
+    MODIFY_TAB_NAME_BY_INDEX (state, args) {
+      let targetTab = state.xlsxCsvTabs[args.index];
+      targetTab.tabName = args.name;
     },
     DELETE_TAB (state, index) {
       state.xlsxCsvTabs.splice(index, 1);
@@ -148,11 +163,14 @@ export default new Vuex.Store({
     modifyTrashedRows (context, index) {
       context.commit('MODIFY_TRASHED_ROWS', index);
     },
+    modifyTabNameByIndex (context, index) {
+      context.commit('MODIFY_TAB_NAME_BY_INDEX', index);
+    },
     addTab (context) {
       context.commit('ADD_TAB');
     },
-    deleteTab (context, index) {
-      context.commit('DELETE_TAB', index);
+    deleteTab (context, args) {
+      context.commit('DELETE_TAB', args);
     }
   }
 });
