@@ -10,7 +10,7 @@
                 :key="num"
                 class="th-button-area"
                 :class="{
-                  'border-right': (num - 1) === selectedSheetMaxLen
+                  'border-right': num === selectedSheetMaxLen
                 }"
               >
                 <button
