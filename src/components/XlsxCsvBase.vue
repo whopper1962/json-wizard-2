@@ -1,7 +1,7 @@
 <template>
   <div class="card xlsx-csv-card">
     <div class="card-header card-header-title">
-      XLSX / CSV
+      SOURCE
     </div>
     <div class="card-body">
       <div class="execute-conversion-button-wrapper">
@@ -78,7 +78,6 @@ export default {
   },
   data () {
     return {
-      xlsxCsvList: [{}, {}, {}],
       selectedXlsxCsv: {},
       selectedXlsxCsvIndex: 0,
     };
@@ -86,12 +85,14 @@ export default {
   computed: {
     isCurrentTab () {
       return function (index) {
-        console.error(this.selectedTab);
         return this.selectedTab === index;
       };
     },
     xlsxCsvInputed () {
       return this.$store.getters['getCurrentTabContents']?.fileInputed;
+    },
+    xlsxCsvList () {
+      return this.$store.getters['getXlsxCsvTabs'];
     },
     currentXlsxCsvTab: {
       get () {
