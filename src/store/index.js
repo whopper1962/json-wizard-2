@@ -97,6 +97,11 @@ export default new Vuex.Store({
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       if (!currentTabContents) return;
       currentTabContents.selectedSheet = sheetName;
+      currentTabContents.currentXlsxCsvContents = currentTabContents.xlsxCsvSheets[sheetName];
+      currentTabContents.columnOrders = [];
+      currentTabContents.trashedRows = [];
+      currentTabContents.isRootArray = false;
+      currentTabContents.numberOfElements = 1;
     },
     MODIFY_TRASHED_ROWS (state, index) {
       const currentTrashedRows = state.xlsxCsvTabs[state.selectedTabIndex].trashedRows;
