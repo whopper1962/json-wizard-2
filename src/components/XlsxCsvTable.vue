@@ -50,7 +50,8 @@
             v-for="(row, rowIndex) in currentSheet"
             :key="`row_${rowIndex}`"
             :class="{
-              'trashed-row': trashedRows.includes(rowIndex)
+              'error-row': errorRows.includes(rowIndex),
+              'trashed-row': trashedRows.includes(rowIndex),
             }"
           >
             <th class="border-bottom void-area garbage-button-wrapper">
@@ -125,6 +126,11 @@ export default {
     trashedRows: {
       get () {
         return this.$store.getters['getCurrentTabContents'].trashedRows;
+      }
+    },
+    errorRows: {
+      get () {
+        return this.$store.getters['getErrorRows'];
       }
     }
   },
@@ -309,5 +315,8 @@ export default {
 }
 .trashed-row {
   background-color: rgb(176, 176, 176) !important;
+}
+.error-row {
+  background-color: rgb(255, 158, 158);
 }
 </style>

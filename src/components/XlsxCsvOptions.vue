@@ -114,12 +114,14 @@ export default {
     },
     executeConversion () {
       try {
+        this.$store.dispatch('setErrorRows', []);
         const props = this.currentXlsxCsv();
         const generatedJson = xlsxToJson(props);
         this.$store.dispatch('setGeneratedJson', generatedJson);
         console.error(generatedJson);
       } catch (error) {
         console.error(error);
+        this.$store.dispatch('setErrorRows', error.body);
       }
     },
   }

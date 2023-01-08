@@ -39,7 +39,8 @@ export default new Vuex.Store({
     ],
     selectedTabIndex: 0,
     currentTabContents: {},
-    generatedJson: {}
+    generatedJson: {},
+    errorRows: []
   },
   getters: {
     getCurrentTabContents (state) {
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     },
     getContentsByIndex: (state) => (index) => {
       return state.xlsxCsvTabs[index];
+    },
+    getErrorRows (state) {
+      return state.errorRows;
     }
   },
   mutations: {
@@ -130,6 +134,9 @@ export default new Vuex.Store({
     },
     DELETE_TAB (state, index) {
       state.xlsxCsvTabs.splice(index, 1);
+    },
+    SET_ERROR_ROWS (state, rows) {
+      state.errorRows = rows;
     }
   },
   actions: {
@@ -171,6 +178,9 @@ export default new Vuex.Store({
     },
     deleteTab (context, args) {
       context.commit('DELETE_TAB', args);
+    },
+    setErrorRows (context, rows) {
+      context.commit('SET_ERROR_ROWS', rows);
     }
   }
 });
