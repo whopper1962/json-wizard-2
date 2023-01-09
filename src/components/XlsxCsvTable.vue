@@ -181,10 +181,18 @@ export default {
     onCtxOpen (locals) {
       this.ctxOpenedRowIndex = locals.rowIndex;
       this.ctxOpenedContentIndex = locals.index;
+      const body = document.querySelector('body');
+      body.style.overflow = 'hidden';
+      const table = document.getElementsByClassName('xlsx-csv-table-outer')[0];
+      table.style.overflow = 'hidden';
     },
     onCtxClose () {
       this.ctxOpenedRowIndex = null;
       this.ctxOpenedContentIndex = null;
+      const body = document.querySelector('body');
+      body.style.overflow = 'scroll';
+      const table = document.getElementsByClassName('xlsx-csv-table-outer')[0];
+      table.style.overflow = 'scroll';
     },
     referToExternalFile () {
       console.error('External file');
