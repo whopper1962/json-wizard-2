@@ -259,7 +259,7 @@ export default {
 }
 .tab-item {
   width: fit-content;
-  min-width: 200px;
+  min-width: 100px;
   font-size: 20px;
   height: 50px;
 }
