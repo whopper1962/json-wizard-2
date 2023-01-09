@@ -73,21 +73,61 @@
               v-for="(content, index) in row"
               :key="`content_${index}`"
               class="content-cell"
+              :class="{
+                'context-menu-opened':
+                  ctxOpenedRowIndex === rowIndex && ctxOpenedContentIndex === index
+              }"
+              @contextmenu.prevent="$refs.ctxMenu.open($event, {rowIndex, index})"
             >
               {{ content }}
             </td>
           </tr>
         </tbody>
       </table>
+      <ContextMenu
+        id="context-menu"
+        @ctx-open="onCtxOpen"
+        @ctx-close="onCtxClose"
+        @ctx-cancel="onCtxClose"
+        ref="ctxMenu"
+      >
+        <li
+          class="context-menu-item"
+          @click="referToExternalFile()"
+        >
+          <span class="ctx-title">Refer to external file</span>
+        </li>
+      </ContextMenu>
+      <Modal :name="`external-file-settings-modal`" :clickToClose="true">
+        <template slot="modal-header">
+          External file settings
+        </template>
+        <template slot="modal-body">
+          <p class="modal-msg">
+            Select external file(tab). Current value will be ignored.
+          </p>
+          <select class="custom-select">
+            <option selected>Open this select menu</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </select>
+        </template>
+      </Modal>
     </div>
     <div v-else>Selected sheet has no data</div>
   </div>
 </template>
 
 <script>
-// import test from '@/assets/test.json';
+import ContextMenu from 'vue-context-menu';
+import Modal from '@/components/ModalTemplate.vue';
 
 export default {
+  components: {
+    ContextMenu,
+    Modal
+  },
   data() {
     return {
       isFileSelected: false,
@@ -99,11 +139,14 @@ export default {
         contents: {}
       },
       stagedNum: [],
+      ctxOpenedRowIndex: null,
+      ctxOpenedContentIndex: null
       // selectedSheetMaxLen: 0,
       // currentSheet: []
     };
   },
   computed: {
+    externalFileSettingsModal: () => 'external-file-settings-modal',
     currentColumnOrder: {
       get () {
         return this.$store.getters['getCurrentTabContents']?.columnOrders;
@@ -134,17 +177,19 @@ export default {
       }
     }
   },
-  created () {
-    // TEST
-    // this.currentSheet = test;
-    // this.currentSheet.splice();
-    // let lengths = [];
-    // for (const row of this.currentSheet) {
-    //   lengths.push(row.length);
-    // }
-    // this.selectedSheetMaxLen = Math.max(...lengths);
-  },
   methods: {
+    onCtxOpen (locals) {
+      this.ctxOpenedRowIndex = locals.rowIndex;
+      this.ctxOpenedContentIndex = locals.index;
+    },
+    onCtxClose () {
+      this.ctxOpenedRowIndex = null;
+      this.ctxOpenedContentIndex = null;
+    },
+    referToExternalFile () {
+      console.error('External file');
+      this.$modal.show(this.externalFileSettingsModal);
+    },
     onClickGarbageButton (index) {
       this.$store.dispatch('modifyTrashedRows', index);
     },
@@ -318,5 +363,26 @@ export default {
 }
 .error-row {
   background-color: rgb(255, 158, 158);
+}
+
+.ctx-menu {
+  min-width: fit-content !important;
+}
+.ctx-title {
+  margin: 10px 5px;
+}
+.context-menu-item {
+  cursor: pointer;
+  margin: 5px 10px;
+  min-width: fit-content !important;
+}
+.context-menu-item:hover {
+  background-color: rgb(215, 214, 214);
+}
+.context-menu-opened {
+  background-color: rgb(255, 229, 79);
+}
+.modal-msg {
+  margin-bottom: 20px;
 }
 </style>
