@@ -44,6 +44,7 @@
         </span>
         <select
           class="form-control selected-sheet-form"
+          @change="$store.dispatch('setErrorRows', [])"
           v-model="selectedSheet"
         >
           <template v-for="(sheet, index) in currentContents.sheetNames">
