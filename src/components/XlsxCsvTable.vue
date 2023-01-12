@@ -106,12 +106,21 @@
           <p class="modal-msg">
             Select external file(tab). Current value will be ignored.
           </p>
-          <select class="custom-select">
-            <option selected>Open this select menu</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <select class="custom-select" :disabled="xlsxCsvTabs.length === 0">
+            <option selected value=""></option>
+            <template v-if="xlsxCsvTabs.length > 0">
+              <option
+                v-for="(tab, index) in xlsxCsvTabs"
+                :key="`tab_${index}`"
+                :value="tab"
+              >
+                {{ tab }}
+              </option>
+            </template>
           </select>
+          <p v-if="xlsxCsvTabs.length === 0" class="text-danger">
+            There is no external tab.
+          </p>
         </template>
       </Modal>
     </div>
@@ -147,6 +156,12 @@ export default {
   },
   computed: {
     externalFileSettingsModal: () => 'external-file-settings-modal',
+    xlsxCsvTabs () {
+      let tabs = this.$store.getters['getXlsxCsvTabs'].map((tab) => tab.tabName);
+      const currentTabIndex = this.$store.getters['getCurrentTabIndex']
+      tabs.splice(currentTabIndex, 1);
+      return tabs;
+    },
     currentColumnOrder: {
       get () {
         return this.$store.getters['getCurrentTabContents']?.columnOrders;
