@@ -23,6 +23,7 @@
     "vue-router": "^3.5.1",
     "vuedraggable": "^2.24.3",
     "vuex": "^3.6.2",
+    "vuex-persistedstate": "^4.1.0",
     "write-excel-file": "^1.4.17",
     "xlsx": "^0.18.5"
   },

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 // import test from '@/assets/test.json';
 
 Vue.use(Vuex);
@@ -20,6 +21,11 @@ const tabData = {
 };
 
 export default new Vuex.Store({
+  plugins: [
+    createPersistedState({
+      storage: localStorage
+    })
+  ],
   state: {
     xlsxCsvTabs: [
       {
