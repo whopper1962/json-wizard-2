@@ -5,7 +5,7 @@ import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
-const tabData = {
+const defaultTabData = {
   tabName: 'Awesome file',
   fileName: '',
   fileInputed: false,
@@ -17,7 +17,8 @@ const tabData = {
   columnOrders: [],
   trashedRows: [],
   isRootArray: false,
-  numberOfElements: 1
+  numberOfElements: 1,
+  externalTabColumnInfo: []
 };
 
 export default new Vuex.Store({
@@ -40,7 +41,8 @@ export default new Vuex.Store({
         columnOrders: [],
         trashedRows: [],
         isRootArray: false,
-        numberOfElements: 1
+        numberOfElements: 1,
+        externalTabColumnInfo: []
       }
     ],
     selectedTabIndex: 0,
@@ -73,7 +75,7 @@ export default new Vuex.Store({
     },
     getErrorRows (state) {
       return state.errorRows;
-    }
+    },
   },
   mutations: {
     SET_CURRENT_TAB_CONTENTS (state, selectedTabIndex) {
@@ -104,7 +106,7 @@ export default new Vuex.Store({
       state.generatedJson = json;
     },
     ADD_TAB (state) {
-      let clonedTabData = {...tabData};
+      let clonedTabData = {...defaultTabData};
       state.xlsxCsvTabs.push(clonedTabData);
     },
     SET_ROOT_ARRAY_STATUS (state, status) {
@@ -146,6 +148,10 @@ export default new Vuex.Store({
     },
     SET_ERROR_ROWS (state, rows) {
       state.errorRows = rows;
+    },
+    SET_EXTERNAL_FILE_COLUMN (state, info) {
+      const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      currentTabContents.externalTabColumnInfo.push(info);
     }
   },
   actions: {
@@ -175,6 +181,9 @@ export default new Vuex.Store({
     },
     setSelectedSheet (context, sheetName) {
       context.commit('SET_SELECTED_SHEET', sheetName);
+    },
+    setExternalFileColumn (context, info) {
+      context.commit('SET_EXTERNAL_FILE_COLUMN', info);
     },
     modifyTrashedRows (context, index) {
       context.commit('MODIFY_TRASHED_ROWS', index);

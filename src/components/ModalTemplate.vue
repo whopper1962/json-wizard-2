@@ -22,6 +22,7 @@
         <button
           class="btn btn-primary ok-button"
           @click="okFunction()"
+          :disabled="disableOkButton"
         >
           Confirm
         </button>
@@ -54,6 +55,10 @@ export default {
     showFooter: {
       type: Boolean,
       default: true
+    },
+    disableOkButton: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

@@ -4,10 +4,18 @@
       Cells refering to external file
     </div>
     <div class="card-body">
-      <!-- <ul class="list">
-        <li>Column7(25) ▶︎ test-xlsx.csv</li>
-        <li>Column7(26) ▶︎ test-xlsx2.csv</li>
-      </ul> -->
+      <table class="table">
+        <thead>
+          <th>Cell</th>
+          <th>External file</th>
+        </thead>
+        <tbody>
+          <tr v-for="(info, index) in currentExternalFileInfo" :key="`info_${index}`">
+            <td>{{ info.cell }}</td>
+            <td>{{ info.refering }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -17,6 +25,11 @@ export default {
   data () {
     return {};
   },
+  computed: {
+    currentExternalFileInfo () {
+      return this.$store.getters['getCurrentTabContents'].externalTabColumnInfo;
+    },
+  },
   methods: {},
 }
 </script>
@@ -24,7 +37,7 @@ export default {
 <style scoped>
 .xlsx-csv-external-files-info-main {
   margin-right: 5px;
-  height: 30%;
+  height: 50%;
 }
 .list {
   padding-left:0;

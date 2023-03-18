@@ -75,7 +75,8 @@
               class="content-cell"
               :class="{
                 'context-menu-opened':
-                  ctxOpenedRowIndex === rowIndex && ctxOpenedContentIndex === index
+                  ctxOpenedRowIndex === rowIndex && ctxOpenedContentIndex === index,
+                'refering-external-file': isReferingExternalFile(`${rowIndex}-${index}`)
               }"
               @contextmenu.prevent="$refs.ctxMenu.open($event, {rowIndex, index})"
             >
@@ -98,7 +99,12 @@
           <span class="ctx-title">Refer to external file</span>
         </li>
       </ContextMenu>
-      <Modal :name="`external-file-settings-modal`" :clickToClose="true">
+      <Modal
+        :name="`external-file-settings-modal`" 
+        :clickToClose="true"
+        :onClickOkButton="confirmExternalFile"
+        :disableOkButton="!externalFile"
+      >
         <template slot="modal-header">
           External file settings
         </template>
@@ -106,7 +112,7 @@
           <p class="modal-msg">
             Select external file(tab). Current value will be ignored.
           </p>
-          <select class="custom-select" :disabled="xlsxCsvTabs.length === 0">
+          <select class="custom-select" :disabled="xlsxCsvTabs.length === 0" v-model="externalFile">
             <option selected value=""></option>
             <template v-if="xlsxCsvTabs.length > 0">
               <option
@@ -149,7 +155,10 @@ export default {
       },
       stagedNum: [],
       ctxOpenedRowIndex: null,
-      ctxOpenedContentIndex: null
+      ctxOpenedContentIndex: null,
+      ctxOpenedRowIndexCache: null,
+      ctxOpenedContentIndexCache: null,
+      externalFile: ''
       // selectedSheetMaxLen: 0,
       // currentSheet: []
     };
@@ -173,6 +182,9 @@ export default {
     currentSheet () {
       return this.$store.getters['getCurrentTabContents'].currentXlsxCsvContents;
     },
+    currentExternalFileInfo () {
+      return this.$store.getters['getCurrentTabContents'].externalTabColumnInfo;
+    },
     selectedSheetMaxLen () {
       const current = this.$store.getters['getCurrentTabContents'].currentXlsxCsvContents;
       let lengths = [];
@@ -190,7 +202,14 @@ export default {
       get () {
         return this.$store.getters['getErrorRows'];
       }
-    }
+    },
+    isReferingExternalFile () {
+      return function (cell) {
+        return this.currentExternalFileInfo.find((obj) => {
+          return obj.cell === cell;
+        })
+      };
+    },
   },
   methods: {
     onCtxOpen (locals) {
@@ -202,6 +221,8 @@ export default {
       table.style.overflow = 'hidden';
     },
     onCtxClose () {
+      this.ctxOpenedContentIndexCache = this.ctxOpenedContentIndex;
+      this.ctxOpenedRowIndexCache = this.ctxOpenedRowIndex;
       this.ctxOpenedRowIndex = null;
       this.ctxOpenedContentIndex = null;
       const body = document.querySelector('body');
@@ -210,8 +231,13 @@ export default {
       table.style.overflow = 'scroll';
     },
     referToExternalFile () {
-      console.error('External file');
       this.$modal.show(this.externalFileSettingsModal);
+    },
+    confirmExternalFile () {
+      this.$store.dispatch('setExternalFileColumn', {
+        cell: `${this.ctxOpenedRowIndexCache}-${this.ctxOpenedContentIndexCache}`,
+        refering: this.externalFile
+      })
     },
     onClickGarbageButton (index) {
       this.$store.dispatch('modifyTrashedRows', index);
@@ -407,5 +433,8 @@ export default {
 }
 .modal-msg {
   margin-bottom: 20px;
+}
+.refering-external-file {
+  background-color: #92b8f3;
 }
 </style>
