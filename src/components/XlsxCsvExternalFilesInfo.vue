@@ -4,18 +4,20 @@
       Cells refering to external file
     </div>
     <div class="card-body">
-      <table class="table">
-        <thead>
-          <th>Cell</th>
-          <th>External file</th>
-        </thead>
-        <tbody>
-          <tr v-for="(info, index) in currentExternalFileInfo" :key="`info_${index}`">
-            <td>{{ info.cell }}</td>
-            <td>{{ info.refering }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <th>Cell</th>
+            <th>External file</th>
+          </thead>
+          <tbody>
+            <tr v-for="(info, index) in currentExternalFileInfo" :key="`info_${index}`">
+              <td>{{ info.cell }}</td>
+              <td>{{ info.refering }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
@@ -38,6 +40,16 @@ export default {
 .xlsx-csv-external-files-info-main {
   margin-right: 5px;
   height: 50%;
+}
+.table-wrapper {
+  height: 100%;
+  overflow: scroll;
+}
+.table th{
+  /* position: sticky;
+  background: #f2f2f2;
+  top: 0;
+  left: 0; */
 }
 .list {
   padding-left:0;
