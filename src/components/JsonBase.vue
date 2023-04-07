@@ -41,7 +41,7 @@
         </div>
       </div>
       <JsonEditor
-        v-model="inputedJson"
+        v-model="generatedJson"
       />
     </div>
   </div>
@@ -55,13 +55,12 @@ export default {
   },
   data () {
     return {
-      inputedJson: ``,
       invalidJsonFormat: false,
-      numberOfSpaces: null
+      numberOfSpaces: 4
     };
   },
   watch: {
-    inputedJson (inputed) {
+    generatedJson (inputed) {
       try {
         this.invalidJsonFormat = false;
         JSON.parse(inputed);
@@ -69,20 +68,17 @@ export default {
         this.invalidJsonFormat = true;
       }
     },
-    generatedJson (json) {
-      this.inputedJson = json; 
-    }
   },
   computed: {
     generatedJson () {
       const json = this.$store.getters['getGeneratedJson'];
-      return JSON.stringify(json, null, 4);
+      return JSON.stringify(json, null, this.numberOfSpaces);
     }
   },
   methods: {
     copyToClipboard () {
       const jsonToCopy = JSON.stringify(
-        JSON.parse(this.inputedJson),
+        JSON.parse(this.generatedJson),
         null,
         4
       );
@@ -96,8 +92,6 @@ export default {
     },
     formatJsonSpace () {
       console.error(`Format spaces: ${this.numberOfSpaces}`);
-      // let formattedJson = JSON.stringify(this.inputedJson, null, this.numberOfSpaces);
-      // this.inputedJson = formattedJson;
     }
   }
 }
