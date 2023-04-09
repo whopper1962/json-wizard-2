@@ -4,7 +4,7 @@
       JSON
     </div>
     <div class="card-body">
-      <div class="option-button-wrapper">
+      <div class="form-inline option-button-wrapper">
         <button
           class="btn btn-secondary"
           @click="copyToClipboard()"
@@ -12,22 +12,7 @@
         >
           Copy to Clipboard
         </button>
-        <span
-          class="invalid-json-format-error text-danger"
-          v-if="invalidJsonFormat"
-        >
-          Invalid JSON format!
-        </span>
-      </div>
-      <div class="form-inline option-button-wrapper">
-        <button
-          class="btn btn-info mb-2"
-          @click="formatJsonSpace()"
-          :disabled="numberOfSpaces < 0 || invalidJsonFormat"
-        >
-          Format JSON spaces
-        </button>
-        <div class="form-group mx-sm-3 mb-2">
+        <div class="form-group mx-sm-3">
           <span class="spaces-form-text">
             Number of spaces:
           </span>
@@ -35,13 +20,21 @@
             type="number"
             class="form-control"
             placeholder="Number of spaces"
-            min="0"
+            min="1"
+            max="10"
             v-model="numberOfSpaces"
+            :disabled="invalidJsonFormat"
           >
         </div>
+        <span
+          class="invalid-json-format-error text-danger"
+          v-if="invalidJsonFormat"
+        >
+          Invalid JSON format!
+        </span>
       </div>
       <JsonEditor
-        v-model="generatedJson"
+        v-model="inputedJson"
       />
     </div>
   </div>
@@ -55,12 +48,16 @@ export default {
   },
   data () {
     return {
+      inputedJson: ``,
       invalidJsonFormat: false,
       numberOfSpaces: 4
     };
   },
+  created () {
+    this.inputedJson = this.generatedJson;
+  },
   watch: {
-    generatedJson (inputed) {
+    inputedJson (inputed) {
       try {
         this.invalidJsonFormat = false;
         JSON.parse(inputed);
@@ -68,19 +65,22 @@ export default {
         this.invalidJsonFormat = true;
       }
     },
+    generatedJson (json) {
+      this.inputedJson = json; 
+    }
   },
   computed: {
     generatedJson () {
       const json = this.$store.getters['getGeneratedJson'];
-      return JSON.stringify(json, null, this.numberOfSpaces);
+      return JSON.stringify(json, null, Number(this.numberOfSpaces));
     }
   },
   methods: {
     copyToClipboard () {
       const jsonToCopy = JSON.stringify(
-        JSON.parse(this.generatedJson),
+        JSON.parse(this.inputedJson),
         null,
-        4
+        Number(this.numberOfSpaces)
       );
       navigator.clipboard.writeText(jsonToCopy)
       .then(() => {
@@ -90,9 +90,6 @@ export default {
         console.error(error);
       });
     },
-    formatJsonSpace () {
-      console.error(`Format spaces: ${this.numberOfSpaces}`);
-    }
   }
 }
 </script>
@@ -108,7 +105,7 @@ export default {
 }
 .option-button-wrapper {
   text-align: left;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .invalid-json-format-error {
   margin-left: 15px;
@@ -118,5 +115,8 @@ export default {
 }
 .spaces-form-text {
   margin-right: 5px;
+}
+.error-msg-area {
+  margin-bottom: 10px;
 }
 </style>
