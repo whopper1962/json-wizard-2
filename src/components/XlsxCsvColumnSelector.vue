@@ -48,6 +48,11 @@ export default {
       default: () => []
     }
   },
+  data () {
+    return {
+      forceChangeFlag: false
+    };
+  },
   computed: {
     columnOrder: {
       get () {
@@ -56,6 +61,18 @@ export default {
       set (order) {
         this.$emit('input', order);
       }
+    }
+  },
+  watch: {
+    columnOrder (a, b) {
+      if (a[0] === b[0] || this.forceChangeFlag) {
+        this.forceChangeFlag = false;
+        return;
+      }
+      const result = confirm('External file info will be discarded. You sure want to change the value column?');
+      if (result) return;
+      this.forceChangeFlag = true;
+      this.columnOrder = b;
     }
   },
   methods: {}
