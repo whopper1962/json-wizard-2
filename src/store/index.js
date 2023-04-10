@@ -67,7 +67,6 @@ export default new Vuex.Store({
       return state.generatedJson;
     },
     getTabNameByIndex: (state) => (index) => {
-      console.error(index);
       return state.xlsxCsvTabs[index].tabName;
     },
     getContentsByIndex: (state) => (index) => {
@@ -94,8 +93,9 @@ export default new Vuex.Store({
     SET_TAB_INDEX (state, index) {
       state.selectedTabIndex = index;
     },
-    MODIFY_CURRENT_XLSX_CSV_COLUMN_ORDER (state, orders) {
-      state.xlsxCsvTabs[state.selectedTabIndex].columnOrders = orders;
+    MODIFY_CURRENT_XLSX_CSV_COLUMN_ORDER (state, ordersInfo) {
+      if (ordersInfo.isValueChanged) state.xlsxCsvTabs[state.selectedTabIndex].externalTabColumnInfo = [];
+      state.xlsxCsvTabs[state.selectedTabIndex].columnOrders = ordersInfo.order;
     },
     MODIFY_COLUMN_ORDER (state, columnOrders) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
@@ -164,8 +164,8 @@ export default new Vuex.Store({
     addSourceData (context, data) {
       context.commit('ADD_SOURCE_DATA', data);
     },
-    modifyCurrentXlsxCsvColumnOrder (context, orders) {
-      context.commit('MODIFY_CURRENT_XLSX_CSV_COLUMN_ORDER', orders);
+    modifyCurrentXlsxCsvColumnOrder (context, ordersInfo) {
+      context.commit('MODIFY_CURRENT_XLSX_CSV_COLUMN_ORDER', ordersInfo);
     },
     modifyColumnOrder (context, columnOrders) {
       context.commit('MODIFY_COLUMN_ORDER', columnOrders);

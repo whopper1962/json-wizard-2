@@ -48,31 +48,22 @@ export default {
       default: () => []
     }
   },
-  data () {
-    return {
-      forceChangeFlag: false
-    };
-  },
   computed: {
     columnOrder: {
       get () {
         return this.value;
       },
       set (order) {
-        this.$emit('input', order);
+        const isValueChanged = this.value[0] !== order[0];
+        if (isValueChanged) {
+          const result = confirm('External file info will be discarded. You sure want to change the value column?');
+          if (!result) return;
+        }
+        this.$emit('input', {
+          isValueChanged,
+          order
+        });
       }
-    }
-  },
-  watch: {
-    columnOrder (a, b) {
-      if (a[0] === b[0] || this.forceChangeFlag) {
-        this.forceChangeFlag = false;
-        return;
-      }
-      const result = confirm('External file info will be discarded. You sure want to change the value column?');
-      if (result) return;
-      this.forceChangeFlag = true;
-      this.columnOrder = b;
     }
   },
   methods: {}

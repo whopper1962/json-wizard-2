@@ -152,8 +152,8 @@ export default {
       get () {
         return this.$store.getters['getCurrentTabContents']?.columnOrders;
       },
-      set (orders) {
-        this.$store.dispatch('modifyCurrentXlsxCsvColumnOrder', orders);
+      set (ordersInfo) {
+        this.$store.dispatch('modifyCurrentXlsxCsvColumnOrder', ordersInfo);
       }
     },
     selectedTab: {
