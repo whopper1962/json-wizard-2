@@ -78,7 +78,7 @@
                   ctxOpenedRowIndex === rowIndex && ctxOpenedContentIndex === index,
                 'refering-external-file': isReferingExternalFile(`${rowIndex}-${index}`)
               }"
-              @contextmenu.prevent="$refs.ctxMenu.open($event, {rowIndex, index})"
+              @contextmenu.prevent="isValueColumn(index) ? $refs.ctxMenu.open($event, {rowIndex, index}) : {}"
             >
               {{ content }}
             </td>
@@ -165,6 +165,11 @@ export default {
   },
   computed: {
     externalFileSettingsModal: () => 'external-file-settings-modal',
+    isValueColumn () {
+      return function (columnIndex) {
+        return columnIndex === this.currentColumnOrder[0];
+      }
+    },
     xlsxCsvTabs () {
       let tabs = this.$store.getters['getXlsxCsvTabs'].map((tab) => tab.tabName);
       const currentTabIndex = this.$store.getters['getCurrentTabIndex']

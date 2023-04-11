@@ -68,7 +68,6 @@
           <span class="ctx-title">Change tab name</span>
         </li>
         <li
-          v-if="ctxOpendTabIndex !== 0"
           class="context-menu-item"
           @click="deleteTab()"
         >
