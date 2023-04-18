@@ -76,7 +76,8 @@
               :class="{
                 'context-menu-opened':
                   ctxOpenedRowIndex === rowIndex && ctxOpenedContentIndex === index,
-                'refering-external-file': isReferingExternalFile(`${rowIndex}-${index}`)
+                'refering-external-file': isReferingExternalFile(`${rowIndex}-${index}`),
+                'ctx-menu-enabled-cell': isValueColumn(index)
               }"
               @contextmenu.prevent="isValueColumn(index) ? $refs.ctxMenu.open($event, {rowIndex, index}) : {}"
             >
@@ -441,5 +442,8 @@ export default {
 }
 .refering-external-file {
   background-color: #92b8f3;
+}
+.ctx-menu-enabled-cell {
+  cursor:context-menu;
 }
 </style>
