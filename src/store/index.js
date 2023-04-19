@@ -47,7 +47,10 @@ export default new Vuex.Store({
     ],
     selectedTabIndex: 0,
     currentTabContents: {},
-    generatedJson: {},
+    generatedJson: {
+      source: '',
+      json: ''
+    },
     errorRows: []
   },
   getters: {
@@ -103,7 +106,10 @@ export default new Vuex.Store({
       currentTabContents.columnOrders = columnOrders;
     },
     SET_GENERATED_JSON (state, json) {
-      state.generatedJson = json;
+      state.generatedJson = {
+        source: state.xlsxCsvTabs[state.selectedTabIndex].tabName,
+        json
+      };
     },
     ADD_TAB (state) {
       let clonedTabData = {...defaultTabData};

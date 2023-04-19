@@ -4,6 +4,7 @@
       JSON
     </div>
     <div class="card-body">
+      Source: {{ source }}
       <div class="form-inline option-button-wrapper">
         <button
           class="btn btn-secondary"
@@ -50,12 +51,14 @@ export default {
   data () {
     return {
       inputedJson: ``,
+      source: '',
       invalidJsonFormat: false,
       numberOfSpaces: 4
     };
   },
   created () {
     this.inputedJson = this.generatedJson;
+    this.source = this.sourceFile;
   },
   watch: {
     inputedJson (inputed) {
@@ -68,12 +71,19 @@ export default {
     },
     generatedJson (json) {
       this.inputedJson = json; 
+    },
+    sourceFile (source) {
+      this.source = source;
     }
   },
   computed: {
     generatedJson () {
-      const json = this.$store.getters['getGeneratedJson'];
+      const json = this.$store.getters['getGeneratedJson'].json;
+      console.error(json);
       return JSON.stringify(json, null, Number(this.numberOfSpaces));
+    },
+    sourceFile () {
+      return this.$store.getters['getGeneratedJson'].source;
     }
   },
   methods: {
