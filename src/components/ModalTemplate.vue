@@ -15,7 +15,7 @@
       <div class="card-footer text-muted" v-if="showFooter">
         <button
           class="btn btn-secondary cancel-button"
-          @click="okFunction()"
+          @click="cancelFunction()"
         >
           Cancel
         </button>

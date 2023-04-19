@@ -237,6 +237,7 @@ export default {
       table.style.overflow = 'scroll';
     },
     referToExternalFile () {
+      this.externalFile = '';
       this.$modal.show(this.externalFileSettingsModal);
     },
     confirmExternalFile () {
