@@ -34,6 +34,7 @@
           placeholder="Number of elements"
           min="0"
           v-model="numberOfElements"
+          onKeydown="return false"
         >
       </div>
     </div>

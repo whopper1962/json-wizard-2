@@ -24,6 +24,7 @@
             max="10"
             v-model="numberOfSpaces"
             :disabled="invalidJsonFormat"
+            onKeyDown="return false"
           >
         </div>
         <span
