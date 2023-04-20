@@ -4,7 +4,10 @@
       JSON
     </div>
     <div class="card-body">
-      Source: {{ source }}
+      <div class="form-inline option-button-wrapper">
+        <span class="sourc-placeholder">Source:</span>
+        <span class="source-name">{{ source }}</span>
+      </div>
       <div class="form-inline option-button-wrapper">
         <button
           class="btn btn-secondary"
@@ -79,7 +82,6 @@ export default {
   computed: {
     generatedJson () {
       const json = this.$store.getters['getGeneratedJson'].json;
-      console.error(json);
       return JSON.stringify(json, null, Number(this.numberOfSpaces));
     },
     sourceFile () {
@@ -130,4 +132,13 @@ export default {
 .error-msg-area {
   margin-bottom: 10px;
 }
+.source-name {
+  font-weight: bold;
+}
+.sourc-placeholder {
+  margin-right: 5px;
+}
+/* .source-tab-area {
+  margin-bottom: 5px;
+} */
 </style>
