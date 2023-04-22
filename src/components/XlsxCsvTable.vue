@@ -76,9 +76,9 @@
               :class="{
                 'context-menu-opened':
                   ctxOpenedRowIndex === rowIndex && ctxOpenedContentIndex === index,
+                'mouseovered-index': isMouseOvered(index) && !trashedRows.includes(rowIndex) && !isReferingExternalFile(`${rowIndex}-${index}`),
                 'refering-external-file': isReferingExternalFile(`${rowIndex}-${index}`),
                 'ctx-menu-enabled-cell': isValueColumn(index),
-                'mouseovered-index': isMouseOvered(index)
               }"
               @contextmenu.prevent="isValueColumn(index) ? $refs.ctxMenu.open($event, {rowIndex, index}) : {}"
             >
@@ -355,7 +355,7 @@ export default {
   top: 0;
 }
 .xlsx-csv-table-content thead tr:nth-child(2) th {
-  top: 2.95rem;
+  top: 3.9rem;
 }
 .xlsx-csv-table-content thead tr:nth-child(3) th {
   top: 4rem;
@@ -454,12 +454,12 @@ export default {
   margin-bottom: 20px;
 }
 .refering-external-file {
-  background-color: #92b8f3;
+  background-color: #bbd4fa;
 }
 .ctx-menu-enabled-cell {
   cursor:context-menu;
 }
 .mouseovered-index {
-  background-color: yellow;
+  background-color: rgb(255, 255, 155);
 }
 </style>

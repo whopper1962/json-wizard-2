@@ -110,7 +110,7 @@ export default {
 <style scoped>
 .card-header-title {
   font-family: 'Trattatello';
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 .json-card {
@@ -118,7 +118,7 @@ export default {
 }
 .option-button-wrapper {
   text-align: left;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .invalid-json-format-error {
   margin-left: 15px;
@@ -136,6 +136,7 @@ export default {
   font-weight: bold;
 }
 .sourc-placeholder {
+  font-size: 10px;
   margin-right: 5px;
 }
 /* .source-tab-area {

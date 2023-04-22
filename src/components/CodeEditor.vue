@@ -1,7 +1,7 @@
 <template>
   <CodeEditor
     width="100%"
-    font_size="14px"
+    font_size="10px"
     :language_selector="false"
     :hide_header="true"
     height="600px"

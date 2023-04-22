@@ -222,7 +222,7 @@ export default {
 }
 .card-header-title {
   font-family: 'Trattatello';
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
 }
 .link-cursor {
@@ -236,7 +236,7 @@ export default {
   margin-bottom: 20px;
 }
 .source-file-form-wrapper {
-  height: 450px;
+  height: 481px;
   display: table;
   width: 100%;
 }
@@ -266,8 +266,8 @@ export default {
 .tab-item {
   width: fit-content;
   min-width: 100px;
-  font-size: 20px;
-  height: 50px;
+  font-size: 12px;
+  height: 30px;
 }
 .tab-name-form {
   height: 30px;

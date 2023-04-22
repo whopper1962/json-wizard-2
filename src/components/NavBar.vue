@@ -8,7 +8,7 @@
     >
       <img
         src="wizard.png"
-        alt="" width="40"
+        alt="" width="30"
         class="img-fluid title-logo"
       >
       JSON WIZARD
@@ -63,8 +63,8 @@ export default {
 <style scoped>
 .app-title {
   font-family: 'Trattatello';
-  font-size: 30px;
-  margin-left: 15px;
+  font-size: 25px;
+  margin-left: 20px;
   font-weight: bold;
 }
 .title-logo {

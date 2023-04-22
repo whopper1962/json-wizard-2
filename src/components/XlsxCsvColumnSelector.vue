@@ -19,8 +19,6 @@
             @mouseenter="onMouseenter(column)"
             @mouseleave="onMouseenter(null)"
           >
-            <!-- @mousedown="updateHighlightedColumn(column)"
-            @mouseup="updateHighlightedColumn(null)" -->
             <div class="column-card-inner">
               <span class="font-weight-bold">
                 Column{{ column + 1 }}
@@ -110,7 +108,7 @@ export default {
   width: 100%;
   margin-bottom: 5px;
   cursor: move;
-  height: 40px;
+  height: 30px;
 }
 .column-card-inner {
   display: table-cell;

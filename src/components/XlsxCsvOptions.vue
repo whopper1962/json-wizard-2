@@ -2,7 +2,7 @@
   <div class="xlsx-csv-option-area">
     <div class="form-inline">
       <button
-        class="btn btn-primary mb-2 font-weight-bold"
+        class="btn btn-primary mb-2 font-weight-bold root-array-button"
         @click="executeConversion()"
         :disabled="!isValueAndKeySelected"
       >
@@ -138,8 +138,8 @@ export default {
   margin-right: 5px;
 }
 .root-array-button {
-  text-align: left;
-  width: 150px;
+  width: 100px;
+  min-width: fit-content;
 }
 .selected-sheet-form {
   width: 150px !important;
