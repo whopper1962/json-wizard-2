@@ -19,6 +19,12 @@ Vue.directive('focus', {
   }
 });
 
+import Toasted from 'vue-toasted';
+
+Vue.use(Toasted, {
+  duration: 3000,
+});
+
 Vue.config.productionTip = false;
 
 // FontAwesome

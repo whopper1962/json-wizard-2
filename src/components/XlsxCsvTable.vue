@@ -76,7 +76,7 @@
               :class="{
                 'context-menu-opened':
                   ctxOpenedRowIndex === rowIndex && ctxOpenedContentIndex === index,
-                'mouseovered-index': isMouseOvered(index) && !trashedRows.includes(rowIndex) && !isReferingExternalFile(`${rowIndex}-${index}`),
+                'mouseovered-index': isMouseOvered(index) && !trashedRows.includes(rowIndex) && !isReferingExternalFile(`${rowIndex}-${index}`) & !errorRows.includes(rowIndex),
                 'refering-external-file': isReferingExternalFile(`${rowIndex}-${index}`),
                 'ctx-menu-enabled-cell': isValueColumn(index),
               }"

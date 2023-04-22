@@ -120,9 +120,15 @@ export default {
         const props = this.currentXlsxCsv();
         const generatedJson = xlsxToJson(props);
         this.$store.dispatch('setGeneratedJson', generatedJson);
+        this.$toasted.show('Converted Successfully!', {
+          type: 'success',
+        });
       } catch (error) {
         console.error(error);
         this.$store.dispatch('setErrorRows', error.body);
+        this.$toasted.show('Error occured! Check the error message and convert again.', {
+          type: 'error',
+        });
       }
     },
   }
