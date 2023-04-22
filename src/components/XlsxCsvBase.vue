@@ -80,11 +80,14 @@
       <div class="row" v-if="xlsxCsvInputed">
         <div class="col-9">
           <XlsxCsvOptions/>
-          <XlsxCsvTable/>
+          <XlsxCsvTable
+            :mouseOveredColumn="mouseOveredColumn"
+          />
         </div>
         <div class="col-3">
           <XlsxCsvColumnSelector
             v-model="currentXlsxCsvTab"
+            @updateHighlightedColumn="updateHighlightedColumn"
           />
           <XlsxCsvExternalFilesInfo/>
         </div>
@@ -122,7 +125,8 @@ export default {
       ctxOpendTabIndex: 0,
       changingTabNameIndex: null,
       invalidTabName: false,
-      tabName: ''
+      tabName: '',
+      mouseOveredColumn: null
     };
   },
   watch: {
@@ -180,6 +184,9 @@ export default {
     },
     onDoubleClickTab () {
       console.error('Double')
+    },
+    updateHighlightedColumn (column) {
+      this.mouseOveredColumn = column;
     },
     deleteTab () {
       this.$store.dispatch('deleteTab', this.ctxOpendTabIndex);

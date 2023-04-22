@@ -7,7 +7,7 @@
       v-if="columnOrder.length > 0"
       class="card-body xlsx-csv-column-selector-inner"
     >
-      <Draggable v-model="columnOrder">
+      <Draggable v-model="columnOrder" :move="onMoveCallback">
         <template v-for="(column, index) in columnOrder">
           <div
             class="card column-card-outer"
@@ -16,7 +16,11 @@
               'bg-yellowgreen': index > 0
             }"
             :key="`elem_${index}`"
+            @mouseenter="onMouseenter(column)"
+            @mouseleave="onMouseenter(null)"
           >
+            <!-- @mousedown="updateHighlightedColumn(column)"
+            @mouseup="updateHighlightedColumn(null)" -->
             <div class="column-card-inner">
               <span class="font-weight-bold">
                 Column{{ column + 1 }}
@@ -42,6 +46,11 @@ export default {
   components: {
     Draggable
   },
+  data () {
+    return {
+      isMoving: false
+    };
+  },
   props: {
     value: {
       type: Array,
@@ -54,6 +63,7 @@ export default {
         return this.value;
       },
       set (order) {
+        this.isMoving = false;
         const isValueChanged = this.value[0] !== order[0];
         if (isValueChanged) {
           const result = confirm('External file info will be discarded. You sure want to change the value column?');
@@ -66,7 +76,22 @@ export default {
       }
     }
   },
-  methods: {}
+  methods: {
+    onMoveCallback (){
+      this.isMoving = true;
+      setTimeout(() => {
+        this.isMoving = false;
+      }, 100);
+    },
+    reset () {
+      if (this.isMoving) return;
+      this.$emit('updateHighlightedColumn', null);
+    },
+    onMouseenter (column) {
+      if (this.isMoving) return;
+      this.$emit('updateHighlightedColumn', column);
+    }
+  }
 }
 </script>
 

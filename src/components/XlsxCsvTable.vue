@@ -77,7 +77,8 @@
                 'context-menu-opened':
                   ctxOpenedRowIndex === rowIndex && ctxOpenedContentIndex === index,
                 'refering-external-file': isReferingExternalFile(`${rowIndex}-${index}`),
-                'ctx-menu-enabled-cell': isValueColumn(index)
+                'ctx-menu-enabled-cell': isValueColumn(index),
+                'mouseovered-index': isMouseOvered(index)
               }"
               @contextmenu.prevent="isValueColumn(index) ? $refs.ctxMenu.open($event, {rowIndex, index}) : {}"
             >
@@ -144,6 +145,11 @@ export default {
     ContextMenu,
     Modal
   },
+  props: {
+    mouseOveredColumn: {
+      type: Number
+    }
+  },
   data() {
     return {
       isFileSelected: false,
@@ -184,6 +190,12 @@ export default {
       set (columnOrders) {
         this.$store.dispatch('modifyColumnOrder', columnOrders);
       }
+    },
+    isMouseOvered () {
+      return function (column) {
+        if (column === null || column === undefined) return;
+        return this.mouseOveredColumn === column;
+      };
     },
     currentSheet () {
       return this.$store.getters['getCurrentTabContents'].currentXlsxCsvContents;
@@ -446,5 +458,8 @@ export default {
 }
 .ctx-menu-enabled-cell {
   cursor:context-menu;
+}
+.mouseovered-index {
+  background-color: yellow;
 }
 </style>
