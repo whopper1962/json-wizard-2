@@ -82,7 +82,11 @@
               }"
               @contextmenu.prevent="isValueColumn(index) ? $refs.ctxMenu.open($event, {rowIndex, index}) : {}"
             >
-              {{ content }}
+              {{
+                isReferingExternalFile(`${rowIndex}-${index}`)
+                  ? `Refering: ${isReferingExternalFile(`${rowIndex}-${index}`)}`
+                  : content
+              }}
             </td>
           </tr>
         </tbody>
@@ -111,24 +115,26 @@
           External file settings
         </template>
         <template slot="modal-body">
-          <p class="modal-msg">
-            Select external file(tab). Current value will be ignored.
-          </p>
-          <select class="custom-select" :disabled="xlsxCsvTabs.length === 0" v-model="externalFile">
-            <option selected value=""></option>
-            <template v-if="xlsxCsvTabs.length > 0">
-              <option
-                v-for="(tab, index) in xlsxCsvTabs"
-                :key="`tab_${index}`"
-                :value="tab"
-              >
-                {{ tab }}
-              </option>
-            </template>
-          </select>
-          <p v-if="xlsxCsvTabs.length === 0" class="text-danger">
-            There is no external tab.
-          </p>
+          <div class="external-file-selector-area">
+            <p class="modal-msg">
+              Select external file(tab). Current value will be ignored.
+            </p>
+            <select class="custom-select" :disabled="xlsxCsvTabs.length === 0" v-model="externalFile">
+              <option selected value=""></option>
+              <template v-if="xlsxCsvTabs.length > 0">
+                <option
+                  v-for="(tab, index) in xlsxCsvTabs"
+                  :key="`tab_${index}`"
+                  :value="tab"
+                >
+                  {{ tab }}
+                </option>
+              </template>
+            </select>
+            <p v-if="xlsxCsvTabs.length === 0" class="text-danger">
+              There is no external tab.
+            </p>
+          </div>
         </template>
       </Modal>
     </div>
@@ -223,9 +229,10 @@ export default {
     },
     isReferingExternalFile () {
       return function (cell) {
-        return this.currentExternalFileInfo.find((obj) => {
+        const referingTab = this.currentExternalFileInfo.find((obj) => {
           return obj.cell === cell;
-        })
+        });
+        return referingTab ? referingTab.refering : false;
       };
     },
   },
