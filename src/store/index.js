@@ -150,6 +150,12 @@ export default new Vuex.Store({
       }
     },
     MODIFY_TAB_NAME_BY_INDEX (state, args) {
+      const tabNames = state.xlsxCsvTabs.map((tab, index) => {
+        if (index !== args.index) {
+          return tab.tabName;
+        }
+      }).filter(Boolean);
+      if (tabNames.some((name) => name === args.name)) throw new Error();
       let targetTab = state.xlsxCsvTabs[args.index];
       targetTab.tabName = args.name;
     },

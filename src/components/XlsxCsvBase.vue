@@ -198,15 +198,19 @@ export default {
       this.changingTabNameIndex = this.ctxOpendTabIndex;
     },
     submitTabName () {
-      if (this.tabName.length === 0) {
-        this.invalidTabName = true;
-        return;
+      try {
+        if (this.tabName.length === 0) {
+          this.invalidTabName = true;
+          return;
+        }
+        this.$store.dispatch('modifyTabNameByIndex', {
+          index: this.changingTabNameIndex,
+          name: this.tabName.trim()
+        });
+        this.changingTabNameIndex = null;
+      } catch (_) {
+        alert(`"${this.tabName}" already used as other tab name.`);
       }
-      this.$store.dispatch('modifyTabNameByIndex', {
-        index: this.changingTabNameIndex,
-        name: this.tabName.trim()
-      });
-      this.changingTabNameIndex = null;
     },
     clickOutside () {
       this.changingTabNameIndex = null;
