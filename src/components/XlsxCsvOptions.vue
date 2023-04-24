@@ -112,6 +112,7 @@ export default {
         excludes: currentTabContents.trashedRows,
         isArray: currentTabContents.isRootArray,
         numberOfElements: currentTabContents.numberOfElements,
+        externalTabs: currentTabContents.externalTabColumnInfo
       };
     },
     executeConversion () {

@@ -19,8 +19,4 @@ module.exports = function (xlsxObj) {
     };
   }
   return jsonGenerator.json;
-  // try {
-  // } catch (err) {
-  //   throw new Error(err);
-  // }
 };

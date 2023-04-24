@@ -1,6 +1,6 @@
 module.exports = class JsonGenerator {
   constructor({ parentKeys, valueIndex, contents,
-    excludes, isArray, numberOfElements }) {
+    excludes, isArray, numberOfElements, externalTabs }) {
     this.parents = parentKeys;
     this.valueIndex = valueIndex;
     this.contents = contents;
@@ -12,6 +12,7 @@ module.exports = class JsonGenerator {
     this.json = {};
     this.isArray = isArray;
     this.numberOfElements = numberOfElements;
+    this.externalTabs = externalTabs;
     for (const row of this.contents) {
       const valueArr = [];
       for (const keyIndex of this.parents) {

@@ -54,6 +54,9 @@ export default {
 .list {
   padding-left:0;
 }
+.selector-style {
+  height: 20px !important;
+}
 .list li {
   list-style:none;
 }

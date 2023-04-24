@@ -57,6 +57,10 @@ export default new Vuex.Store({
     getCurrentTabContents (state) {
       return state.xlsxCsvTabs[state.selectedTabIndex];
     },
+    // getReferingTabContents (state) {
+    //   const currentTab = state.xlsxCsvTabs[state.selectedTabIndex];
+    //   const 
+    // },
     getCurrentTabIndex (state) {
       return state.selectedTabIndex;
     },
