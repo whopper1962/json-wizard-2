@@ -1,16 +1,19 @@
 <template>
   <div>
+    <ShareBase/>
     <XlsxCsvBase/>
     <JsonBase/>
   </div>
 </template>
 
 <script>
+import ShareBase from '@/components/ShareBase.vue';
 import XlsxCsvBase from '@/components/XlsxCsvBase.vue';
 import JsonBase from '@/components/JsonBase.vue';
 
 export default {
   components: {
+    ShareBase,
     XlsxCsvBase,
     JsonBase
   },
