@@ -46,10 +46,10 @@ export default {
   overflow: scroll;
 }
 .table th{
-  /* position: sticky;
+  position: sticky;
   background: #f2f2f2;
   top: 0;
-  left: 0; */
+  left: 0;
 }
 .list {
   padding-left:0;

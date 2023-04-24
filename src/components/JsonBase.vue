@@ -6,7 +6,7 @@
     <div class="card-body">
       <div class="form-inline option-button-wrapper">
         <span class="sourc-placeholder">Source:</span>
-        <span class="source-name">{{ source }}</span>
+        <span class="source-name">{{ sourceIndex }}</span>
       </div>
       <div class="form-inline option-button-wrapper">
         <button
@@ -53,15 +53,15 @@ export default {
   },
   data () {
     return {
-      inputedJson: ``,
-      source: '',
+      inputedJson: '',
+      sourceIndex: '',
       invalidJsonFormat: false,
       numberOfSpaces: 4
     };
   },
   created () {
     this.inputedJson = this.generatedJson;
-    this.source = this.sourceFile;
+    this.sourceIndex = this.sourceInStore.tabName;
   },
   watch: {
     inputedJson (inputed) {
@@ -75,8 +75,11 @@ export default {
     generatedJson (json) {
       this.inputedJson = json; 
     },
-    sourceFile (source) {
-      this.source = source;
+    sourceInStore: {
+      handler (source) {
+        this.sourceIndex = source.tabName;
+      },
+      deep: true
     }
   },
   computed: {
@@ -84,9 +87,12 @@ export default {
       const json = this.$store.getters['getGeneratedJson'].json;
       return JSON.stringify(json, null, Number(this.numberOfSpaces));
     },
-    sourceFile () {
-      return this.$store.getters['getGeneratedJson'].source;
-    }
+    sourceInStore () {
+      return this.$store.getters.getSpecificIndexSourceInfo(this.sourceIndexInStore);
+    },
+    sourceIndexInStore() {
+      return this.$store.getters['getGeneratedJson'].sourceIndex;
+    },
   },
   methods: {
     copyToClipboard () {

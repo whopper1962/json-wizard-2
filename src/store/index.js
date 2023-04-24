@@ -48,7 +48,8 @@ export default new Vuex.Store({
     selectedTabIndex: 0,
     currentTabContents: {},
     generatedJson: {
-      source: '',
+      sourceIndex: null,
+      isSourceDeleted: false,
       json: ''
     },
     errorRows: []
@@ -61,6 +62,11 @@ export default new Vuex.Store({
     //   const currentTab = state.xlsxCsvTabs[state.selectedTabIndex];
     //   const 
     // },
+    getSpecificIndexSourceInfo (state) {
+      return function (index) {
+        return state.xlsxCsvTabs[index]
+      };
+    },
     getCurrentTabIndex (state) {
       return state.selectedTabIndex;
     },
@@ -111,7 +117,8 @@ export default new Vuex.Store({
     },
     SET_GENERATED_JSON (state, json) {
       state.generatedJson = {
-        source: state.xlsxCsvTabs[state.selectedTabIndex].tabName,
+        sourceIndex: state.selectedTabIndex,
+        isSourceDeleted: false,
         json
       };
     },
