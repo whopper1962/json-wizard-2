@@ -7,7 +7,7 @@
       v-if="columnOrder.length > 0"
       class="card-body xlsx-csv-column-selector-inner"
     >
-      <Draggable v-model="columnOrder" :move="onMoveCallback">
+      <Draggable v-model="columnOrder" :move="onMoveCallback" :animation="200">
         <template v-for="(column, index) in columnOrder">
           <div
             class="card column-card-outer"
