@@ -1,6 +1,9 @@
 <template>
   <div class="xlsx-csv-table-main">
-    <div class="xlsx-csv-table-outer" v-if="selectedSheetMaxLen > 0 && currentColumnOrder">
+    <div
+      class="xlsx-csv-table-outer"
+      v-if="selectedSheetMaxLen > 0 && currentColumnOrder"
+    >
       <table class="xlsx-csv-table-content">
         <thead>
           <tr>
@@ -10,7 +13,7 @@
                 :key="num"
                 class="th-button-area"
                 :class="{
-                  'border-right': num === selectedSheetMaxLen
+                  'border-right': num === selectedSheetMaxLen,
                 }"
               >
                 <button
@@ -37,7 +40,7 @@
                 :key="num"
                 class="text-center"
                 :class="{
-                  'border-right': num === selectedSheetMaxLen
+                  'border-right': num === selectedSheetMaxLen,
                 }"
               >
                 Column{{ num }}
@@ -63,10 +66,7 @@
                   v-if="trashedRows.includes(rowIndex)"
                   icon="fa-solid fa-trash-arrow-up"
                 />
-                <font-awesome-icon
-                  v-else
-                  icon="fa-solid fa-trash"
-                />
+                <font-awesome-icon v-else icon="fa-solid fa-trash" />
               </button>
             </th>
             <td
@@ -75,16 +75,29 @@
               class="content-cell"
               :class="{
                 'context-menu-opened':
-                  ctxOpenedRowIndex === rowIndex && ctxOpenedContentIndex === index,
-                'mouseovered-index': isMouseOvered(index) && !trashedRows.includes(rowIndex) && !isReferingExternalFile(`${rowIndex}-${index}`) & !errorRows.includes(rowIndex),
-                'refering-external-file': isReferingExternalFile(`${rowIndex}-${index}`),
+                  ctxOpenedRowIndex === rowIndex &&
+                  ctxOpenedContentIndex === index,
+                'mouseovered-index':
+                  isMouseOvered(index) &&
+                  !trashedRows.includes(rowIndex) &&
+                  !isReferingExternalFile(`${rowIndex}-${index}`) &
+                    !errorRows.includes(rowIndex),
+                'refering-external-file': isReferingExternalFile(
+                  `${rowIndex}-${index}`
+                ),
                 'ctx-menu-enabled-cell': isValueColumn(index),
               }"
-              @contextmenu.prevent="isValueColumn(index) ? $refs.ctxMenu.open($event, {rowIndex, index}) : {}"
+              @contextmenu.prevent="
+                isValueColumn(index)
+                  ? $refs.ctxMenu.open($event, { rowIndex, index })
+                  : {}
+              "
             >
               {{
                 isReferingExternalFile(`${rowIndex}-${index}`)
-                  ? `Refering: ${isReferingExternalFile(`${rowIndex}-${index}`)}`
+                  ? `Refering: ${isReferingExternalFile(
+                      `${rowIndex}-${index}`
+                    )}`
                   : content
               }}
             </td>
@@ -98,28 +111,27 @@
         @ctx-cancel="onCtxClose"
         ref="ctxMenu"
       >
-        <li
-          class="context-menu-item"
-          @click="referToExternalFile()"
-        >
+        <li class="context-menu-item" @click="referToExternalFile()">
           <span class="ctx-title">Refer to external file</span>
         </li>
       </ContextMenu>
       <Modal
-        :name="`external-file-settings-modal`" 
+        :name="`external-file-settings-modal`"
         :clickToClose="true"
         :onClickOkButton="confirmExternalFile"
         :disableOkButton="!externalFile"
       >
-        <template slot="modal-header">
-          External file settings
-        </template>
+        <template slot="modal-header"> External file settings </template>
         <template slot="modal-body">
           <div class="external-file-selector-area">
             <p class="modal-msg">
               Select external file(tab). Current value will be ignored.
             </p>
-            <select class="custom-select" :disabled="xlsxCsvTabs.length === 0" v-model="externalFile">
+            <select
+              class="custom-select"
+              :disabled="xlsxCsvTabs.length === 0"
+              v-model="externalFile"
+            >
               <option selected value=""></option>
               <template v-if="xlsxCsvTabs.length > 0">
                 <option
@@ -143,18 +155,18 @@
 </template>
 
 <script>
-import ContextMenu from 'vue-context-menu';
-import Modal from '@/components/ModalTemplate.vue';
+import ContextMenu from "vue-context-menu";
+import Modal from "@/components/ModalTemplate.vue";
 
 export default {
   components: {
     ContextMenu,
-    Modal
+    Modal,
   },
   props: {
     mouseOveredColumn: {
-      type: Number
-    }
+      type: Number,
+    },
   },
   data() {
     return {
@@ -164,53 +176,57 @@ export default {
       currentXlsxCsv: {
         columnOrder: [],
         sheetNames: [],
-        contents: {}
+        contents: {},
       },
       stagedNum: [],
       ctxOpenedRowIndex: null,
       ctxOpenedContentIndex: null,
       ctxOpenedRowIndexCache: null,
       ctxOpenedContentIndexCache: null,
-      externalFile: ''
+      externalFile: "",
       // selectedSheetMaxLen: 0,
       // currentSheet: []
     };
   },
   computed: {
-    externalFileSettingsModal: () => 'external-file-settings-modal',
-    isValueColumn () {
+    externalFileSettingsModal: () => "external-file-settings-modal",
+    isValueColumn() {
       return function (columnIndex) {
         return columnIndex === this.currentColumnOrder[0];
-      }
+      };
     },
-    xlsxCsvTabs () {
-      let tabs = this.$store.getters['getXlsxCsvTabs'].map((tab) => tab.tabName);
-      const currentTabIndex = this.$store.getters['getCurrentTabIndex']
+    xlsxCsvTabs() {
+      let tabs = this.$store.getters["getXlsxCsvTabs"].map(
+        (tab) => tab.tabName
+      );
+      const currentTabIndex = this.$store.getters["getCurrentTabIndex"];
       tabs.splice(currentTabIndex, 1);
       return tabs;
     },
     currentColumnOrder: {
-      get () {
-        return this.$store.getters['getCurrentTabContents']?.columnOrders;
+      get() {
+        return this.$store.getters["getCurrentTabContents"]?.columnOrders;
       },
-      set (columnOrders) {
-        this.$store.dispatch('modifyColumnOrder', columnOrders);
-      }
+      set(columnOrders) {
+        this.$store.dispatch("modifyColumnOrder", columnOrders);
+      },
     },
-    isMouseOvered () {
+    isMouseOvered() {
       return function (column) {
         if (column === null || column === undefined) return;
         return this.mouseOveredColumn === column;
       };
     },
-    currentSheet () {
-      return this.$store.getters['getCurrentTabContents'].currentXlsxCsvContents;
+    currentSheet() {
+      return this.$store.getters["getCurrentTabContents"]
+        .currentXlsxCsvContents;
     },
-    currentExternalFileInfo () {
-      return this.$store.getters['getCurrentTabContents'].externalTabColumnInfo;
+    currentExternalFileInfo() {
+      return this.$store.getters["getCurrentTabContents"].externalTabColumnInfo;
     },
-    selectedSheetMaxLen () {
-      const current = this.$store.getters['getCurrentTabContents'].currentXlsxCsvContents;
+    selectedSheetMaxLen() {
+      const current =
+        this.$store.getters["getCurrentTabContents"].currentXlsxCsvContents;
       let lengths = [];
       for (const row of current) {
         lengths.push(row.length);
@@ -218,16 +234,16 @@ export default {
       return Math.max(...lengths);
     },
     trashedRows: {
-      get () {
-        return this.$store.getters['getCurrentTabContents'].trashedRows;
-      }
+      get() {
+        return this.$store.getters["getCurrentTabContents"].trashedRows;
+      },
     },
     errorRows: {
-      get () {
-        return this.$store.getters['getErrorRows'];
-      }
+      get() {
+        return this.$store.getters["getErrorRows"];
+      },
     },
-    isReferingExternalFile () {
+    isReferingExternalFile() {
       return function (cell) {
         const referingTab = this.currentExternalFileInfo.find((obj) => {
           return obj.cell === cell;
@@ -237,44 +253,44 @@ export default {
     },
   },
   methods: {
-    onCtxOpen (locals) {
+    onCtxOpen(locals) {
       this.ctxOpenedRowIndex = locals.rowIndex;
       this.ctxOpenedContentIndex = locals.index;
-      const body = document.querySelector('body');
-      body.style.overflow = 'hidden';
-      const table = document.getElementsByClassName('xlsx-csv-table-outer')[0];
-      table.style.overflow = 'hidden';
+      const body = document.querySelector("body");
+      body.style.overflow = "hidden";
+      const table = document.getElementsByClassName("xlsx-csv-table-outer")[0];
+      table.style.overflow = "hidden";
     },
-    onCtxClose () {
+    onCtxClose() {
       this.ctxOpenedContentIndexCache = this.ctxOpenedContentIndex;
       this.ctxOpenedRowIndexCache = this.ctxOpenedRowIndex;
       this.ctxOpenedRowIndex = null;
       this.ctxOpenedContentIndex = null;
-      const body = document.querySelector('body');
-      body.style.overflow = 'scroll';
-      const table = document.getElementsByClassName('xlsx-csv-table-outer')[0];
-      table.style.overflow = 'scroll';
+      const body = document.querySelector("body");
+      body.style.overflow = "scroll";
+      const table = document.getElementsByClassName("xlsx-csv-table-outer")[0];
+      table.style.overflow = "scroll";
     },
-    referToExternalFile () {
-      this.externalFile = '';
+    referToExternalFile() {
+      this.externalFile = "";
       this.$modal.show(this.externalFileSettingsModal);
     },
-    confirmExternalFile () {
-      this.$store.dispatch('setExternalFileColumn', {
+    confirmExternalFile() {
+      this.$store.dispatch("setExternalFileColumn", {
         cell: `${this.ctxOpenedRowIndexCache}-${this.ctxOpenedContentIndexCache}`,
-        refering: this.externalFile
-      })
+        refering: this.externalFile,
+      });
     },
-    onClickGarbageButton (index) {
-      this.$store.dispatch('modifyTrashedRows', index);
+    onClickGarbageButton(index) {
+      this.$store.dispatch("modifyTrashedRows", index);
     },
-    onClickStageButton (columnNum) {
+    onClickStageButton(columnNum) {
       let clonedColumnOrder = this.currentColumnOrder.slice();
       if (clonedColumnOrder.includes(columnNum)) {
         const foundIndex = clonedColumnOrder.indexOf(columnNum);
         clonedColumnOrder.splice(foundIndex, 1);
       } else {
-        clonedColumnOrder.push(columnNum)
+        clonedColumnOrder.push(columnNum);
       }
       this.currentColumnOrder = clonedColumnOrder;
     },
@@ -303,11 +319,12 @@ export default {
   padding: 0.5rem;
   max-height: 2rem;
   min-height: 2rem;
-  word-break : break-all;
+  word-break: break-all;
   line-height: 1rem;
   text-align: left;
 }
 .xlsx-csv-table-content td {
+  height: 20px;
   border: 1px solid rgb(113, 113, 113);
 }
 .border-bottom {
@@ -375,19 +392,20 @@ export default {
   align-content: center;
 }
 .garbage-button {
-  position:absolute;
+  position: absolute;
   right: 0;
   top: 0;
   height: 100%;
   width: 100%;
   appearance: button;
-  background-color: #94D364;
-  border: 1px solid #94D364;
+  background-color: #94d364;
+  border: 1px solid #94d364;
   border-radius: 4px;
   box-sizing: border-box;
   color: black;
   cursor: pointer;
-  font-family: Graphik,-apple-system,system-ui,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+  font-family: Graphik, -apple-system, system-ui, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   line-height: 1.15;
   overflow: visible;
   /* padding: 3px; */
@@ -400,7 +418,7 @@ export default {
 }
 
 .garbage-button:disabled {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .garbage-button:focus {
@@ -413,8 +431,8 @@ export default {
 }
 
 .garbage-button:active {
-  background-color: #94D364;
-  border-color: #94D364;
+  background-color: #94d364;
+  border-color: #94d364;
 }
 .th-button {
   width: 100%;
@@ -424,7 +442,8 @@ export default {
   height: 35px;
 }
 .content-cell {
-  cursor: pointer;
+  vertical-align: top;
+  min-height: 30px !important;
 }
 .void-area {
   max-width: 4rem !important;
@@ -464,7 +483,7 @@ export default {
   background-color: #bbd4fa;
 }
 .ctx-menu-enabled-cell {
-  cursor:context-menu;
+  cursor: context-menu;
 }
 .mouseovered-index {
   background-color: rgb(255, 255, 155);
