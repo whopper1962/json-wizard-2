@@ -13,6 +13,14 @@
       >
       JSON WIZARD
     </router-link>
+    <div class="credit-area">
+      <p class="credit">
+        created by 
+        <a href="https://github.com/whopper1962" target="_blank" rel="noopener noreferrer">
+          @whopper1962
+        </a>
+      </p>
+    </div>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -69,5 +77,17 @@ export default {
 }
 .title-logo {
   margin-right: 20px;
+}
+.credit-area {
+  display: table;
+  text-align: center;
+  margin: 0px 20px 0px 5px;
+}
+.credit {
+  display: table-cell;
+  vertical-align: middle;
+  font-family: 'Trattatello';
+  color: white;
+  font-size: 16px;
 }
 </style>

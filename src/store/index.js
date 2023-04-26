@@ -104,6 +104,7 @@ export default new Vuex.Store({
       currentTabContents.currentXlsxCsvContents = xlsxContents[sheetNames[0]];
     },
     SET_TAB_INDEX(state, index) {
+      state.errorRows = [];
       state.selectedTabIndex = index;
     },
     MODIFY_CURRENT_XLSX_CSV_COLUMN_ORDER(state, ordersInfo) {
