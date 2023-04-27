@@ -2,7 +2,13 @@ const JsonGenerator = require('@/lib/json-wizard/xlsx-to-json/json-generator');
 
 module.exports = function (xlsxObj) {
   const jsonGenerator = new JsonGenerator({...xlsxObj});
-  jsonGenerator.generate();
+  if (jsonGenerator.externalTabs.length > 0) {
+    // multiple conversion
+    // refering external tabs
+    jsonGenerator.generate();
+  } else {
+    jsonGenerator.generate();
+  }
   jsonGenerator.checkDuplicates();
   if (jsonGenerator.isArray) {
     jsonGenerator.convertToArray();
