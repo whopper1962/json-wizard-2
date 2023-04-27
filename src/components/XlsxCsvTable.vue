@@ -119,7 +119,7 @@
         :name="`external-file-settings-modal`"
         :clickToClose="true"
         :onClickOkButton="confirmExternalFile"
-        :disableOkButton="!externalFile"
+        :disableOkButton="externalFile === null"
       >
         <template slot="modal-header"> External file settings </template>
         <template slot="modal-body">
@@ -137,9 +137,13 @@
                 <option
                   v-for="(tab, index) in xlsxCsvTabs"
                   :key="`tab_${index}`"
-                  :value="tab"
+                  :value="index"
+                  :disabled="index === currentIndex"
                 >
-                  {{ tab }}
+                  {{ tab }} 
+                  <template v-if="index === currentIndex">
+                    (You cannot refer own tab.)
+                  </template>
                 </option>
               </template>
             </select>
@@ -196,12 +200,12 @@ export default {
       };
     },
     xlsxCsvTabs() {
-      let tabs = this.$store.getters["getXlsxCsvTabs"].map(
+      return this.$store.getters["getXlsxCsvTabs"].map(
         (tab) => tab.tabName
       );
-      const currentTabIndex = this.$store.getters["getCurrentTabIndex"];
-      tabs.splice(currentTabIndex, 1);
-      return tabs;
+    },
+    currentIndex () {
+      return this.$store.getters["getCurrentTabIndex"];
     },
     currentColumnOrder: {
       get() {
@@ -272,7 +276,7 @@ export default {
       table.style.overflow = "scroll";
     },
     referToExternalFile() {
-      this.externalFile = "";
+      this.externalFile = null;
       this.$modal.show(this.externalFileSettingsModal);
     },
     confirmExternalFile() {
