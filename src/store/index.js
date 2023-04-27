@@ -6,7 +6,6 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 const defaultTabData = {
-  tabName: "Awesome file",
   fileName: "",
   fileInputed: false,
   selectedFileName: "",
@@ -125,20 +124,34 @@ export default new Vuex.Store({
       };
     },
     ADD_TAB(state) {
-      const awesomeFiles = state.xlsxCsvTabs.filter((tab) => {
-        const name = tab.tabName?.toLocaleLowerCase().replaceAll(' ', '')?.substring(0, 11);
-        return name.length === 11 && name === 'awesomefile'
-      }).map((tab) => tab.tabName).filter((name) => name.length > 11);
+      const awesomeFiles = state.xlsxCsvTabs
+        .filter((tab) => {
+          const name = tab.tabName
+            ?.toLocaleLowerCase()
+            .replaceAll(" ", "")
+            ?.substring(0, 11);
+          return name.length === 11 && name === "awesomefile";
+        })
+        .map((tab) => tab.tabName)
+        .filter((name) => name.length > 11);
       const identifiers = [];
       for (const file of awesomeFiles) {
         identifiers.push(Number(file.substring(11)));
       }
-      const sortedIdentifiers = identifiers.sort((a, b) => a -b);
-      const maximumIdentifier = sortedIdentifiers.length > 0 ? Number(sortedIdentifiers.pop()) : 0;
-      const clonedTabData = {
+      const sortedIdentifiers = identifiers.sort((a, b) => a - b);
+      const maximumIdentifier =
+        sortedIdentifiers.length > 0 ? Number(sortedIdentifiers.pop()) : 0;
+      const clonedDefaultData = {
         ...defaultTabData,
-        tabName: `AwesomeFile${maximumIdentifier + 1}`
+        tabName: `AwesomeFile${maximumIdentifier + 1}`,
+        xlsxCsvSheets: { ...defaultTabData.xlsxCsvSheets },
+        sheetNames: [...defaultTabData.sheetNames],
+        currentXlsxCsvContents: { ...defaultTabData.currentXlsxCsvContents },
+        columnOrders: [...defaultTabData.columnOrders],
+        trashedRows: [...defaultTabData.trashedRows],
+        externalTabColumnInfo: [...defaultTabData.externalTabColumnInfo],
       };
+      const clonedTabData = { ...clonedDefaultData };
       state.xlsxCsvTabs.push(clonedTabData);
     },
     SET_ROOT_ARRAY_STATUS(state, status) {
@@ -181,8 +194,12 @@ export default new Vuex.Store({
           }
         })
         .filter(Boolean);
-      if (tabNames.some((name) => 
-        name?.toLowerCase() === args.name?.toLowerCase())) throw new Error();
+      if (
+        tabNames.some(
+          (name) => name?.toLowerCase() === args.name?.toLowerCase()
+        )
+      )
+        throw new Error();
       let targetTab = state.xlsxCsvTabs[args.index];
       targetTab.tabName = args.name;
     },
