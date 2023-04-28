@@ -3,12 +3,21 @@ const JsonGenerator = require('@/lib/json-wizard/xlsx-to-json/json-generator');
 module.exports = function (xlsxObj) {
   const jsonGenerator = new JsonGenerator({...xlsxObj});
   if (jsonGenerator.externalTabs.length > 0) {
-    // multiple conversion
-    // refering external tabs
-    jsonGenerator.generate();
-  } else {
-    jsonGenerator.generate();
+    return generateMultipleJson(jsonGenerator);
   }
+  return generateJson(jsonGenerator);
+};
+
+// multiple conversion
+// refering external tabs
+function generateMultipleJson (jsonGenerator) {
+  console.error('External:', jsonGenerator.externalTabs);
+  return generateJson(jsonGenerator);
+}
+
+// single conversion
+function generateJson (jsonGenerator) {
+  jsonGenerator.generate();
   jsonGenerator.checkDuplicates();
   if (jsonGenerator.isArray) {
     jsonGenerator.convertToArray();
@@ -25,4 +34,4 @@ module.exports = function (xlsxObj) {
     };
   }
   return jsonGenerator.json;
-};
+}
