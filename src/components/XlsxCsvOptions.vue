@@ -102,6 +102,7 @@ export default {
   methods: {
     currentXlsxCsv () {
       const currentTabContents = this.$store.getters['getCurrentTabContents'];
+      const externalTabs = this.$store.getters.getExternalTabInfo(currentTabContents.externalTabColumnInfo);
       let columnOrder = currentTabContents?.columnOrders.slice();
       const valueIndex = columnOrder.shift();
       const parentKeys = columnOrder.reverse();
@@ -112,7 +113,7 @@ export default {
         excludes: currentTabContents.trashedRows,
         isArray: currentTabContents.isRootArray,
         numberOfElements: currentTabContents.numberOfElements,
-        externalTabs: currentTabContents.externalTabColumnInfo
+        externalTabs
       };
     },
     executeConversion () {

@@ -57,10 +57,18 @@ export default new Vuex.Store({
     getCurrentTabContents(state) {
       return state.xlsxCsvTabs[state.selectedTabIndex];
     },
-    // getReferingTabContents (state) {
-    //   const currentTab = state.xlsxCsvTabs[state.selectedTabIndex];
-    //   const
-    // },
+    getExternalTabInfo(state) {
+      return function (externalTabColumnInfo) {
+        if (!externalTabColumnInfo) return [];
+        return externalTabColumnInfo.map((info) => {
+          return {
+            cell: info.cell,
+            refering: info.refering,
+            contents: state.xlsxCsvTabs[info.refering]
+          };
+        });
+      }
+    },
     getSpecificIndexSourceInfo(state) {
       return function (index) {
         return state.xlsxCsvTabs[index];
