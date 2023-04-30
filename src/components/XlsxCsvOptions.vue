@@ -2,6 +2,12 @@
   <div class="xlsx-csv-option-area">
     <div class="form-inline">
       <button
+        class="btn btn-secondary mb-2 font-weight-bold root-array-button spaces-form-text"
+        @click="selectOtherFile()"
+      >
+        Select other file
+      </button>
+      <button
         class="btn btn-primary mb-2 font-weight-bold root-array-button"
         @click="executeConversion()"
         :disabled="!isValueAndKeySelected"
@@ -100,6 +106,9 @@ export default {
     }
   },
   methods: {
+    selectOtherFile () {
+      this.$store.dispatch('selectOtherFile');
+    },
     currentXlsxCsv () {
       const currentTabContents = this.$store.getters['getCurrentTabContents'];
       const externalTabs = this.$store.getters.getExternalTabInfo(currentTabContents.externalTabColumnInfo);

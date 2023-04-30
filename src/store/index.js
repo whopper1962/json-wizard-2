@@ -64,10 +64,10 @@ export default new Vuex.Store({
           return {
             cell: info.cell,
             refering: info.refering,
-            contents: state.xlsxCsvTabs[info.refering]
+            contents: state.xlsxCsvTabs[info.refering],
           };
         });
-      }
+      };
     },
     getSpecificIndexSourceInfo(state) {
       return function (index) {
@@ -221,6 +221,21 @@ export default new Vuex.Store({
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       currentTabContents.externalTabColumnInfo.push(info);
     },
+    SELECT_OTHER_FILE(state) {
+      let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      currentTabContents.fileInputed = false;
+      const clonedDefaultData = {
+        ...defaultTabData,
+        tabName: currentTabContents.tabName,
+        xlsxCsvSheets: { ...defaultTabData.xlsxCsvSheets },
+        sheetNames: [...defaultTabData.sheetNames],
+        currentXlsxCsvContents: { ...defaultTabData.currentXlsxCsvContents },
+        columnOrders: [...defaultTabData.columnOrders],
+        trashedRows: [...defaultTabData.trashedRows],
+        externalTabColumnInfo: [...defaultTabData.externalTabColumnInfo],
+      };
+      currentTabContents = { ...clonedDefaultData }
+    },
   },
   actions: {
     setCurrentTabContents(context, selectedTabIndex) {
@@ -267,6 +282,9 @@ export default new Vuex.Store({
     },
     setErrorRows(context, rows) {
       context.commit("SET_ERROR_ROWS", rows);
+    },
+    selectOtherFile(context) {
+      context.commit("SELECT_OTHER_FILE");
     },
   },
 });
