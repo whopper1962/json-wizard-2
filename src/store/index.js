@@ -224,17 +224,16 @@ export default new Vuex.Store({
     SELECT_OTHER_FILE(state) {
       let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       currentTabContents.fileInputed = false;
-      const clonedDefaultData = {
-        ...defaultTabData,
-        tabName: currentTabContents.tabName,
-        xlsxCsvSheets: { ...defaultTabData.xlsxCsvSheets },
-        sheetNames: [...defaultTabData.sheetNames],
-        currentXlsxCsvContents: { ...defaultTabData.currentXlsxCsvContents },
-        columnOrders: [...defaultTabData.columnOrders],
-        trashedRows: [...defaultTabData.trashedRows],
-        externalTabColumnInfo: [...defaultTabData.externalTabColumnInfo],
-      };
-      currentTabContents = { ...clonedDefaultData }
+      currentTabContents.selectedFileName = "";
+      currentTabContents.xlsxCsvSheets = {};
+      currentTabContents.sheetNames = [];
+      currentTabContents.selectedSheet = "";
+      currentTabContents.currentXlsxCsvContents = {};
+      currentTabContents.columnOrders = [];
+      currentTabContents.trashedRows = [];
+      currentTabContents.isRootArray = false;
+      currentTabContents.numberOfElements = 1;
+      currentTabContents.externalTabColumnInfo = [];
     },
   },
   actions: {
