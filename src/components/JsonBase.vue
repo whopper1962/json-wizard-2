@@ -6,7 +6,9 @@
     <div class="card-body">
       <div class="form-inline option-button-wrapper">
         <span class="sourc-placeholder">Source:</span>
-        <span class="source-name">{{ sourceIndex }}</span>
+        <span class="source-name">
+          {{ isSourceDeleted ? 'Source deleted' : sourceIndex }}
+        </span>
       </div>
       <div class="form-inline option-button-wrapper">
         <button
@@ -56,6 +58,7 @@ export default {
       inputedJson: '',
       sourceIndex: '',
       invalidJsonFormat: false,
+      isSourceDeleted: false,
       numberOfSpaces: 4
     };
   },
@@ -78,6 +81,7 @@ export default {
     sourceInStore: {
       handler (source) {
         this.sourceIndex = source.tabName;
+        this.isSourceDeleted = source.isSourceDeleted;
       },
       deep: true
     }

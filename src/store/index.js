@@ -213,6 +213,9 @@ export default new Vuex.Store({
     },
     DELETE_TAB(state, index) {
       state.xlsxCsvTabs.splice(index, 1);
+      // if (index === state.generatedJson.sourceIndex) {
+      //   state.generatedJson.isSourceDeleted = true;
+      // }
     },
     SET_ERROR_ROWS(state, rows) {
       state.errorRows = rows;
