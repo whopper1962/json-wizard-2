@@ -58,6 +58,13 @@
         </li>
       </ul>
     </div>
+
+    <div class="github-info-wrapper" v-if="!reqError" @click="jumpToRepo()">
+      <font-awesome-icon class="github-icon" icon="fa-brands fa-github" />
+      <p class="github-info-content">
+        GitHub stars: {{ repoStars }}
+      </p>
+    </div>
   </nav>
 </template>
 
@@ -82,6 +89,9 @@ export default {
     }
   },
   methods: {
+    jumpToRepo () {
+      window.open('https://github.com/whopper1962/json-wizard-2', '_blank');
+    },
     async getRepositoryDetials () {
       try {
         const { data } = await axios.get('https://api.github.com/users/whopper1962/repos');
@@ -119,6 +129,24 @@ export default {
   vertical-align: middle;
   font-family: "Trattatello";
   color: white;
-  font-size: 16px;
+  font-size: 20px;
+}
+.github-info-wrapper {
+  display: table;
+  text-align: center;
+  margin: 0px 20px 0px 5px;
+  cursor: pointer;
+}
+.github-icon {
+  height: 3em;
+  padding-right: 10px;
+  color: white;
+}
+.github-info-content {
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+  font-family: "Trattatello";
+  font-size: 20px;
 }
 </style>
