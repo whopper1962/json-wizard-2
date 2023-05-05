@@ -59,7 +59,7 @@
       </ul>
     </div>
 
-    <div class="github-info-wrapper" v-if="!reqError" @click="jumpToRepo()">
+    <div class="github-info-wrapper" v-if="isGitHubInfoFetched" @click="jumpToRepo()">
       <font-awesome-icon class="github-icon" icon="fa-brands fa-github" />
       <p class="github-info-content">
         GitHub stars: {{ repoStars }}
@@ -73,7 +73,7 @@ import axios from 'axios';
 export default {
   data () {
     return {
-      reqError: false,
+      isGitHubInfoFetched: false,
       repoStars: null,
       repoUrl: ''
     };
@@ -100,8 +100,8 @@ export default {
         console.error(jsonWizard);
         this.repoStars = jsonWizard.stargazers_count;
         this.repoUrl = jsonWizard.html_url;
+        this.isGitHubInfoFetched = true;
       } catch (e) {
-        this.reqError = true;
         return;
       }
     }
