@@ -12,6 +12,7 @@ module.exports = function (xlsxObj) {
 // refering external tabs
 function generateMultipleJson (jsonGenerator) {
   console.error('External:', jsonGenerator.externalTabs);
+  // TODO: check validation: is every tabs convertable?
   return generateJson(jsonGenerator);
 }
 
