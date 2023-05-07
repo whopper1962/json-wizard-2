@@ -90,6 +90,14 @@
             @updateHighlightedColumn="updateHighlightedColumn"
           />
           <XlsxCsvExternalFilesInfo/>
+          <div class="select-other-file-button-wrapper">
+            <button
+              class="btn btn-secondary mb-2 font-weight-bold select-other-file-button"
+              @click="selectOtherFile()"
+            >
+              Select other file
+            </button>
+          </div>
         </div>
       </div>
       <div class="source-file-form-wrapper" v-else>
@@ -191,6 +199,9 @@ export default {
     deleteTab () {
       this.$store.dispatch('deleteTab', this.ctxOpendTabIndex);
     },
+    selectOtherFile () {
+      this.$store.dispatch('selectOtherFile');
+    },
     changeTabName (index = null) {
       if (index !== null) this.ctxOpendTabIndex = index;
       const currentTabName = this.$store.getters.getContentsByIndex(this.ctxOpendTabIndex);
@@ -278,5 +289,12 @@ export default {
 }
 .invalid-name {
   background-color: rgb(255, 161, 161);
+}
+.select-other-file-button-wrapper {
+  padding-top: 5px;
+}
+.select-other-file-button {
+  width: 100%;
+  height: 4%;
 }
 </style>

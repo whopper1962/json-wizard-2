@@ -38,8 +38,7 @@ export default {
 
 <style scoped>
 .xlsx-csv-external-files-info-main {
-  margin-right: 5px;
-  height: 50%;
+  height: 47%;
 }
 .table-wrapper {
   height: 100%;
