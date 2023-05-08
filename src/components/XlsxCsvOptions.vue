@@ -146,7 +146,7 @@ export default {
   margin-right: 5px;
 }
 .root-array-button {
-  width: 100px;
+  width: 217px;
   min-width: fit-content;
 }
 .selected-sheet-form {
