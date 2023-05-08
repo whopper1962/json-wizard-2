@@ -151,6 +151,7 @@ export default {
 }
 .selected-sheet-form {
   width: 150px !important;
+  cursor: pointer;
 }
 .sheet-info {
   margin-left: 15px;
