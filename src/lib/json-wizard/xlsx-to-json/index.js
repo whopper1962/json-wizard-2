@@ -1,20 +1,29 @@
 const JsonGenerator = require('@/lib/json-wizard/xlsx-to-json/json-generator');
+const JsonGeneratorRecursive = require('@/lib/json-wizard/xlsx-to-json/json-generator-recursive');
 
 module.exports = function (xlsxObj) {
-  const jsonGenerator = new JsonGenerator({...xlsxObj});
-  if (jsonGenerator.externalTabs.length > 0) {
-    return generateMultipleJson(jsonGenerator);
+  if (xlsxObj.externalTabs.length > 0) {
+    // new JsonGeneratorRecursive({...xlsxObj});
+    const jsonGeneratorRecursive = new JsonGeneratorRecursive({...xlsxObj});
+    try {
+      jsonGeneratorRecursive.checkIfEveryXlsxInfoConvertable();
+    } catch (e) {
+      console.error('Error occured! in json generate');
+      console.error(e);
+    }
+    // return generateMultipleJson(jsonGenerator);
   }
+  const jsonGenerator = new JsonGenerator({...xlsxObj});
   return generateJson(jsonGenerator);
 };
 
 // multiple conversion
 // refering external tabs
-function generateMultipleJson (jsonGenerator) {
-  console.error('External:', jsonGenerator.externalTabs);
-  // TODO: check validation: is every tabs convertable?
-  return generateJson(jsonGenerator);
-}
+// function generateMultipleJson (jsonGenerator) {
+//   console.error('External:', jsonGenerator.externalTabs);
+//   // TODO: check validation: is every tabs convertable?
+//   return generateJson(jsonGenerator);
+// }
 
 // single conversion
 function generateJson (jsonGenerator) {

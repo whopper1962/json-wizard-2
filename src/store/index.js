@@ -18,6 +18,7 @@ const defaultTabData = {
   isRootArray: false,
   numberOfElements: 1,
   externalTabColumnInfo: [],
+  isExecutable: true
 };
 
 export default new Vuex.Store({
@@ -63,6 +64,8 @@ export default new Vuex.Store({
         return externalTabColumnInfo.map((info) => {
           return {
             cell: info.cell,
+            rowIndex: info.rowIndex,
+            columnIndex: info.columnIndex,
             refering: info.refering,
             contents: state.xlsxCsvTabs[info.refering],
           };

@@ -31,7 +31,6 @@ Vue.config.productionTip = false;
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faTrash, faTrashArrowUp,  } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-console.error(faGithub);
 import { } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 const icons = [

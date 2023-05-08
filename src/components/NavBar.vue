@@ -97,7 +97,6 @@ export default {
         const { data } = await axios.get('https://api.github.com/users/whopper1962/repos');
         // TODO: get app name in other way
         const jsonWizard = data.find((repo) => repo.name === 'json-wizard-2');
-        console.error(jsonWizard);
         this.repoStars = jsonWizard.stargazers_count;
         this.repoUrl = jsonWizard.html_url;
         this.isGitHubInfoFetched = true;

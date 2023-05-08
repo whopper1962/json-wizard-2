@@ -281,6 +281,8 @@ export default {
     },
     confirmExternalFile() {
       this.$store.dispatch("setExternalFileColumn", {
+        rowIndex: this.ctxOpenedRowIndexCache,
+        columnIndex: this.ctxOpenedContentIndexCache,
         cell: `${this.ctxOpenedRowIndexCache}-${this.ctxOpenedContentIndexCache}`,
         refering: this.externalFile,
       });
