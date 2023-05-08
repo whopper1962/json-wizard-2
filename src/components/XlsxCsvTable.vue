@@ -316,6 +316,7 @@ export default {
 }
 .xlsx-csv-table-outer {
   max-height: 44rem;
+  min-height: 44rem;
   overflow: scroll;
 }
 .xlsx-csv-table-content th,
