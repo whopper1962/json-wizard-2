@@ -18,7 +18,7 @@ const defaultTabData = {
   isRootArray: false,
   numberOfElements: 1,
   externalTabColumnInfo: [],
-  isExecutable: true
+  isExecutable: false
 };
 
 export default new Vuex.Store({
@@ -43,6 +43,7 @@ export default new Vuex.Store({
         isRootArray: false,
         numberOfElements: 1,
         externalTabColumnInfo: [],
+        isExecutable: false,
       },
     ],
     selectedTabIndex: 0,
@@ -126,6 +127,7 @@ export default new Vuex.Store({
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       if (!currentTabContents) return;
       currentTabContents.columnOrders = columnOrders;
+      currentTabContents.isExecutable = columnOrders.length > 1;
     },
     SET_GENERATED_JSON(state, json) {
       state.generatedJson = {
@@ -184,6 +186,7 @@ export default new Vuex.Store({
       currentTabContents.columnOrders = [];
       currentTabContents.trashedRows = [];
       currentTabContents.isRootArray = false;
+      currentTabContents.isExecutable = false;
       currentTabContents.numberOfElements = 1;
     },
     MODIFY_TRASHED_ROWS(state, index) {

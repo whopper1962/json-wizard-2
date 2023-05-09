@@ -4,12 +4,12 @@
       <button
         class="btn btn-primary mb-2 font-weight-bold root-array-button"
         @click="executeConversion()"
-        :disabled="!isValueAndKeySelected"
+        :disabled="!currentContents.isExecutable"
       >
         Execute conversion
       </button>
       <span
-        v-if="!isValueAndKeySelected"
+        v-if="!currentContents.isExecutable"
         class="value-and-key-not-selected-error text-danger"
       >
         At least one key and one value should be selected.
@@ -94,10 +94,6 @@ export default {
         this.$store.dispatch('setSelectedSheet', selectedSheet);
       }
     },
-    isValueAndKeySelected () {
-      const currentContents = this.$store.getters['getCurrentTabContents'];
-      return currentContents?.columnOrders.length > 1;
-    }
   },
   methods: {
     currentXlsxCsv () {
