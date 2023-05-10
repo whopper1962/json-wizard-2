@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 // import test from '@/assets/test.json';
+import { v4 as uuidv4 } from "uuid";
 
 Vue.use(Vuex);
 
@@ -157,8 +158,10 @@ export default new Vuex.Store({
       const sortedIdentifiers = identifiers.sort((a, b) => a - b);
       const maximumIdentifier =
         sortedIdentifiers.length > 0 ? Number(sortedIdentifiers.pop()) : 0;
+      const uuid = uuidv4();
       const clonedDefaultData = {
         ...defaultTabData,
+        id: uuid,
         tabName: `AwesomeFile${maximumIdentifier + 1}`,
         xlsxCsvSheets: { ...defaultTabData.xlsxCsvSheets },
         sheetNames: [...defaultTabData.sheetNames],
