@@ -8,12 +8,12 @@ module.exports = class JsonGeneratorRecusive {
     this.xlsxObj = xlsxObj;
   }
   checkIfEveryXlsxInfoConvertable() {
-    console.error("Check");
+    // console.error("Check");
     // TODO: if (!this.xlsxObj.isExecutable) throw new Error();
     // const jsonGenerator = new JsonGenerator({ ...this.xlsxObj });
     this.xlsxContentStack.push(this.xlsxObj);
     this.checkData(this.xlsxObj);
-    console.error("this.xlsxContentStack", this.xlsxContentStack);
+    // console.error("this.xlsxContentStack", this.xlsxContentStack);
     // const isValid = this.checkData(this.xlsxObj);
     // try {
     //   return true;
@@ -24,11 +24,13 @@ module.exports = class JsonGeneratorRecusive {
   checkData(xlsxObj) {
     // TODO: if (!xlsxObj.isExecutable) return false;
     for (const externalContent of xlsxObj.externalTabs) {
-      const currentContent = externalContent.contents;
       // TODO: if (!currentContent.isExecutable) return false;
-      this.xlsxContentStack.push(generateJsonGeneratorProps(externalContent.contents));
-      if (currentContent.externalTabColumnInfo.length > 0) {
-        this.checkData(currentContent);
+      const formattedContent = generateJsonGeneratorProps(
+        externalContent.contents
+      );
+      this.xlsxContentStack.push(formattedContent);
+      if (formattedContent.externalTabs.length > 0) {
+        this.checkData(formattedContent);
       }
     }
     return true;
@@ -48,6 +50,6 @@ function generateJsonGeneratorProps(info) {
     excludes: currentTabContents.trashedRows,
     isArray: currentTabContents.isRootArray,
     numberOfElements: currentTabContents.numberOfElements,
-    externalTabs
+    externalTabs,
   };
 }

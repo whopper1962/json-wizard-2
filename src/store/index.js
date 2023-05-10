@@ -6,6 +6,7 @@ import createPersistedState from "vuex-persistedstate";
 Vue.use(Vuex);
 
 const defaultTabData = {
+  id: "",
   fileName: "",
   fileInputed: false,
   selectedFileName: "",
@@ -18,7 +19,7 @@ const defaultTabData = {
   isRootArray: false,
   numberOfElements: 1,
   externalTabColumnInfo: [],
-  isExecutable: false
+  isExecutable: false,
 };
 
 export default new Vuex.Store({
@@ -30,6 +31,7 @@ export default new Vuex.Store({
   state: {
     xlsxCsvTabs: [
       {
+        id: "",
         tabName: "Awesome file",
         fileName: "",
         fileInputed: false,
@@ -63,6 +65,7 @@ export default new Vuex.Store({
       return function (externalTabColumnInfo) {
         if (!externalTabColumnInfo) return [];
         return externalTabColumnInfo.map((info) => {
+          formatExternalContents(state, info);
           return {
             cell: info.cell,
             rowIndex: info.rowIndex,
@@ -296,3 +299,39 @@ export default new Vuex.Store({
     },
   },
 });
+
+function formatExternalContents(state, xlsxObj) {
+  const referingTabContent = state.xlsxCsvTabs[xlsxObj.refering];
+  const res = formatExternalContentsRecursively(state, referingTabContent);
+  console.error('Finished')
+  console.error(res);
+  return res;
+}
+
+function formatExternalContentsRecursively(state, contents, stack = []) {
+  for (const content of contents.externalTabColumnInfo) {
+    const referingTabContent = state.xlsxCsvTabs[content.refering];
+    stack.push(referingTabContent);
+    if (referingTabContent.externalTabColumnInfo.length > 0) {
+      formatExternalContentsRecursively(state, referingTabContent, stack);
+    }
+  }
+  return stack;
+}
+
+// function generateJsonGeneratorProps(info) {
+//   const currentTabContents = info;
+//   const externalTabs = [];
+//   let columnOrder = currentTabContents?.columnOrders.slice();
+//   const valueIndex = columnOrder.shift();
+//   const parentKeys = columnOrder.reverse();
+//   return {
+//     parentKeys,
+//     valueIndex,
+//     contents: currentTabContents.currentXlsxCsvContents,
+//     excludes: currentTabContents.trashedRows,
+//     isArray: currentTabContents.isRootArray,
+//     numberOfElements: currentTabContents.numberOfElements,
+//     externalTabs,
+//   };
+// }
