@@ -305,8 +305,8 @@ export default new Vuex.Store({
 
 function formatExternalContents(state, xlsxObj) {
   const referingTabContent = state.xlsxCsvTabs[xlsxObj.refering];
-  const res = formatExternalContentsRecursively(state, referingTabContent);
-  console.error('Finished')
+  const res = formatExternalContentsRecursively(state, referingTabContent, [referingTabContent]);
+  console.error('==================FORMAT RECURSIVELY: RESULT====================');
   console.error(res);
   return res;
 }
