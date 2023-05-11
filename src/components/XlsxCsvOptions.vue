@@ -98,18 +98,22 @@ export default {
   methods: {
     currentXlsxCsv () {
       const currentTabContents = this.$store.getters['getCurrentTabContents'];
-      const externalTabs = this.$store.getters.getExternalTabInfo(currentTabContents.externalTabColumnInfo);
+      const externalTabsInfo = this.$store.getters.getExternalTabInfo(currentTabContents.externalTabColumnInfo);
+      const externalTabs = externalTabsInfo.xlsxObj;
+      const xlsxToGenerate = externalTabsInfo.toGenerate;
       let columnOrder = currentTabContents?.columnOrders.slice();
       const valueIndex = columnOrder.shift();
       const parentKeys = columnOrder.reverse();
       return {
+        id: currentTabContents.id,
         parentKeys,
         valueIndex,
         contents: currentTabContents.currentXlsxCsvContents,
         excludes: currentTabContents.trashedRows,
         isArray: currentTabContents.isRootArray,
         numberOfElements: currentTabContents.numberOfElements,
-        externalTabs
+        externalTabs,
+        xlsxToGenerate
       };
     },
     executeConversion () {

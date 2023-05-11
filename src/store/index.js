@@ -65,16 +65,14 @@ export default new Vuex.Store({
     getExternalTabInfo(state) {
       return function (externalTabColumnInfo) {
         if (!externalTabColumnInfo) return [];
-        return externalTabColumnInfo.map((info) => {
-          formatExternalContents(state, info);
-          return {
-            cell: info.cell,
-            rowIndex: info.rowIndex,
-            columnIndex: info.columnIndex,
-            refering: info.refering,
-            contents: state.xlsxCsvTabs[info.refering],
-          };
+        const xlsxObj = externalTabColumnInfo.map((info) => {
+          return formatExternalContents(state, info);
         });
+        const toGenerate = xlsxToGenerate(xlsxObj);
+        return {
+          xlsxObj,
+          toGenerate
+        };
       };
     },
     getSpecificIndexSourceInfo(state) {
@@ -305,16 +303,37 @@ export default new Vuex.Store({
 
 function formatExternalContents(state, xlsxObj) {
   const referingTabContent = state.xlsxCsvTabs[xlsxObj.refering];
-  const res = formatExternalContentsRecursively(state, referingTabContent, [referingTabContent]);
-  console.error('==================FORMAT RECURSIVELY: RESULT====================');
-  console.error(res);
+  const rootXlsxObj = generateJsonGeneratorProps(referingTabContent);
+  const res = formatExternalContentsRecursively(state, referingTabContent, [rootXlsxObj]);
+  const isValid = checkRecursiveXlsxObjValidation(res);
+  console.log('isValid:', isValid);
+  // TODO: throw error if invalid
   return res;
+}
+
+function checkRecursiveXlsxObjValidation(xlsxObj) {
+  for (const obj of xlsxObj) {
+    if (!obj.isExecutable) return false;
+  }
+  return true;
+}
+
+function xlsxToGenerate(obj) {
+  let xlsxToGenerate = [];
+  for (const num of obj) {
+    for (const hello of num) {
+      if (xlsxToGenerate.find((obj) => obj.id === hello.id)) continue;
+      xlsxToGenerate.push(hello);
+    }
+  }
+  return xlsxToGenerate;
 }
 
 function formatExternalContentsRecursively(state, contents, stack = []) {
   for (const content of contents.externalTabColumnInfo) {
     const referingTabContent = state.xlsxCsvTabs[content.refering];
-    stack.push(referingTabContent);
+    const xlsxObj = generateJsonGeneratorProps(referingTabContent);
+    stack.push(xlsxObj);
     if (referingTabContent.externalTabColumnInfo.length > 0) {
       formatExternalContentsRecursively(state, referingTabContent, stack);
     }
@@ -322,19 +341,21 @@ function formatExternalContentsRecursively(state, contents, stack = []) {
   return stack;
 }
 
-// function generateJsonGeneratorProps(info) {
-//   const currentTabContents = info;
-//   const externalTabs = [];
-//   let columnOrder = currentTabContents?.columnOrders.slice();
-//   const valueIndex = columnOrder.shift();
-//   const parentKeys = columnOrder.reverse();
-//   return {
-//     parentKeys,
-//     valueIndex,
-//     contents: currentTabContents.currentXlsxCsvContents,
-//     excludes: currentTabContents.trashedRows,
-//     isArray: currentTabContents.isRootArray,
-//     numberOfElements: currentTabContents.numberOfElements,
-//     externalTabs,
-//   };
-// }
+function generateJsonGeneratorProps(info) {
+  const currentTabContents = info;
+  const externalTabs = info.externalTabColumnInfo;
+  let columnOrder = currentTabContents?.columnOrders.slice();
+  const valueIndex = columnOrder.shift();
+  const parentKeys = columnOrder.reverse();
+  return {
+    isExecutable: currentTabContents.isExecutable,
+    id: currentTabContents.id,
+    parentKeys,
+    valueIndex,
+    contents: currentTabContents.currentXlsxCsvContents,
+    excludes: currentTabContents.trashedRows,
+    isArray: currentTabContents.isRootArray,
+    numberOfElements: currentTabContents.numberOfElements,
+    externalTabs,
+  };
+}

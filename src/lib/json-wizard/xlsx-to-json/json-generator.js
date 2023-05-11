@@ -1,6 +1,18 @@
 module.exports = class JsonGenerator {
-  constructor({ parentKeys, valueIndex, contents,
-    excludes, isArray, numberOfElements, externalTabs }) {
+  constructor({
+    id,
+    parentKeys,
+    valueIndex,
+    contents,
+    excludes,
+    isArray,
+    numberOfElements,
+    externalTabs,
+    generatedJson,
+  }) {
+    this.id = id;
+    this.generatedJson = generatedJson;
+    console.error(this.generatedJson);
     this.parents = parentKeys;
     this.valueIndex = valueIndex;
     this.contents = contents;
@@ -8,7 +20,7 @@ module.exports = class JsonGenerator {
     this.excludedKeyPaths = [];
     this.orderedKeys = [];
     this.nullKeys = [];
-    this.duplicates = []
+    this.duplicates = [];
     this.json = {};
     this.isArray = isArray;
     this.numberOfElements = numberOfElements;
@@ -17,7 +29,7 @@ module.exports = class JsonGenerator {
       const valueArr = [];
       for (const keyIndex of this.parents) {
         if (row[keyIndex] === null) {
-          valueArr.push('');
+          valueArr.push("");
           continue;
         }
         valueArr.push(row[keyIndex]);
@@ -25,7 +37,7 @@ module.exports = class JsonGenerator {
       this.orderedKeys.push(valueArr);
     }
     for (const excludeIndex of this.excludes) {
-      const keyPath = this.orderedKeys[excludeIndex].join('.');
+      const keyPath = this.orderedKeys[excludeIndex].join(".");
       this.excludedKeyPaths.push(keyPath);
     }
   }
@@ -36,13 +48,13 @@ module.exports = class JsonGenerator {
       let masterObj = this.json;
       for (const [keyIndex, currentKey] of keys.entries()) {
         if (keyIndex === keys.length - 1) {
-          if (currentKey === '') {
+          if (currentKey === "") {
             this.nullKeys.push(index);
             continue;
           }
           masterObj[currentKey] = this.contents[index][this.valueIndex];
         } else {
-          if (currentKey === '') continue;
+          if (currentKey === "") continue;
           if (!isKeyExists(masterObj, currentKey)) {
             masterObj[currentKey] = {};
           }
@@ -52,9 +64,9 @@ module.exports = class JsonGenerator {
     }
   }
 
-  convertToArray () {
+  convertToArray() {
     const arr = [];
-    const clonedJson = {...this.json};
+    const clonedJson = { ...this.json };
     for (let i = 0; i < this.numberOfElements; i++) {
       arr.push(clonedJson);
     }
@@ -62,12 +74,13 @@ module.exports = class JsonGenerator {
     this.json = arr;
   }
 
+  setExternalJsonToValue() {
+    console.error(this.generatedJson);
+  }
+
   checkDuplicates() {
     let duplicates = [];
-    const frequency = this.orderedKeys.reduce((
-      seen,
-      currentItem
-    ) => {
+    const frequency = this.orderedKeys.reduce((seen, currentItem) => {
       if (currentItem in seen) {
         seen[currentItem] = seen[currentItem] + 1;
       } else {
@@ -77,7 +90,7 @@ module.exports = class JsonGenerator {
     }, {});
 
     for (const key in frequency) {
-      const joinedKey = key.split(',').join('.');
+      const joinedKey = key.split(",").join(".");
       if (this.excludedKeyPaths.includes(joinedKey)) continue;
       if (frequency[key] > 1) {
         duplicates.push(
