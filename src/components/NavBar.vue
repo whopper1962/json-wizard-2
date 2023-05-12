@@ -1,14 +1,15 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-main">
-    <router-link
+    <div
       class="navbar-brand app-title"
+      @click="jumpToHome()"
       :to="{
         name: 'HOME_VIEW',
       }"
     >
-      <img src="json-wizard-logo.png" alt="" class="img-fluid title-logo" />
+      <img :src="`json-wizard-${wizardHatColor}.png`" alt="" class="img-fluid title-logo" />
       JSON WIZARD
-    </router-link>
+    </div>
     <div class="credit-area">
       <p class="credit">
         created by
@@ -75,10 +76,12 @@ export default {
     return {
       isGitHubInfoFetched: false,
       repoStars: null,
-      repoUrl: ''
+      repoUrl: '',
+      wizardHatColor: 'logo'
     };
   },
   created () {
+    this.setWizardHatColor();
     this.getRepositoryDetials();
   },
   computed: {
@@ -89,8 +92,19 @@ export default {
     }
   },
   methods: {
+    setWizardHatColor () {
+      const colors = ['red', 'green', 'orange', 'blue'];
+      const randomIndex = Math.floor(Math.random() * (3 - 0 + 1) + 0);
+      this.wizardHatColor = colors[randomIndex];
+    },
     jumpToRepo () {
       window.open('https://github.com/whopper1962/json-wizard-2', '_blank');
+    },
+    jumpToHome () {
+      this.setWizardHatColor();
+      this.$router.push({
+        name: 'HOME_VIEW'
+      }).catch(() => {});
     },
     async getRepositoryDetials () {
       try {
@@ -117,6 +131,7 @@ export default {
   font-size: 35px;
   margin-left: 20px;
   font-weight: bold;
+  cursor: pointer;
 }
 .title-logo {
   margin-right: 5px;
