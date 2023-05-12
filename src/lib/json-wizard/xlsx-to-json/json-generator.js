@@ -12,7 +12,6 @@ module.exports = class JsonGenerator {
   }) {
     this.id = id;
     this.generatedJson = generatedJson;
-    console.error(this.generatedJson);
     this.parents = parentKeys;
     this.valueIndex = valueIndex;
     this.contents = contents;

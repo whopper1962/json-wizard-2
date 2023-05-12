@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ShareBase from '@/components/ShareBase.vue';
+import ShareBase from '@/components/Share/ShareBase.vue';
 import XlsxCsvBase from '@/components/XlsxCsvBase.vue';
 import JsonBase from '@/components/JsonBase.vue';
 

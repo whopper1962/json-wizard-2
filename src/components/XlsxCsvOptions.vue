@@ -17,17 +17,13 @@
     </div>
     <div class="form-inline">
       <button
-        class="btn btn-success mb-2 root-array-button"
+        class="btn btn-success mb-2 root-array-button font-weight-bold"
         @click="isRootArray = !isRootArray"
       >
-        Set as array: <span class="font-weight-bold">
-          {{ isRootArray ? 'ON' : 'OFF' }}
-        </span>
+        Set as array: {{ isRootArray ? "ON" : "OFF" }}
       </button>
       <div class="form-group mx-sm-3 mb-2" v-show="isRootArray">
-        <span class="spaces-form-text">
-          ▶Number of elements:
-        </span>
+        <span class="spaces-form-text"> ▶Number of elements: </span>
         <input
           type="number"
           class="form-control"
@@ -35,14 +31,12 @@
           min="0"
           v-model="numberOfElements"
           onKeydown="return false"
-        >
+        />
       </div>
     </div>
     <div class="form-inline">
       <div class="form-group mb-2" v-if="currentContents">
-        <span class="spaces-form-text">
-          Selected sheet:
-        </span>
+        <span class="spaces-form-text"> Selected sheet: </span>
         <select
           class="form-control selected-sheet-form"
           @change="$store.dispatch('setErrorRows', [])"
@@ -64,42 +58,47 @@
 </template>
 
 <script>
-import xlsxToJson from '@/lib/json-wizard/xlsx-to-json';
+import xlsxToJson from "@/lib/json-wizard/xlsx-to-json";
 export default {
   computed: {
     isRootArray: {
-      get () {
-        return this.$store.getters['getCurrentTabContents']?.isRootArray;
+      get() {
+        return this.$store.getters["getCurrentTabContents"]?.isRootArray;
       },
-      set (status) {
-        this.$store.dispatch('setRootArrayStatus', status);
-      }
+      set(status) {
+        this.$store.dispatch("setRootArrayStatus", status);
+      },
     },
     numberOfElements: {
-      get () {
-        return this.$store.getters['getCurrentTabContents']?.numberOfElements;
+      get() {
+        return this.$store.getters["getCurrentTabContents"]?.numberOfElements;
       },
-      set (num) {
-        this.$store.dispatch('setNumberOfArrayElements', num);
-      }
+      set(num) {
+        this.$store.dispatch("setNumberOfArrayElements", num);
+      },
     },
-    currentContents () {
-      return this.$store.getters['getCurrentTabContents'];
+    currentContents() {
+      return this.$store.getters["getCurrentTabContents"];
     },
     selectedSheet: {
-      get () {
+      get() {
         return this.currentContents?.selectedSheet;
       },
-      set (selectedSheet) {
-        this.$store.dispatch('setSelectedSheet', selectedSheet);
-      }
+      set(selectedSheet) {
+        this.$store.dispatch("setSelectedSheet", selectedSheet);
+      },
     },
   },
   methods: {
-    currentXlsxCsv () {
-      const currentTabContents = this.$store.getters['getCurrentTabContents'];
-      const externalTabsInfo = this.$store.getters.getExternalTabInfo(currentTabContents.externalTabColumnInfo);
+    currentXlsxCsv() {
+      const currentTabContents = this.$store.getters["getCurrentTabContents"];
+      console.error("=================CREATE CONVERTER PROPS=================");
+      console.error("currentTabContents:", currentTabContents);
+      const externalTabsInfo = this.$store.getters.getExternalTabInfo(
+        currentTabContents.externalTabColumnInfo
+      );
       const externalTabs = externalTabsInfo.xlsxObj;
+      console.error("externalTabs", externalTabs);
       const xlsxToGenerate = externalTabsInfo.toGenerate;
       let columnOrder = currentTabContents?.columnOrders.slice();
       const valueIndex = columnOrder.shift();
@@ -113,28 +112,35 @@ export default {
         isArray: currentTabContents.isRootArray,
         numberOfElements: currentTabContents.numberOfElements,
         externalTabs,
-        xlsxToGenerate
+        xlsxToGenerate,
       };
     },
-    executeConversion () {
+    executeConversion() {
       try {
-        this.$store.dispatch('setErrorRows', []);
+        this.$store.dispatch("setErrorRows", []);
         const props = this.currentXlsxCsv();
         const generatedJson = xlsxToJson(props);
-        this.$store.dispatch('setGeneratedJson', generatedJson);
-        this.$toasted.show('Converted Successfully!', {
-          type: 'success',
+        this.$store.dispatch("setGeneratedJson", generatedJson);
+        this.$toasted.show("Converted Successfully!", {
+          type: "success",
+        });
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
         });
       } catch (error) {
         console.error(error);
-        this.$store.dispatch('setErrorRows', error.body);
-        this.$toasted.show('Error occured! Check the error message and convert again.', {
-          type: 'error',
-        });
+        this.$store.dispatch("setErrorRows", error.body);
+        this.$toasted.show(
+          "Error occured! Check the error message and convert again.",
+          {
+            type: "error",
+          }
+        );
       }
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
