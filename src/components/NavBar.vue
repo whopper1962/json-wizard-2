@@ -135,7 +135,7 @@ export default {
 }
 .title-logo {
   margin-right: 5px;
-  height: 6rem;
+  height: 7.5rem;
 }
 .credit-area {
   display: table;
