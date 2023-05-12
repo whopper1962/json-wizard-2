@@ -137,10 +137,10 @@
                 <option
                   v-for="(tab, index) in xlsxCsvTabs"
                   :key="`tab_${index}`"
-                  :value="index"
+                  :value="tab.id"
                   :disabled="index === currentIndex"
                 >
-                  {{ tab }} 
+                  {{ tab.name }}
                   <template v-if="index === currentIndex">
                     (You cannot refer own tab.)
                   </template>
@@ -200,11 +200,14 @@ export default {
       };
     },
     xlsxCsvTabs() {
-      return this.$store.getters["getXlsxCsvTabs"].map(
-        (tab) => tab.tabName
-      );
+      return this.$store.getters["getXlsxCsvTabs"].map((tab) => {
+        return {
+          id: tab.id,
+          name: tab.tabName,
+        };
+      });
     },
-    currentIndex () {
+    currentIndex() {
       return this.$store.getters["getCurrentTabIndex"];
     },
     currentColumnOrder: {
@@ -284,7 +287,7 @@ export default {
         rowIndex: this.ctxOpenedRowIndexCache,
         columnIndex: this.ctxOpenedContentIndexCache,
         cell: `${this.ctxOpenedRowIndexCache}-${this.ctxOpenedContentIndexCache}`,
-        refering: this.externalFile,
+        referingTabId: this.externalFile,
       });
     },
     onClickGarbageButton(index) {
