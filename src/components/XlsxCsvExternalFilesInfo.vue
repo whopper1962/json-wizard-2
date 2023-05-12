@@ -30,7 +30,9 @@ export default {
   },
   computed: {
     currentExternalFileInfo() {
-      return this.$store.getters["getCurrentTabContents"].externalTabColumnInfo;
+      const row = this.$store.getters["getCurrentTabContents"].externalTabColumnInfo;
+      const ordered = row.sort((a, b) => a.rowIndex - b.rowIndex);
+      return ordered;
     },
     tabName() {
       return function (id) {
