@@ -13,7 +13,7 @@
               v-for="(info, index) in currentExternalFileInfo"
               :key="`info_${index}`"
             >
-              <td>{{ info.rowIndex }}</td>
+              <td>{{ info.rowIndex + 1 }}</td>
               <td>{{ tabName(info.referingTabId) || '' }}</td>
             </tr>
           </tbody>

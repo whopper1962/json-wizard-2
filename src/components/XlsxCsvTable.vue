@@ -8,6 +8,7 @@
         <thead>
           <tr>
             <th class="th-button-area void-area"></th>
+            <th class="th-button-area void-area"></th>
             <template v-for="num of selectedSheetMaxLen">
               <th
                 :key="num"
@@ -35,6 +36,7 @@
           </tr>
           <tr>
             <th class="border-bottom void-area"></th>
+            <th class="border-bottom void-area"></th>
             <template v-for="num of selectedSheetMaxLen">
               <th
                 :key="num"
@@ -57,7 +59,10 @@
               'trashed-row': trashedRows.includes(rowIndex),
             }"
           >
-            <th class="border-bottom void-area garbage-button-wrapper">
+            <th class="border-bottom void-area garbage-button-wrapper index-area">
+              {{ rowIndex + 1 }}
+            </th>
+            <th class="border-bottom void-area garbage-button-wrapper index-area">
               <button
                 class="garbage-button"
                 @click="onClickGarbageButton(rowIndex)"
@@ -352,6 +357,10 @@ export default {
   border-left: none;
   background-color: rgb(148, 211, 100);
 }
+.xlsx-csv-table-content thead th:nth-child(2) {
+  border-left: none;
+  background-color: rgb(148, 211, 100);
+}
 .xlsx-csv-table-content tbody tr th:nth-child(1) {
   background-color: rgb(148, 211, 100);
 }
@@ -365,18 +374,22 @@ export default {
 .xlsx-csv-table-content tbody tr th:nth-child(3) {
   position: sticky;
   position: -webkit-sticky;
-  z-index: 1;
+}
+.xlsx-csv-table-content thead tr th:nth-child(2) {
+  left: 4rem;
 }
 .xlsx-csv-table-content thead tr th:nth-child(1),
 .xlsx-csv-table-content tbody tr th:nth-child(1),
 .xlsx-csv-table-content thead tr td:nth-child(1),
 .xlsx-csv-table-content tbody tr td:nth-child(1) {
   left: 0;
+  text-align: center;
 }
-.xlsx-csv-table-content tbody tr th:nth-child(2),
-.xlsx-csv-table-content thead tr td:nth-child(2),
-.xlsx-csv-table-content tbody tr td:nth-child(2) {
-  left: 6rem;
+.xlsx-csv-table-content thead tr th:nth-child(2) {
+  left: 4rem;
+}
+.xlsx-csv-table-content tbody tr th:nth-child(2) {
+  left: 4rem;
 }
 .border-right {
   border-right: 1px solid rgb(113, 113, 113) !important;
@@ -398,7 +411,8 @@ export default {
 .xlsx-csv-table-content thead tr:nth-child(3) th {
   top: 4rem;
 }
-.xlsx-csv-table-content thead tr th:nth-child(1) {
+.xlsx-csv-table-content thead tr th:nth-child(1),
+.xlsx-csv-table-content thead tr th:nth-child(2) {
   z-index: 3;
 }
 .garbage-button-wrapper {
@@ -501,5 +515,9 @@ export default {
 }
 .mouseovered-index {
   background-color: rgb(255, 255, 155);
+}
+.index-area {
+  text-align: center;
+  background-color: #94d364;
 }
 </style>
