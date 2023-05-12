@@ -111,6 +111,7 @@ export default new Vuex.Store({
       const { sheetNames, xlsxContents } = data;
       let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       currentTabContents.fileInputed = true;
+      currentTabContents.isExecutable = false;
       currentTabContents.sheetNames = sheetNames;
       currentTabContents.xlsxCsvSheets = xlsxContents;
       currentTabContents.selectedSheet = sheetNames[0];
@@ -245,6 +246,7 @@ export default new Vuex.Store({
       currentTabContents.columnOrders = [];
       currentTabContents.trashedRows = [];
       currentTabContents.isRootArray = false;
+      currentTabContents.isExecutable = false;
       currentTabContents.numberOfElements = 1;
       currentTabContents.externalTabColumnInfo = [];
     },

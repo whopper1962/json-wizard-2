@@ -7,7 +7,7 @@
         name: 'HOME_VIEW',
       }"
     >
-      <img :src="`json-wizard-${wizardHatColor}.png`" alt="" class="img-fluid title-logo" />
+      <img :src="`json-wizard-${wizardHatColor}.png`" alt="" class="img-fluid title-logo" @mouseover="setWizardHatColor()" />
       JSON WIZARD
     </div>
     <div class="credit-area">
