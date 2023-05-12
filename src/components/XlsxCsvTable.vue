@@ -255,7 +255,11 @@ export default {
         const referingTab = this.currentExternalFileInfo.find((obj) => {
           return obj.cell === cell;
         });
-        return referingTab ? referingTab.refering : false;
+        if (referingTab) {
+          const tab = this.$store.getters.getTabInfoById(referingTab.referingTabId);
+          return tab.tabName
+        }
+        return false;
       };
     },
   },

@@ -70,9 +70,15 @@ export default new Vuex.Store({
         });
         const toGenerate = xlsxToGenerate(xlsxObj);
         return {
+          locationInfo: externalTabColumnInfo,
           xlsxObj,
-          toGenerate
+          toGenerate,
         };
+      };
+    },
+    getTabInfoById(state) {
+      return function (id) {
+        return state.xlsxCsvTabs.find((tab) => tab.id === id);
       };
     },
     getSpecificIndexSourceInfo(state) {
@@ -304,11 +310,15 @@ export default new Vuex.Store({
 });
 
 function formatExternalContents(state, xlsxObj) {
-  const referingTabContent = state.xlsxCsvTabs.find((tab) => tab.id === xlsxObj.referingTabId);
+  const referingTabContent = state.xlsxCsvTabs.find(
+    (tab) => tab.id === xlsxObj.referingTabId
+  );
   const rootXlsxObj = generateJsonGeneratorProps(referingTabContent);
-  const res = formatExternalContentsRecursively(state, referingTabContent, [rootXlsxObj]);
+  const res = formatExternalContentsRecursively(state, referingTabContent, [
+    rootXlsxObj,
+  ]);
   const isValid = checkRecursiveXlsxObjValidation(res);
-  console.log('isValid:', isValid);
+  console.log("isValid:", isValid);
   // TODO: throw error if invalid
   return res;
 }
@@ -333,7 +343,9 @@ function xlsxToGenerate(obj) {
 
 function formatExternalContentsRecursively(state, contents, stack = []) {
   for (const content of contents.externalTabColumnInfo) {
-    const referingTabContent = state.xlsxCsvTabs.find((tab) => tab.id === content.referingTabId);
+    const referingTabContent = state.xlsxCsvTabs.find(
+      (tab) => tab.id === content.referingTabId
+    );
     const xlsxObj = generateJsonGeneratorProps(referingTabContent);
     stack.push(xlsxObj);
     if (referingTabContent.externalTabColumnInfo.length > 0) {

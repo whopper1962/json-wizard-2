@@ -9,6 +9,7 @@ module.exports = class JsonGenerator {
     numberOfElements,
     externalTabs,
     generatedJson,
+    locationInfo,
   }) {
     this.id = id;
     this.generatedJson = generatedJson;
@@ -24,6 +25,8 @@ module.exports = class JsonGenerator {
     this.isArray = isArray;
     this.numberOfElements = numberOfElements;
     this.externalTabs = externalTabs;
+    this.locationInfo = locationInfo || [];
+    this.valuesToSetExternalObj = [];
     for (const row of this.contents) {
       const valueArr = [];
       for (const keyIndex of this.parents) {
@@ -45,11 +48,20 @@ module.exports = class JsonGenerator {
     for (const [index, keys] of this.orderedKeys.entries()) {
       if (this.excludes.includes(index)) continue;
       let masterObj = this.json;
+      let keyPath = [];
       for (const [keyIndex, currentKey] of keys.entries()) {
+        keyPath.push(currentKey);
         if (keyIndex === keys.length - 1) {
           if (currentKey === "") {
             this.nullKeys.push(index);
             continue;
+          }
+          const locationObj = this.isToSetExternalJson(index);
+          if (locationObj) {
+            this.valuesToSetExternalObj.push({
+              referingId: locationObj.referingTabId,
+              key: keyPath.filter(Boolean).join('.')
+            });
           }
           masterObj[currentKey] = this.contents[index][this.valueIndex];
         } else {
@@ -74,7 +86,12 @@ module.exports = class JsonGenerator {
   }
 
   setExternalJsonToValue() {
-    console.error(this.generatedJson);
+    for (const obj of this.valuesToSetExternalObj) {
+      const referedJson = this.generatedJson.find((json) => json.id === obj.referingId);
+      if (!referedJson) throw new Error();
+      const str = `this.json.${obj.key} = referedJson.json`;
+      eval(str);
+    }
   }
 
   checkDuplicates() {
@@ -110,6 +127,11 @@ module.exports = class JsonGenerator {
     } else {
       return [];
     }
+  }
+  isToSetExternalJson (rowIndex) {
+    return this.locationInfo.find((info) => {
+      return info.rowIndex === rowIndex;
+    });
   }
 };
 
