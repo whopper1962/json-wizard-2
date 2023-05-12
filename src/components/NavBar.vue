@@ -1,12 +1,12 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-main">
     <router-link
       class="navbar-brand app-title"
       :to="{
         name: 'HOME_VIEW',
       }"
     >
-      <img src="wizard.png" alt="" width="30" class="img-fluid title-logo" />
+      <img src="json-wizard-logo.png" alt="" class="img-fluid title-logo" />
       JSON WIZARD
     </router-link>
     <div class="credit-area">
@@ -109,14 +109,18 @@ export default {
 </script>
 
 <style scoped>
+.navbar-main {
+  font-size: 13px;
+}
 .app-title {
   font-family: "Trattatello";
-  font-size: 25px;
+  font-size: 35px;
   margin-left: 20px;
   font-weight: bold;
 }
 .title-logo {
-  margin-right: 20px;
+  margin-right: 5px;
+  height: 6rem;
 }
 .credit-area {
   display: table;
@@ -137,7 +141,7 @@ export default {
   cursor: pointer;
 }
 .github-icon {
-  height: 3em;
+  height: 3rem;
   padding-right: 10px;
   color: white;
 }
