@@ -14,7 +14,7 @@
         <!-- <p>JSON WizardはXLSXまたはCSVを元にJSONを作成するツールです。</p> -->
         <div class="converter-link">
           <button class="btn first" @click="jumpToConverter()">
-            CONVERT YOURSELF
+            CONVERT YOURSELF<font-awesome-icon :icon="['fas', 'wand-sparkles']" class="convert-icon" />
           </button>
         </div>
       </div>
@@ -184,5 +184,8 @@ export default {
 }
 .first:hover {
   box-shadow: 0 0 40px 40px #393939 inset;
+}
+.convert-icon {
+  margin-left: 7px;
 }
 </style>

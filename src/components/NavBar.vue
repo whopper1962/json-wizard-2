@@ -57,14 +57,14 @@
       </ul>
     </div>
 
-    <div
+    <!-- <div
       class="github-info-wrapper"
       v-if="isGitHubInfoFetched"
       @click="jumpToRepo()"
     >
       <font-awesome-icon class="github-icon" icon="fa-brands fa-github" />
       <p class="github-info-content">GitHub stars: {{ repoStars }}</p>
-    </div>
+    </div> -->
 
     <div class="lang-select-area">
       <font-awesome-icon :icon="['fas', 'globe']" class="lang-icon" />
@@ -89,7 +89,7 @@ export default {
   },
   created() {
     this.setWizardHatColor();
-    this.getRepositoryDetials();
+    // this.getRepositoryDetials();
   },
   computed: {
     isActiveRoute() {
