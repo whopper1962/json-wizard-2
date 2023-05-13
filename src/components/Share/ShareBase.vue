@@ -1,7 +1,7 @@
 <template>
   <div class="share-base-style">
-    <RecoverFromFile @openModal="openRecoverModal"/>
     <ShareWithTeammates @openModal="openShareModal"/>
+    <RecoverFromFile @openModal="openRecoverModal"/>
     <RecoverModal/>
     <ShareModal/>
   </div>

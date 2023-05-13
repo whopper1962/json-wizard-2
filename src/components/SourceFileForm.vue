@@ -10,11 +10,12 @@
     </p>
     <div class="read-button-wrapper">
       <button
-        class="btn btn-success"
+        class="btn btn-success read-button"
         :disabled="invalidFile || !fileInputed"
         @click="readSourceFile()"
       >
         READ
+        <font-awesome-icon :icon="['fas', 'glasses']" />
       </button>
     </div>
   </div>
@@ -98,5 +99,8 @@ export default {
 <style scoped>
 .read-button-wrapper {
   margin-top: 20px;
+}
+.read-button {
+  width: 217px;
 }
 </style>

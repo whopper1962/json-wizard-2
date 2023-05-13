@@ -11,12 +11,12 @@ const routes = [
   {
     path: '/',
     name: 'HOME_VIEW',
-    component: HomeView
+    component: UserManualView
   },
   {
-    path: '/user-manual',
-    name: 'USER_MANUAL',
-    component: UserManualView
+    path: '/converter',
+    name: 'CONVERTER_VIEW',
+    component: HomeView
   },
   {
     path: '*',

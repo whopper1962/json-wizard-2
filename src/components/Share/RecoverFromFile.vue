@@ -1,6 +1,7 @@
 <template>
   <button class="btn btn-success recover-button" @click="onClickRecover()">
-    Recover from data
+    Use saved data
+    <font-awesome-icon :icon="['fas', 'download']" class="icon-style" />
   </button>
 </template>
 
@@ -20,8 +21,10 @@ export default {
 
 <style scoped>
 .recover-button {
-  margin-right: 10px;
   width: 180px;
   font-weight: bold;
+}
+.icon-style {
+  color: white;
 }
 </style>

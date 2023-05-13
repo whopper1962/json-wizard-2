@@ -1,6 +1,7 @@
 <template>
   <button class="btn btn-success share-button" @click="onClickShare()">
-    Share current data
+    Save current data
+    <font-awesome-icon :icon="['fas', 'floppy-disk']" class="icon-style" />
   </button>
 </template>
 
@@ -20,7 +21,11 @@ export default {
 
 <style scoped>
 .share-button {
+  margin-right: 10px;
   width: 180px;
   font-weight: bold;
+}
+.icon-style {
+  color: white;
 }
 </style>

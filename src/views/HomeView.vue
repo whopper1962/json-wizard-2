@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-width">
     <ShareBase/>
     <XlsxCsvBase/>
     <JsonBase/>
@@ -26,5 +26,6 @@ export default {
 <style scoped>
 .container-width {
   width: 100%;
+  padding: 20px;
 }
 </style>

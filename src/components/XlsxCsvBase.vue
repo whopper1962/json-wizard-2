@@ -52,6 +52,7 @@
             @click="addNewTab()"
           >
             Add source file
+            <font-awesome-icon :icon="['fas', 'plus']" />
           </button>
         </li>
       </ul>
@@ -96,6 +97,7 @@
               @click="selectOtherFile()"
             >
               Select other file
+              <font-awesome-icon :icon="['fas', 'rotate-left']" />
             </button>
           </div>
         </div>

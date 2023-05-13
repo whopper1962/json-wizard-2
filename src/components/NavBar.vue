@@ -48,20 +48,10 @@
           <router-link
             class="nav-link"
             :to="{
-              name: 'HOME_VIEW',
+              name: 'CONVERTER_VIEW',
             }"
           >
             Converter
-          </router-link>
-        </li>
-        <li class="nav-item" :class="{ active: isActiveRoute('USER_MANUAL') }">
-          <router-link
-            class="nav-link"
-            :to="{
-              name: 'USER_MANUAL',
-            }"
-          >
-            User Manual
           </router-link>
         </li>
       </ul>

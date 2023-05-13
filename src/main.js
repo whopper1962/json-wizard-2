@@ -29,7 +29,7 @@ Vue.config.productionTip = false;
 
 // FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faTrashArrowUp, faWandSparkles  } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faTrashArrowUp, faWandSparkles, faGlasses, faDownload, faFloppyDisk, faRotateLeft, faPlus  } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCircleXmark, faClipboard } from '@fortawesome/free-regular-svg-icons';
 import { } from '@fortawesome/fontawesome-free-regular';
@@ -38,9 +38,14 @@ const icons = [
   faTrash,
   faTrashArrowUp,
   faGithub,
+  faGlasses,
   faCircleXmark,
   faClipboard,
-  faWandSparkles
+  faWandSparkles,
+  faDownload,
+  faRotateLeft,
+  faPlus,
+  faFloppyDisk
 ];
 library.add(icons);
 Vue.component('font-awesome-icon', FontAwesomeIcon);

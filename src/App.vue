@@ -24,8 +24,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-.main-content {
-  margin: 20px;
-}
 </style>
