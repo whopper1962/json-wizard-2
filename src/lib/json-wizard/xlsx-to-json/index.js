@@ -33,9 +33,6 @@ function generateMultipleJson(xlsxObj) {
 function generateJson(jsonGenerator) {
   jsonGenerator.generate();
   jsonGenerator.checkDuplicates();
-  if (jsonGenerator.isArray) {
-    jsonGenerator.convertToArray();
-  }
   if (jsonGenerator.nullKeys.length > 0) {
     throw {
       status: 429,
@@ -47,9 +44,11 @@ function generateJson(jsonGenerator) {
       body: jsonGenerator.duplicates,
     };
   }
-  // console.error(jsonGenerator.generatedJson);
   if (jsonGenerator.generatedJson?.length > 0) {
     jsonGenerator.setExternalJsonToValue();
+  }
+  if (jsonGenerator.isArray) {
+    jsonGenerator.convertToArray();
   }
   return jsonGenerator.json;
 }
