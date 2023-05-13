@@ -7,6 +7,7 @@
           <thead>
             <th>Value at...</th>
             <th>External tab</th>
+            <th></th>
           </thead>
           <tbody>
             <tr
@@ -14,7 +15,14 @@
               :key="`info_${index}`"
             >
               <td>{{ info.rowIndex + 1 }}</td>
-              <td>{{ tabName(info.referingTabId) || '' }}</td>
+              <td>{{ tabName(info.referingTabId) || "" }}</td>
+              <td>
+                <font-awesome-icon
+                  :icon="['far', 'circle-xmark']"
+                  class="xmark-icon"
+                  @click="remove(info)"
+                />
+              </td>
             </tr>
           </tbody>
         </table>
@@ -30,7 +38,8 @@ export default {
   },
   computed: {
     currentExternalFileInfo() {
-      const row = this.$store.getters["getCurrentTabContents"].externalTabColumnInfo;
+      const row =
+        this.$store.getters["getCurrentTabContents"].externalTabColumnInfo;
       const ordered = row.sort((a, b) => a.rowIndex - b.rowIndex);
       return ordered;
     },
@@ -40,7 +49,11 @@ export default {
       };
     },
   },
-  methods: {},
+  methods: {
+    remove(info) {
+      this.$store.dispatch('removeExTabInfo', info.rowIndex);
+    },
+  },
 };
 </script>
 
@@ -66,5 +79,9 @@ export default {
 }
 .list li {
   list-style: none;
+}
+.xmark-icon {
+  height: 1.6rem;
+  cursor: pointer;
 }
 </style>

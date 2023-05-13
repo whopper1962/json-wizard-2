@@ -256,6 +256,12 @@ export default new Vuex.Store({
       currentTabContents.numberOfElements = 1;
       currentTabContents.externalTabColumnInfo = [];
     },
+    REMOVE_EX_TAB_INFO (state, rowIndex) {
+      let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      let currentExTabInfo = currentTabContents.externalTabColumnInfo;
+      const foundIndex = currentExTabInfo.findIndex((loopInfo) => loopInfo.rowIndex === rowIndex);
+      currentExTabInfo.splice(foundIndex, 1);
+    }
   },
   actions: {
     setCurrentTabContents(context, selectedTabIndex) {
@@ -306,6 +312,9 @@ export default new Vuex.Store({
     selectOtherFile(context) {
       context.commit("SELECT_OTHER_FILE");
     },
+    removeExTabInfo(context, rowIndex) {
+      context.commit("REMOVE_EX_TAB_INFO", rowIndex);
+    }
   },
 });
 
