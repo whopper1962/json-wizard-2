@@ -261,6 +261,12 @@ export default new Vuex.Store({
       let currentExTabInfo = currentTabContents.externalTabColumnInfo;
       const foundIndex = currentExTabInfo.findIndex((loopInfo) => loopInfo.rowIndex === rowIndex);
       currentExTabInfo.splice(foundIndex, 1);
+    },
+    REMOVE_COLUMN_FROM_ORDER (state, columnIndex) {
+      let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      let currentColumnOrder = currentTabContents.columnOrders;
+      const foundIndex = currentColumnOrder.findIndex((column) => column === columnIndex);
+      currentColumnOrder.splice(foundIndex, 1);
     }
   },
   actions: {
@@ -314,6 +320,9 @@ export default new Vuex.Store({
     },
     removeExTabInfo(context, rowIndex) {
       context.commit("REMOVE_EX_TAB_INFO", rowIndex);
+    },
+    removeColumnFromOrder(context, columnIndex) {
+      context.commit("REMOVE_COLUMN_FROM_ORDER", columnIndex);
     }
   },
 });

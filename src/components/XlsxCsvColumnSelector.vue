@@ -20,9 +20,16 @@
             @mouseleave="onMouseenter(null)"
           >
             <div class="column-card-inner">
-              <span class="font-weight-bold">
+              <span class="font-weight-bold column-text">
                 Column{{ column + 1 }}
               </span>
+              <div class="xmark-icon-wrapper">
+                <font-awesome-icon
+                  :icon="['far', 'circle-xmark']"
+                  class="xmark-icon"
+                  @click="remove(column)"
+                />
+              </div>
             </div>
           </div>
         </template>
@@ -32,7 +39,7 @@
       v-else
       class="area-placeholder"
     >
-      Click "Stage" to add column to here.
+      Click "Add to order" to add column here.
     </div>
   </div>
 </template>
@@ -88,6 +95,13 @@ export default {
     onMouseenter (column) {
       if (this.isMoving) return;
       this.$emit('updateHighlightedColumn', column);
+    },
+    remove (columnIndex) {
+      if (this.value[0] === columnIndex) {
+        const result = confirm('External file info will be discarded. You sure want to delete the value column?');
+        if (!result) return;
+      }
+      this.$store.dispatch('removeColumnFromOrder', columnIndex);
     }
   }
 }
@@ -103,15 +117,29 @@ export default {
   overflow: auto;
 }
 .column-card-outer {
-  display: table;
   width: 100%;
   margin-bottom: 5px;
   cursor: move;
   height: 30px;
 }
 .column-card-inner {
-  display: table-cell;
-  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.xmark-icon-wrapper {
+  position: absolute;
+  right: 0;
+}
+.xmark-icon {
+  cursor: pointer;
+  height: 1.7rem;
+  margin-right: 5px;
+  margin-top: 6px;
+}
+.column-text {
+  margin-top: 7px;
+  font-size: 10px;
 }
 .bg-yellowgreen {
   background-color: yellowgreen;

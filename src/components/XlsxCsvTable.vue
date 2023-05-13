@@ -22,14 +22,14 @@
                   class="btn btn-secondary btn-sm th-button font-weight-bold"
                   @click="onClickStageButton(num - 1)"
                 >
-                  Staged
+                  Remove from order
                 </button>
                 <button
                   v-else
                   class="btn btn-info btn-sm th-button font-weight-bold"
                   @click="onClickStageButton(num - 1)"
                 >
-                  Stage
+                  Add to order
                 </button>
               </th>
             </template>
@@ -465,6 +465,7 @@ export default {
 .th-button {
   width: 100%;
   height: 100%;
+  font-size: 11px;
 }
 .th-button-area {
   height: 35px;
