@@ -7,6 +7,7 @@
         :disabled="!currentContents.isExecutable"
       >
         Execute conversion
+        <font-awesome-icon :icon="['fas', 'wand-sparkles']" />
       </button>
       <span
         v-if="!currentContents.isExecutable"

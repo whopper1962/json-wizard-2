@@ -29,17 +29,18 @@ Vue.config.productionTip = false;
 
 // FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faTrashArrowUp  } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faTrashArrowUp, faWandSparkles  } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
+import { faCircleXmark, faClipboard } from '@fortawesome/free-regular-svg-icons';
 import { } from '@fortawesome/fontawesome-free-regular';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-console.error(faCircleXmark)
 const icons = [
   faTrash,
   faTrashArrowUp,
   faGithub,
-  faCircleXmark
+  faCircleXmark,
+  faClipboard,
+  faWandSparkles
 ];
 library.add(icons);
 Vue.component('font-awesome-icon', FontAwesomeIcon);

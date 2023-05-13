@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-primary share-button" @click="onClickShare()">
+  <button class="btn btn-success share-button" @click="onClickShare()">
     Share current data
   </button>
 </template>

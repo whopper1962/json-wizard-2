@@ -234,8 +234,10 @@ export default {
 .xlsx-csv-card {
   margin-bottom: 20px;
   padding-bottom: 20px;
+  border: #b3b3b3 solid;
 }
 .card-header-title {
+  background-color: #b3b3b3;
   font-family: 'Trattatello';
   font-size: 15px;
   font-weight: bold;

@@ -12,11 +12,12 @@
       </div>
       <div class="form-inline option-button-wrapper">
         <button
-          class="btn btn-secondary"
+          class="btn btn-secondary copy-button"
           @click="copyToClipboard()"
           :disabled="invalidJsonFormat"
         >
           Copy to Clipboard
+          <font-awesome-icon :icon="['far', 'clipboard']" class="copy-icon" />
         </button>
         <div class="form-group mx-sm-3">
           <span class="spaces-form-text">
@@ -120,11 +121,13 @@ export default {
 <style scoped>
 .card-header-title {
   font-family: 'Trattatello';
+  background-color: #b3b3b3;
   font-size: 15px;
   font-weight: bold;
 }
 .json-card {
   align-content: left;
+  border: #b3b3b3 solid;
 }
 .option-button-wrapper {
   text-align: left;
@@ -152,4 +155,11 @@ export default {
 /* .source-tab-area {
   margin-bottom: 5px;
 } */
+.copy-button {
+  width: 217px;
+  font-weight: bold;
+}
+.copy-icon {
+  /* height: 1.3rem; */
+}
 </style>
