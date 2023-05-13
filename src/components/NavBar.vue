@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-main">
+  <nav
+    class="navbar navbar-expand-lg navbar-dark bg-dark navbar-main"
+    @mouseover="setWizardHatColor()"
+  >
     <div
       class="navbar-brand app-title"
       @click="jumpToHome()"
@@ -7,7 +10,11 @@
         name: 'HOME_VIEW',
       }"
     >
-      <img :src="`json-wizard-${wizardHatColor}.png`" alt="" class="img-fluid title-logo" @mouseover="setWizardHatColor()" />
+      <img
+        :src="`json-wizard-${wizardHatColor}.png`"
+        alt=""
+        class="img-fluid title-logo"
+      />
       JSON WIZARD
     </div>
     <div class="credit-area">
@@ -60,66 +67,72 @@
       </ul>
     </div>
 
-    <div class="github-info-wrapper" v-if="isGitHubInfoFetched" @click="jumpToRepo()">
+    <div
+      class="github-info-wrapper"
+      v-if="isGitHubInfoFetched"
+      @click="jumpToRepo()"
+    >
       <font-awesome-icon class="github-icon" icon="fa-brands fa-github" />
-      <p class="github-info-content">
-        GitHub stars: {{ repoStars }}
-      </p>
+      <p class="github-info-content">GitHub stars: {{ repoStars }}</p>
     </div>
   </nav>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 export default {
-  data () {
+  data() {
     return {
       isGitHubInfoFetched: false,
       repoStars: null,
-      repoUrl: '',
-      wizardHatColor: 'logo'
+      repoUrl: "",
+      wizardHatColor: "logo",
     };
   },
-  created () {
+  created() {
     this.setWizardHatColor();
     this.getRepositoryDetials();
   },
   computed: {
-    isActiveRoute () {
+    isActiveRoute() {
       return function (routeName) {
         return this.$route.name === routeName;
       };
-    }
+    },
   },
   methods: {
-    setWizardHatColor () {
-      const colors = ['red', 'green', 'orange', 'blue'];
+    setWizardHatColor() {
+      const colors = ["red", "green", "orange", "blue"];
       const randomIndex = Math.floor(Math.random() * (3 - 0 + 1) + 0);
       this.wizardHatColor = colors[randomIndex];
     },
-    jumpToRepo () {
-      window.open('https://github.com/whopper1962/json-wizard-2', '_blank');
+    jumpToRepo() {
+      window.open("https://github.com/whopper1962/json-wizard-2", "_blank");
     },
-    jumpToHome () {
+    jumpToHome() {
       this.setWizardHatColor();
-      this.$router.push({
-        name: 'HOME_VIEW'
-      }).catch(() => {});
+      this.$router
+        .push({
+          name: "HOME_VIEW",
+        })
+        .catch(() => {});
     },
-    async getRepositoryDetials () {
+    async getRepositoryDetials() {
       try {
-        const { data } = await axios.get('https://api.github.com/users/whopper1962/repos');
+        const { data } = await axios.get(
+          "https://api.github.com/users/whopper1962/repos"
+        );
         // TODO: get app name in other way
-        const jsonWizard = data.find((repo) => repo.name === 'json-wizard-2');
+        const jsonWizard = data.find((repo) => repo.name === "json-wizard-2");
         this.repoStars = jsonWizard.stargazers_count;
         this.repoUrl = jsonWizard.html_url;
         this.isGitHubInfoFetched = true;
       } catch (e) {
         return;
       }
-    }
+    },
   },
-}
+};
 </script>
 
 <style scoped>
