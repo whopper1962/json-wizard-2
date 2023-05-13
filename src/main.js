@@ -29,13 +29,14 @@ Vue.config.productionTip = false;
 
 // FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faTrashArrowUp, faWandSparkles, faGlasses, faDownload, faFloppyDisk, faRotateLeft, faPlus  } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faTrashArrowUp, faGlobe, faWandSparkles, faGlasses, faDownload, faFloppyDisk, faRotateLeft, faPlus  } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCircleXmark, faClipboard } from '@fortawesome/free-regular-svg-icons';
 import { } from '@fortawesome/fontawesome-free-regular';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 const icons = [
   faTrash,
+  faGlobe,
   faTrashArrowUp,
   faGithub,
   faGlasses,

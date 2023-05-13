@@ -65,6 +65,14 @@
       <font-awesome-icon class="github-icon" icon="fa-brands fa-github" />
       <p class="github-info-content">GitHub stars: {{ repoStars }}</p>
     </div>
+
+    <div class="lang-select-area">
+      <font-awesome-icon :icon="['fas', 'globe']" class="lang-icon" />
+      <select class="form-control lang-select">
+        <option>English</option>
+        <option>Japanese</option>
+      </select>
+    </div>
   </nav>
 </template>
 
@@ -155,7 +163,7 @@ export default {
 .github-info-wrapper {
   display: table;
   text-align: center;
-  margin: 0px 20px 0px 5px;
+  margin: 0px 40px 0px 0px;
   cursor: pointer;
 }
 .github-icon {
@@ -169,5 +177,18 @@ export default {
   color: white;
   font-family: "Trattatello";
   font-size: 20px;
+}
+.lang-select-area {
+  display: flex;
+  margin-right: 30px;
+}
+.lang-icon {
+  margin-top: 0px;
+  height: 24px;
+  padding-right: 10px;
+  color: white;
+}
+.lang-select {
+  cursor: pointer;
 }
 </style>

@@ -5,9 +5,11 @@
         :src="`json-wizard-logo.png`"
         class="wizard-logo"
       />
-      <h1 class="title"><span class="that-font">Welcome to JSON WIZARD, My friend!</span></h1>
+      <!-- <h1 class="title"><span class="that-font">Welcome to JSON WIZARD, My friend!</span></h1> -->
+      <h1 class="title"><span class="that-font">JSON WIZARD へようこそ！友よ！</span></h1>
       <div class="main-content">
-        <p>JSON Wizard is a tool for people who want to create JSON from XLSX or CSV.</p>
+        <!-- <p>JSON Wizard is a tool for people who want to create JSON from XLSX or CSV.</p> -->
+        <p>JSON WizardはXLSXまたはCSVを元にJSONを作成するツールです。</p>
       </div>
     </div>
   </div>
