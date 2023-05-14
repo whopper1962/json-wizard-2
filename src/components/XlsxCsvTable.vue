@@ -147,11 +147,18 @@
                   v-for="(tab, index) in xlsxCsvTabs"
                   :key="`tab_${index}`"
                   :value="tab.id"
-                  :disabled="index === currentIndex || !tab.isExecutable"
+                  :disabled="
+                    index === currentIndex ||
+                    !tab.isExecutable ||
+                    isRefered(tab)
+                  "
                 >
                   {{ tab.name }}
                   <template v-if="index === currentIndex">
                     (You cannot refer own tab.)
+                  </template>
+                  <template v-else-if="isRefered(tab)">
+                    (This tab refering current tab.)
                   </template>
                   <template v-else-if="!tab.isExecutable">
                     (This tab is not executable.)
@@ -216,9 +223,21 @@ export default {
         return {
           id: tab.id,
           name: tab.tabName,
-          isExecutable: tab.isExecutable
+          isExecutable: tab.isExecutable,
         };
       });
+    },
+    isRefered() {
+      return function (tabInfo) {
+        const tabToCheckExTabInfo = this.$store.getters.getTabInfoById(
+          tabInfo.id
+        ).externalTabColumnInfo;
+        if (tabToCheckExTabInfo.length === 0) return false;
+        const currentTab = this.$store.getters["getCurrentTabContents"];
+        return tabToCheckExTabInfo.some(
+          (info) => info.referingTabId === currentTab.id
+        );
+      };
     },
     currentIndex() {
       return this.$store.getters["getCurrentTabIndex"];

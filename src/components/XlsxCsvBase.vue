@@ -287,6 +287,7 @@ export default {
   min-width: 100px;
   font-size: 12px;
   height: 30px;
+  font-weight: bold;
 }
 .tab-name-form {
   height: 30px;
