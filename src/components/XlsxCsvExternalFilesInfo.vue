@@ -18,7 +18,13 @@
               <td>{{ tabName(info.referingTabId) || "" }}</td>
               <td>
                 <font-awesome-icon
-                  :icon="['far', 'circle-xmark']"
+                  :icon="
+                    hoveredIndex === index
+                      ? ['fas', 'circle-xmark']
+                      : ['far', 'circle-xmark']
+                  "
+                  @mouseenter="hoveredIndex = index"
+                  @mouseleave="hoveredIndex = null"
                   class="xmark-icon"
                   @click="remove(info)"
                 />
@@ -34,7 +40,9 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      hoveredIndex: null,
+    };
   },
   computed: {
     currentExternalFileInfo() {

@@ -25,7 +25,13 @@
               </span>
               <div class="xmark-icon-wrapper">
                 <font-awesome-icon
-                  :icon="['far', 'circle-xmark']"
+                  :icon="
+                    hoveredIndex === index
+                      ? ['fas', 'circle-xmark']
+                      : ['far', 'circle-xmark']
+                  "
+                  @mouseenter="hoveredIndex = index"
+                  @mouseleave="hoveredIndex = null"
                   class="xmark-icon"
                   @click="remove(column)"
                 />
@@ -51,6 +57,7 @@ export default {
   data() {
     return {
       isMoving: false,
+      hoveredIndex: null,
     };
   },
   props: {
