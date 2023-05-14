@@ -1,15 +1,10 @@
 <template>
   <div class="xlsx-csv-card">
-    <ul class="nav nav-tabs">
+    <ul class="tabs">
       <template v-for="(xlsxCsc, index) in xlsxCsvList">
-        <li class="nav-item" :key="`xlsx_csv_${index}`">
+        <li :class="{'current': isCurrentTab(index)}" :key="`tab_${index}`">
           <div
-            class="nav-link link-cursor tab-item"
             v-if="isChangingTabName(index)"
-            :class="{
-              active: isCurrentTab(index),
-            }"
-            aria-current="page"
           >
             <input
               type="text"
@@ -25,12 +20,7 @@
             />
           </div>
           <div
-            class="nav-link link-cursor tab-item"
             v-else
-            :class="{
-              active: isCurrentTab(index),
-            }"
-            aria-current="page"
             @contextmenu.prevent="$refs.ctxMenu.open($event, { index })"
             @dblclick="changeTabName(index)"
             @click="onClickTab(index)"
@@ -39,11 +29,11 @@
           </div>
         </li>
       </template>
-      <li class="nav-item">
-        <button class="btn new-tab-button" @click="addNewTab()">
+      <li>
+        <div @click="addNewTab()">
           Add source file
           <font-awesome-icon :icon="['fas', 'plus']" />
-        </button>
+        </div>
       </li>
     </ul>
     <ContextMenu
@@ -217,10 +207,10 @@ export default {
 
 <style scoped>
 .xlsx-csv-card {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   padding-bottom: 20px;
   /* border: #b3b3b3 solid; */
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
 }
 .pad-0 {
   padding: 0px !important;
@@ -236,7 +226,9 @@ export default {
 }
 .current-tab {
   width: 100%;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  padding: 20px 30px 30px 30px;
+  border-radius: 0px 10px 10px 10px;
   background-color: rgb(255, 255, 255);
 }
 .execute-conversion-button-wrapper {
@@ -290,5 +282,77 @@ export default {
 .select-other-file-button {
   width: 100%;
   height: 4%;
+}
+
+.tabs {
+  cursor: pointer;
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.tabs li {
+  float: left;
+  margin: 0 0.5em 0 0;
+}
+
+.tabs div {
+  position: relative;
+  background: #ddd;
+  background-image: linear-gradient(to bottom, #fff, #ddd);
+  padding: 0.7em 0.6em;
+  min-width: fit-content;
+  float: left;
+  text-decoration: none;
+  color: #444;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-radius: 5px 0 0 0;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.tabs div:hover,
+.tabs div:hover::after,
+.tabs div:focus,
+.tabs div:focus::after {
+  background: #fff;
+}
+
+.tabs div:focus {
+  outline: 0;
+}
+
+.tabs div::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  right: -0.5em;
+  bottom: 0;
+  width: 1em;
+  background: #ddd;
+  background-image: linear-gradient(to bottom, #fff, #ddd);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.4);
+  transform: skew(10deg);
+  border-radius: 0 5px 0 0;
+}
+
+.tabs .current div,
+.tabs .current div::after {
+  background: #fff;
+  z-index: 3;
+}
+
+.content {
+  background: #fff;
+  padding: 2em;
+  height: 220px;
+  position: relative;
+  z-index: 2;
+  border-radius: 0 5px 5px 5px;
+  box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, 0.5);
 }
 </style>
