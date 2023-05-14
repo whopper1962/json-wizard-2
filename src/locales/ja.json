@@ -2,7 +2,28 @@
   "manual": {
     "title": "JSON WIZARDへようこそ、友よ!",
     "explanation": "JSON WizardはXLSXまたはCSVを元にJSONを作成するツールです。",
-    "toConverter": "さっそく、変換してみましょう!"
+    "toConverter": "さっそく、変換してみましょう!",
+    "convertXlsxToJson": {
+      "title": "XLSXまたはCSVをJSONに変換"
+    },
+    "convertAsArray": {
+      "title": "配列として変換"
+    },
+    "multipleFiles": {
+      "title": "複数のファイルを管理"
+    },
+    "refertToExternalTab": {
+      "title": "他のファイルをバリューとして使用"
+    },
+    "convertJsonToXlsx": {
+      "title": "JSONをXLSXまたはCSVに変換"
+    },
+    "saveStateAndShare": {
+      "title": "状態を保存してチームメイトと共有"
+    },
+    "importState": {
+      "title": "チームメイトの状態のインポート"
+    }
   },
   "lang": {
     "ja": "日本語",

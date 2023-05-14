@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">Convert XLSX to JSON</h1>
+      <h1 class="how-to-use-title">{{ $t('manual.convertXlsxToJson.title') }}</h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content how-to-use-content">
           fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdj<br />saklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">Convert as Array</h1>
+      <h1 class="how-to-use-title">{{ $t('manual.convertAsArray.title') }}</h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content">
           <img src="manuals/sample.jpg" class="manual-image" />
@@ -40,7 +40,7 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">Multiple files</h1>
+      <h1 class="how-to-use-title">{{ $t('manual.multipleFiles.title') }}</h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content how-to-use-content">
           fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdj<br />saklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
@@ -51,7 +51,7 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">Use some data as other JSON's value</h1>
+      <h1 class="how-to-use-title">{{ $t('manual.refertToExternalTab.title') }}</h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content">
           <img src="manuals/sample.jpg" class="manual-image" />
@@ -62,7 +62,7 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">Convert JSON to XLSX</h1>
+      <h1 class="how-to-use-title">{{ $t('manual.convertJsonToXlsx.title') }}</h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content how-to-use-content">
           fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdlj<br />sakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
@@ -73,7 +73,7 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">Share your data to teammate</h1>
+      <h1 class="how-to-use-title">{{ $t('manual.saveStateAndShare.title') }}</h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content">
           <img src="manuals/sample.jpg" class="manual-image" />
@@ -84,7 +84,7 @@
       </div>
     </div>
     <div class="how-to-use bottom">
-      <h1 class="how-to-use-title">Save your data</h1>
+      <h1 class="how-to-use-title">{{ $t('manual.importState.title') }}</h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content how-to-use-content">
           fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdlj<br />sakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl

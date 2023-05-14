@@ -2,7 +2,28 @@
   "manual": {
     "title": "Welcome to JSON WIZARD, my friend!",
     "explanation": "JSON Wizard is a tool that can generate JSON from XLSX or CSV files.",
-    "toConverter": "Let's try converting it right away!"
+    "toConverter": "Let's try converting it right away!",
+    "convertXlsxToJson": {
+      "title": "Convert XLSX to JSON"
+    },
+    "convertAsArray": {
+      "title": "Convert as Array"
+    },
+    "multipleFiles": {
+      "title": "Manage multiple files"
+    },
+    "refertToExternalTab": {
+      "title": "Use data as other JSON's value"
+    },
+    "convertJsonToXlsx": {
+      "title": "Convert JSON to XLSX"
+    },
+    "saveStateAndShare": {
+      "title": "Save your state and share with your teammate"
+    },
+    "importState": {
+      "title": "Import your teammate's state"
+    }
   },
   "lang": {
     "ja": "Japanese",
