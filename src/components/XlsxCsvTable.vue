@@ -59,10 +59,14 @@
               'trashed-row': trashedRows.includes(rowIndex),
             }"
           >
-            <th class="border-bottom void-area garbage-button-wrapper index-area">
+            <th
+              class="border-bottom void-area garbage-button-wrapper index-area"
+            >
               {{ rowIndex + 1 }}
             </th>
-            <th class="border-bottom void-area garbage-button-wrapper index-area">
+            <th
+              class="border-bottom void-area garbage-button-wrapper index-area"
+            >
               <button
                 class="garbage-button"
                 @click="onClickGarbageButton(rowIndex)"
@@ -143,11 +147,14 @@
                   v-for="(tab, index) in xlsxCsvTabs"
                   :key="`tab_${index}`"
                   :value="tab.id"
-                  :disabled="index === currentIndex"
+                  :disabled="index === currentIndex || !tab.isExecutable"
                 >
                   {{ tab.name }}
                   <template v-if="index === currentIndex">
                     (You cannot refer own tab.)
+                  </template>
+                  <template v-else-if="!tab.isExecutable">
+                    (This tab is not executable.)
                   </template>
                 </option>
               </template>
@@ -209,6 +216,7 @@ export default {
         return {
           id: tab.id,
           name: tab.tabName,
+          isExecutable: tab.isExecutable
         };
       });
     },
@@ -261,8 +269,10 @@ export default {
           return obj.cell === cell;
         });
         if (referingTab) {
-          const tab = this.$store.getters.getTabInfoById(referingTab.referingTabId);
-          return tab.tabName
+          const tab = this.$store.getters.getTabInfoById(
+            referingTab.referingTabId
+          );
+          return tab.tabName;
         }
         return false;
       };
