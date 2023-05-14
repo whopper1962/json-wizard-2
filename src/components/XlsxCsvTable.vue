@@ -36,7 +36,23 @@
           </tr>
           <tr>
             <th class="border-bottom void-area"></th>
-            <th class="border-bottom void-area"></th>
+            <th class="border-bottom void-area">
+              {{ isAllTrashed }}
+              <button
+                class="garbage-button"
+                @click="
+                  isAllTrashed
+                    ? onClickUngarbageAllButton()
+                    : onClickGarbageAllButton()
+                "
+              >
+                <font-awesome-icon
+                  v-if="isAllTrashed"
+                  icon="fa-solid fa-trash-arrow-up"
+                />
+                <font-awesome-icon v-else icon="fa-solid fa-trash" />
+              </button>
+            </th>
             <template v-for="num of selectedSheetMaxLen">
               <th
                 :key="num"
@@ -92,8 +108,9 @@
                   !isReferingExternalFile(`${rowIndex}-${index}`) &
                     !errorRows.includes(rowIndex) &
                     !trashedRows.includes(rowIndex),
-                'refering-external-file':
-                  isReferingExternalFile(`${rowIndex}-${index}`),
+                'refering-external-file': isReferingExternalFile(
+                  `${rowIndex}-${index}`
+                ),
                 'ctx-menu-enabled-cell': isValueColumn(index),
               }"
               @contextmenu.prevent="
@@ -217,6 +234,13 @@ export default {
         return columnIndex === this.currentColumnOrder[0];
       };
     },
+    isAllTrashed() {
+      const currentConetnts = this.$store.getters["getCurrentTabContents"];
+      return (
+        currentConetnts.trashedRows.length ===
+        currentConetnts.currentXlsxCsvContents.length
+      );
+    },
     xlsxCsvTabs() {
       return this.$store.getters["getXlsxCsvTabs"].map((tab) => {
         return {
@@ -329,6 +353,12 @@ export default {
     },
     onClickGarbageButton(index) {
       this.$store.dispatch("modifyTrashedRows", index);
+    },
+    onClickGarbageAllButton() {
+      this.$store.dispatch("allTrash");
+    },
+    onClickUngarbageAllButton() {
+      this.$store.dispatch("allUntrash");
     },
     onClickStageButton(columnNum) {
       let clonedColumnOrder = this.currentColumnOrder.slice();

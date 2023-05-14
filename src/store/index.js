@@ -23,7 +23,7 @@ const defaultTabData = {
   isExecutable: false,
   isError: false,
   errorData: [],
-  isExecuted: false
+  isExecuted: false,
 };
 
 export default new Vuex.Store({
@@ -52,7 +52,7 @@ export default new Vuex.Store({
         isExecutable: false,
         isError: false,
         errorData: [],
-        isExecuted: false
+        isExecuted: false,
       },
     ],
     selectedTabIndex: 0,
@@ -222,6 +222,21 @@ export default new Vuex.Store({
         currentTrashedRows.push(index);
       }
     },
+    ALL_TRASH(state) {
+      const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      if (
+        currentTabContents.trashedRows.length ===
+        currentTabContents.currentXlsxCsvContents.length
+      ) return;
+      for (const [index] of currentTabContents.currentXlsxCsvContents.entries()) {
+        if (currentTabContents.trashedRows.some((trashedIndex) => trashedIndex === index)) continue;
+        currentTabContents.trashedRows.push(index);
+      }
+    },
+    ALL_UNTRASH(state) {
+      const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      currentTabContents.trashedRows = [];
+    },
     MODIFY_TAB_NAME_BY_INDEX(state, args) {
       const tabNames = state.xlsxCsvTabs
         .map((tab, index) => {
@@ -271,18 +286,22 @@ export default new Vuex.Store({
       currentTabContents.numberOfElements = 1;
       currentTabContents.externalTabColumnInfo = [];
     },
-    REMOVE_EX_TAB_INFO (state, rowIndex) {
+    REMOVE_EX_TAB_INFO(state, rowIndex) {
       let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       let currentExTabInfo = currentTabContents.externalTabColumnInfo;
-      const foundIndex = currentExTabInfo.findIndex((loopInfo) => loopInfo.rowIndex === rowIndex);
+      const foundIndex = currentExTabInfo.findIndex(
+        (loopInfo) => loopInfo.rowIndex === rowIndex
+      );
       currentExTabInfo.splice(foundIndex, 1);
     },
-    REMOVE_COLUMN_FROM_ORDER (state, columnIndex) {
+    REMOVE_COLUMN_FROM_ORDER(state, columnIndex) {
       let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       let currentColumnOrder = currentTabContents.columnOrders;
-      const foundIndex = currentColumnOrder.findIndex((column) => column === columnIndex);
+      const foundIndex = currentColumnOrder.findIndex(
+        (column) => column === columnIndex
+      );
       currentColumnOrder.splice(foundIndex, 1);
-    }
+    },
   },
   actions: {
     setCurrentTabContents(context, selectedTabIndex) {
@@ -318,6 +337,12 @@ export default new Vuex.Store({
     modifyTrashedRows(context, index) {
       context.commit("MODIFY_TRASHED_ROWS", index);
     },
+    allTrash(context) {
+      context.commit("ALL_TRASH");
+    },
+    allUntrash(context) {
+      context.commit("ALL_UNTRASH");
+    },
     modifyTabNameByIndex(context, index) {
       context.commit("MODIFY_TAB_NAME_BY_INDEX", index);
     },
@@ -338,7 +363,7 @@ export default new Vuex.Store({
     },
     removeColumnFromOrder(context, columnIndex) {
       context.commit("REMOVE_COLUMN_FROM_ORDER", columnIndex);
-    }
+    },
   },
 });
 
