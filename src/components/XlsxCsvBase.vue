@@ -1,96 +1,77 @@
 <template>
-  <div class="card xlsx-csv-card">
-    <div class="card-header card-header-title">
-      SOURCE
-    </div>
-    <div class="card-body">
-      <ul class="nav nav-tabs">
-        <template v-for="(xlsxCsc, index) in xlsxCsvList">
-          <li
-            class="nav-item"
-            :key="`xlsx_csv_${index}`"
+  <div class="xlsx-csv-card">
+    <ul class="nav nav-tabs">
+      <template v-for="(xlsxCsc, index) in xlsxCsvList">
+        <li class="nav-item" :key="`xlsx_csv_${index}`">
+          <div
+            class="nav-link link-cursor tab-item"
+            v-if="isChangingTabName(index)"
+            :class="{
+              active: isCurrentTab(index),
+            }"
+            aria-current="page"
           >
-            <div
-              class="nav-link link-cursor tab-item"
-              v-if="isChangingTabName(index)"
+            <input
+              type="text"
+              class="tab-name-form"
               :class="{
-                'active': isCurrentTab(index)
+                'invalid-name': invalidTabName,
               }"
-              aria-current="page"
-            >
-              <input
-                type="text"
-                class="tab-name-form"
-                :class="{
-                  'invalid-name': invalidTabName
-                }"
-                :placeholder="invalidTabName ? 'Invalid tab name' : ''"
-                v-model="tabName"
-                v-focus
-                v-click-outside="clickOutside"
-                @keydown.enter.prevent="submitTabName()"
-              >
-            </div>
-            <div
-              class="nav-link link-cursor tab-item"
-              v-else
-              :class="{
-                'active': isCurrentTab(index)
-              }"
-              aria-current="page"
-              @contextmenu.prevent="$refs.ctxMenu.open($event, {index})"
-              @dblclick="changeTabName(index)"
-              @click="onClickTab(index)"
-            >
-              {{ xlsxCsc.tabName }}
-            </div>
-          </li>
-        </template>
-        <li class="nav-item">
-          <button
-            class="btn new-tab-button"
-            @click="addNewTab()"
+              :placeholder="invalidTabName ? 'Invalid tab name' : ''"
+              v-model="tabName"
+              v-focus
+              v-click-outside="clickOutside"
+              @keydown.enter.prevent="submitTabName()"
+            />
+          </div>
+          <div
+            class="nav-link link-cursor tab-item"
+            v-else
+            :class="{
+              active: isCurrentTab(index),
+            }"
+            aria-current="page"
+            @contextmenu.prevent="$refs.ctxMenu.open($event, { index })"
+            @dblclick="changeTabName(index)"
+            @click="onClickTab(index)"
           >
-            Add source file
-            <font-awesome-icon :icon="['fas', 'plus']" />
-          </button>
+            {{ xlsxCsc.tabName }}
+          </div>
         </li>
-      </ul>
-      <ContextMenu
-        id="context-menu"
-        @ctx-open="onCtxOpen"
-        ref="ctxMenu"
-        class="hello"
-      >
-        <li
-          class="context-menu-item"
-          @click="changeTabName()"
-        >
-          <span class="ctx-title">Change tab name</span>
-        </li>
-        <li
-          class="context-menu-item"
-          @click="deleteTab()"
-        >
-          <span class="ctx-title">Delete tab</span>
-        </li>
-      </ContextMenu>
-    </div>
+      </template>
+      <li class="nav-item">
+        <button class="btn new-tab-button" @click="addNewTab()">
+          Add source file
+          <font-awesome-icon :icon="['fas', 'plus']" />
+        </button>
+      </li>
+    </ul>
+    <ContextMenu
+      id="context-menu"
+      @ctx-open="onCtxOpen"
+      ref="ctxMenu"
+      class="hello"
+    >
+      <li class="context-menu-item" @click="changeTabName()">
+        <span class="ctx-title">Change tab name</span>
+      </li>
+      <li class="context-menu-item" @click="deleteTab()">
+        <span class="ctx-title">Delete tab</span>
+      </li>
+    </ContextMenu>
     <!-- Main xlsx csv area -->
     <div class="current-tab container-fluid">
       <div class="row" v-if="xlsxCsvInputed">
-        <div class="col-9">
-          <XlsxCsvOptions/>
-          <XlsxCsvTable
-            :mouseOveredColumn="mouseOveredColumn"
-          />
+        <div class="col-9 pad-0">
+          <XlsxCsvOptions />
+          <XlsxCsvTable :mouseOveredColumn="mouseOveredColumn" />
         </div>
-        <div class="col-3">
+        <div class="col-3 pad-0">
           <XlsxCsvColumnSelector
             v-model="currentXlsxCsvTab"
             @updateHighlightedColumn="updateHighlightedColumn"
           />
-          <XlsxCsvExternalFilesInfo/>
+          <XlsxCsvExternalFilesInfo />
           <div class="select-other-file-button-wrapper">
             <button
               class="btn btn-secondary mb-2 font-weight-bold select-other-file-button"
@@ -104,7 +85,7 @@
       </div>
       <div class="source-file-form-wrapper" v-else>
         <div class="source-file-form-contents">
-          <SourceFileForm/>
+          <SourceFileForm />
         </div>
       </div>
     </div>
@@ -112,12 +93,12 @@
 </template>
 
 <script>
-import XlsxCsvTable from '@/components/XlsxCsvTable.vue';
-import XlsxCsvColumnSelector from '@/components/XlsxCsvColumnSelector.vue';
-import XlsxCsvOptions from '@/components/XlsxCsvOptions.vue';
-import XlsxCsvExternalFilesInfo from '@/components/XlsxCsvExternalFilesInfo.vue';
-import SourceFileForm from '@/components/SourceFileForm.vue';
-import ContextMenu from 'vue-context-menu';
+import XlsxCsvTable from "@/components/XlsxCsvTable.vue";
+import XlsxCsvColumnSelector from "@/components/XlsxCsvColumnSelector.vue";
+import XlsxCsvOptions from "@/components/XlsxCsvOptions.vue";
+import XlsxCsvExternalFilesInfo from "@/components/XlsxCsvExternalFilesInfo.vue";
+import SourceFileForm from "@/components/SourceFileForm.vue";
+import ContextMenu from "vue-context-menu";
 
 export default {
   components: {
@@ -126,121 +107,127 @@ export default {
     XlsxCsvExternalFilesInfo,
     XlsxCsvOptions,
     ContextMenu,
-    SourceFileForm
+    SourceFileForm,
   },
-  data () {
+  data() {
     return {
       selectedXlsxCsv: {},
       selectedXlsxCsvIndex: 0,
       ctxOpendTabIndex: 0,
       changingTabNameIndex: null,
       invalidTabName: false,
-      tabName: '',
-      mouseOveredColumn: null
+      tabName: "",
+      mouseOveredColumn: null,
     };
   },
   watch: {
-    tabName () {
+    tabName() {
       this.invalidTabName = false;
-    }
+    },
   },
   computed: {
-    isChangingTabName () {
+    isChangingTabName() {
       return function (index) {
         return this.changingTabNameIndex === index;
       };
     },
-    isCurrentTab () {
+    isCurrentTab() {
       return function (index) {
         return this.selectedTab === index;
       };
     },
-    xlsxCsvInputed () {
-      return this.$store.getters['getCurrentTabContents']?.fileInputed;
+    xlsxCsvInputed() {
+      return this.$store.getters["getCurrentTabContents"]?.fileInputed;
     },
-    xlsxCsvList () {
-      return this.$store.getters['getXlsxCsvTabs'];
+    xlsxCsvList() {
+      return this.$store.getters["getXlsxCsvTabs"];
     },
     currentXlsxCsvTab: {
-      get () {
-        return this.$store.getters['getCurrentTabContents']?.columnOrders;
+      get() {
+        return this.$store.getters["getCurrentTabContents"]?.columnOrders;
       },
-      set (ordersInfo) {
-        this.$store.dispatch('modifyCurrentXlsxCsvColumnOrder', ordersInfo);
-      }
+      set(ordersInfo) {
+        this.$store.dispatch("modifyCurrentXlsxCsvColumnOrder", ordersInfo);
+      },
     },
     selectedTab: {
-      get () {
-        return this.$store.getters['getSelectedTabIndex'];
+      get() {
+        return this.$store.getters["getSelectedTabIndex"];
       },
-      set (index) {
-        this.$store.dispatch('setTabIndex', index);
-      }
+      set(index) {
+        this.$store.dispatch("setTabIndex", index);
+      },
     },
-    isValueAndKeySelected () {
-      const currentContents = this.$store.getters['getCurrentTabContents'];
+    isValueAndKeySelected() {
+      const currentContents = this.$store.getters["getCurrentTabContents"];
       return currentContents?.columnOrders.length > 1;
-    }
+    },
   },
   methods: {
-    onCtxOpen (locals) {
+    onCtxOpen(locals) {
       this.ctxOpendTabIndex = locals.index;
     },
-    onClickTab (index) {
+    onClickTab(index) {
       this.selectedTab = index;
     },
-    addNewTab () {
-      this.$store.dispatch('addTab');
+    addNewTab() {
+      this.$store.dispatch("addTab");
     },
-    onDoubleClickTab () {
-      console.error('Double')
+    onDoubleClickTab() {
+      console.error("Double");
     },
-    updateHighlightedColumn (column) {
+    updateHighlightedColumn(column) {
       this.mouseOveredColumn = column;
     },
-    deleteTab () {
-      this.$store.dispatch('deleteTab', this.ctxOpendTabIndex);
+    deleteTab() {
+      this.$store.dispatch("deleteTab", this.ctxOpendTabIndex);
     },
-    selectOtherFile () {
-      this.$store.dispatch('selectOtherFile');
+    selectOtherFile() {
+      this.$store.dispatch("selectOtherFile");
     },
-    changeTabName (index = null) {
+    changeTabName(index = null) {
       if (index !== null) this.ctxOpendTabIndex = index;
-      const currentTabName = this.$store.getters.getContentsByIndex(this.ctxOpendTabIndex);
+      const currentTabName = this.$store.getters.getContentsByIndex(
+        this.ctxOpendTabIndex
+      );
       this.tabName = currentTabName.tabName.slice();
       this.changingTabNameIndex = this.ctxOpendTabIndex;
     },
-    submitTabName () {
+    submitTabName() {
       try {
         if (this.tabName.length === 0) {
           this.invalidTabName = true;
           return;
         }
-        this.$store.dispatch('modifyTabNameByIndex', {
+        this.$store.dispatch("modifyTabNameByIndex", {
           index: this.changingTabNameIndex,
-          name: this.tabName.trim()
+          name: this.tabName.trim(),
         });
         this.changingTabNameIndex = null;
       } catch (_) {
         alert(`"${this.tabName}" already used as other tab name.`);
       }
     },
-    clickOutside () {
+    clickOutside() {
       this.changingTabNameIndex = null;
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
 .xlsx-csv-card {
   margin-bottom: 20px;
   padding-bottom: 20px;
-  border: #b3b3b3 solid;
+  /* border: #b3b3b3 solid; */
+  background-color: rgb(255, 255, 255);
+}
+.pad-0 {
+  padding: 0px !important;
 }
 .card-header-title {
   background-color: #b3b3b3;
-  font-family: 'Trattatello';
+  font-family: "Trattatello";
   font-size: 15px;
   font-weight: bold;
 }
@@ -249,6 +236,8 @@ export default {
 }
 .current-tab {
   width: 100%;
+  margin-top: 20px;
+  background-color: rgb(255, 255, 255);
 }
 .execute-conversion-button-wrapper {
   text-align: left;
