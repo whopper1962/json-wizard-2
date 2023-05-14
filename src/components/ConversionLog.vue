@@ -2,6 +2,8 @@
   <div class="card conversion-log-wrapper">
     <div class="card-header title">
       {{ $t("app.log") }}
+      <font-awesome-icon :icon="['fas', 'cubes-stacked']" />
+      <!-- <font-awesome-icon :icon="['fas', 'broom']" class="clean-logs" /> -->
     </div>
     <div class="card-body log-area">
       <span>> Change column order. [2023/08/26 17:30:00]</span><br/>
@@ -43,5 +45,16 @@ export default {
 }
 .error-log {
   color: rgb(250, 66, 66);
+}
+.clean-logs {
+  float: right;
+  border: solid rgb(105, 104, 104);
+  padding: 3px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.clean-logs:hover {
+  color: white;
+  background-color: rgb(105, 104, 104);
 }
 </style>

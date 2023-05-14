@@ -24,18 +24,7 @@
       </h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content how-to-use-content">
-          <pre class="manual-pre" lang="json">
-{
-  "hello": "World",
-  "name": "Steve"
-}</pre>
-          <p>上記のようなJSONを作成する場合を想定します。<br/>その場合、こちらのようなCSVまたはXLSXファイルを用意します。画面からXLSXファイルをアップロードし、「READ」を</p>では、以下のように複数のキーがある場合にはどうすればよいでしょうか？<pre class="manual-pre" lang="json">
-{
-  "hello": {
-    "world": "JSON Wizard"
-  },
-  "name": "Steve"
-}</pre>
+          fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkd<br />ljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
         </div>
         <div class="col-md-6 col-sm-12 left-content">
           <img src="manuals/sample.jpg" class="manual-image" />
