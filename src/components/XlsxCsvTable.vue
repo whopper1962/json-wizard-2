@@ -141,7 +141,6 @@
               :disabled="xlsxCsvTabs.length === 0"
               v-model="externalFile"
             >
-              <option selected value=""></option>
               <template v-if="xlsxCsvTabs.length > 0">
                 <option
                   v-for="(tab, index) in xlsxCsvTabs"
@@ -206,7 +205,7 @@ export default {
       ctxOpenedContentIndex: null,
       ctxOpenedRowIndexCache: null,
       ctxOpenedContentIndexCache: null,
-      externalFile: "",
+      externalFile: null,
       // selectedSheetMaxLen: 0,
       // currentSheet: []
     };
