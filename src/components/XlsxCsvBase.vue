@@ -271,7 +271,7 @@ export default {
   font-weight: bold;
 }
 .tab-name-form {
-  height: 30px;
+  height: 17px;
 }
 .invalid-name {
   background-color: rgb(255, 161, 161);
