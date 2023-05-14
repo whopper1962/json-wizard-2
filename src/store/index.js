@@ -21,6 +21,8 @@ const defaultTabData = {
   numberOfElements: 1,
   externalTabColumnInfo: [],
   isExecutable: false,
+  isError: false,
+  errorData: []
 };
 
 export default new Vuex.Store({
@@ -47,6 +49,8 @@ export default new Vuex.Store({
         numberOfElements: 1,
         externalTabColumnInfo: [],
         isExecutable: false,
+        isError: false,
+        errorData: []
       },
     ],
     selectedTabIndex: 0,
@@ -105,7 +109,8 @@ export default new Vuex.Store({
       return state.xlsxCsvTabs[index];
     },
     getErrorRows(state) {
-      return state.errorRows;
+      const currentTab = state.xlsxCsvTabs[state.selectedTabIndex];
+      return currentTab.errorData;
     },
   },
   mutations: {
@@ -139,6 +144,8 @@ export default new Vuex.Store({
       currentTabContents.isExecutable = columnOrders.length > 1;
     },
     SET_GENERATED_JSON(state, json) {
+      const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      currentTabContents.isError = false;
       state.generatedJson = {
         sourceIndex: state.selectedTabIndex,
         isSourceDeleted: false,
@@ -235,7 +242,9 @@ export default new Vuex.Store({
       // }
     },
     SET_ERROR_ROWS(state, rows) {
-      state.errorRows = rows;
+      const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      currentTabContents.isError = true;
+      currentTabContents.errorData = rows;
     },
     SET_EXTERNAL_FILE_COLUMN(state, info) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
@@ -253,6 +262,8 @@ export default new Vuex.Store({
       currentTabContents.trashedRows = [];
       currentTabContents.isRootArray = false;
       currentTabContents.isExecutable = false;
+      currentTabContents.isError = false;
+      currentTabContents.errorData = [];
       currentTabContents.numberOfElements = 1;
       currentTabContents.externalTabColumnInfo = [];
     },

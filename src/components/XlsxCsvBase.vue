@@ -24,6 +24,7 @@
             @click="onClickTab(index)"
           >
             {{ xlsxCsc.tabName }}
+            <font-awesome-icon v-if="xlsxCsc.isError" :icon="['fas', 'triangle-exclamation']" class="error-icon" />
           </div>
         </li>
       </template>
@@ -352,5 +353,8 @@ export default {
   z-index: 2;
   border-radius: 0 5px 5px 5px;
   box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, 0.5);
+}
+.error-icon {
+  color: rgb(242, 76, 76);
 }
 </style>

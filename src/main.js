@@ -46,7 +46,7 @@ Vue.config.productionTip = false;
 
 // FontAwesome
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faTrash, faTrashArrowUp, faGlobe, faWandSparkles, faGlasses, faDownload, faFloppyDisk, faRotateLeft, faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faTriangleExclamation, faTrashArrowUp, faGlobe, faWandSparkles, faGlasses, faDownload, faFloppyDisk, faRotateLeft, faPlus, faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faCircleXmark as WhiteXmark, faClipboard } from '@fortawesome/free-regular-svg-icons';
 import { } from '@fortawesome/fontawesome-free-regular';
@@ -55,6 +55,7 @@ const icons = [
   faTrash,
   faGlobe,
   faTrashArrowUp,
+  faTriangleExclamation,
   faGithub,
   faGlasses,
   faCircleXmark,

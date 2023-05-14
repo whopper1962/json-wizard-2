@@ -90,10 +90,10 @@
                   isMouseOvered(index) &&
                   !trashedRows.includes(rowIndex) &&
                   !isReferingExternalFile(`${rowIndex}-${index}`) &
-                    !errorRows.includes(rowIndex),
-                'refering-external-file': isReferingExternalFile(
-                  `${rowIndex}-${index}`
-                ),
+                    !errorRows.includes(rowIndex) &
+                    !trashedRows.includes(rowIndex),
+                'refering-external-file':
+                  isReferingExternalFile(`${rowIndex}-${index}`),
                 'ctx-menu-enabled-cell': isValueColumn(index),
               }"
               @contextmenu.prevent="
