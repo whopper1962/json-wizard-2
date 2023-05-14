@@ -1,22 +1,22 @@
 <template>
   <button class="btn btn-success recover-button" @click="onClickRecover()">
-    Use saved data
+    {{ $t("app.importData") }}
     <font-awesome-icon :icon="['fas', 'download']" class="icon-style" />
   </button>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {};
   },
   computed: {},
   methods: {
-    onClickRecover () {
-      this.$emit('openModal');
-    }
+    onClickRecover() {
+      this.$emit("openModal");
+    },
   },
-}
+};
 </script>
 
 <style scoped>

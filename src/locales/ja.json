@@ -25,6 +25,20 @@
       "title": "チームメイトの状態のインポート"
     }
   },
+  "app": {
+    "saveData": "現在の状態を保存",
+    "importData": "データをインポート",
+    "addSourceFile": "タブを追加",
+    "unexecutableMsg": "最低1つのキーとバリューが選択されている必要があります。",
+    "executeConversion": "変換を実行",
+    "convertAsArray": "配列に変換",
+    "numberOfElements": "要素数",
+    "selectedSheet": "選択されているシート",
+    "numberOfRows": "列の数",
+    "numberOfTrashedRows": "変換対象から外されている列の数",
+    "removeFromOrder": "順序から外す",
+    "addToOrdere": "順序に追加"
+  },
   "lang": {
     "ja": "日本語",
     "en": "英語"

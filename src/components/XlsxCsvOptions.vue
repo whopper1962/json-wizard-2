@@ -6,14 +6,14 @@
         @click="executeConversion()"
         :disabled="!currentContents.isExecutable"
       >
-        Execute conversion
+        {{ $t("app.executeConversion") }}
         <font-awesome-icon :icon="['fas', 'wand-sparkles']" />
       </button>
       <span
         v-if="!currentContents.isExecutable"
         class="value-and-key-not-selected-error text-danger"
       >
-        At least one key and one value should be selected.
+        {{ $t("app.unexecutableMsg") }}
       </span>
     </div>
     <div class="form-inline">
@@ -21,10 +21,12 @@
         class="btn btn-success mb-2 root-array-button font-weight-bold"
         @click="isRootArray = !isRootArray"
       >
-        Set as array: {{ isRootArray ? "ON" : "OFF" }}
+        {{ $t("app.convertAsArray") }} {{ isRootArray ? "ON" : "OFF" }}
       </button>
       <div class="form-group mx-sm-3 mb-2" v-show="isRootArray">
-        <span class="spaces-form-text"> ▶Number of elements: </span>
+        <span class="spaces-form-text">
+          ▶{{ $t("app.numberOfElements") }}:
+        </span>
         <input
           type="number"
           class="form-control"
@@ -37,7 +39,7 @@
     </div>
     <div class="form-inline">
       <div class="form-group mb-2" v-if="currentContents">
-        <span class="spaces-form-text"> Selected sheet: </span>
+        <span class="spaces-form-text">{{ $t("app.selectedSheet") }}: </span>
         <select
           class="form-control selected-sheet-form"
           @change="$store.dispatch('setErrorRows', [])"
@@ -48,10 +50,12 @@
           </template>
         </select>
         <span class="sheet-info">
-          Number of rows: {{ currentContents.currentXlsxCsvContents.length }}
+          {{ $t("app.numberOfRows") }}:
+          {{ currentContents.currentXlsxCsvContents.length }}
         </span>
         <span class="sheet-info">
-          Number of trashed rows: {{ currentContents.trashedRows.length }}
+          {{ $t("app.numberOfTrashedRows") }}:
+          {{ currentContents.trashedRows.length }}
         </span>
       </div>
     </div>

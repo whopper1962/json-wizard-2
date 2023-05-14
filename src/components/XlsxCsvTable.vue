@@ -22,14 +22,14 @@
                   class="btn btn-secondary btn-sm th-button font-weight-bold"
                   @click="onClickStageButton(num - 1)"
                 >
-                  Remove from order
+                  {{ $t("app.removeFromOrder") }}
                 </button>
                 <button
                   v-else
                   class="btn btn-info btn-sm th-button font-weight-bold"
                   @click="onClickStageButton(num - 1)"
                 >
-                  Add to order
+                  {{ $t("app.addToOrdere") }}
                 </button>
               </th>
             </template>

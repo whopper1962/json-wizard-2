@@ -25,6 +25,20 @@
       "title": "Import your teammate's state"
     }
   },
+  "app": {
+    "saveData": "Save current data",
+    "importData": "Import data",
+    "addSourceFile": "Add source file",
+    "unexecutableMsg": "At least one key and value must be selected.",
+    "executeConversion": "Execute conversion",
+    "convertAsArray": "Convert as array",
+    "numberOfElements": "Number of elements",
+    "selectedSheet": "Selected sheet",
+    "numberOfRows": "Number of rows",
+    "numberOfTrashedRows": "Number of trashed rows",
+    "removeFromOrder": "Remove from order",
+    "addToOrdere": "Add to order"
+  },
   "lang": {
     "ja": "Japanese",
     "en": "English"

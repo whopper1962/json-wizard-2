@@ -2,10 +2,8 @@
   <div class="xlsx-csv-card">
     <ul class="tabs">
       <template v-for="(xlsxCsc, index) in xlsxCsvList">
-        <li :class="{'current': isCurrentTab(index)}" :key="`tab_${index}`">
-          <div
-            v-if="isChangingTabName(index)"
-          >
+        <li :class="{ current: isCurrentTab(index) }" :key="`tab_${index}`">
+          <div v-if="isChangingTabName(index)">
             <input
               type="text"
               class="tab-name-form"
@@ -31,7 +29,7 @@
       </template>
       <li>
         <div @click="addNewTab()">
-          Add source file
+          {{ $t("app.addSourceFile") }}
           <font-awesome-icon :icon="['fas', 'plus']" />
         </div>
       </li>

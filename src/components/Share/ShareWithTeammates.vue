@@ -1,22 +1,22 @@
 <template>
   <button class="btn btn-success share-button" @click="onClickShare()">
-    Save current data
+    {{ $t("app.saveData") }}
     <font-awesome-icon :icon="['fas', 'floppy-disk']" class="icon-style" />
   </button>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {};
   },
   computed: {},
   methods: {
-    onClickShare () {
-      this.$emit('openModal');
-    }
+    onClickShare() {
+      this.$emit("openModal");
+    },
   },
-}
+};
 </script>
 
 <style scoped>
