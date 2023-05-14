@@ -146,10 +146,11 @@ export default {
 <style scoped>
 .xlsx-csv-option-area {
   margin-left: 5px;
-  padding-bottom: 5px;
+  /* padding-bottom: 5px; */
 }
 .spaces-form-text {
   margin-right: 5px;
+  font-size: 12px;
 }
 .root-array-button {
   width: 217px;
@@ -161,6 +162,7 @@ export default {
 }
 .sheet-info {
   margin-left: 15px;
+  font-size: 12px;
 }
 .value-and-key-not-selected-error {
   margin-left: 10px;

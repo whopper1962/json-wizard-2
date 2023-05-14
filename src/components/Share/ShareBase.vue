@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
 .share-base-style {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   text-align: left;
 }
 </style>

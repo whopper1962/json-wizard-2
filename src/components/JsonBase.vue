@@ -1,10 +1,6 @@
 <template>
   <div>
     <div class="form-inline option-button-wrapper">
-      <span class="sourc-placeholder">Source:</span>
-      <span class="source-name">
-        {{ isSourceDeleted ? "Source deleted" : sourceIndex }}
-      </span>
     </div>
     <div class="form-inline option-button-wrapper">
       <button
@@ -27,6 +23,10 @@
           :disabled="invalidJsonFormat"
           onKeyDown="return false"
         />
+        <span class="sourc-placeholder">Source Tab:</span>
+        <span class="source-name">
+          {{ isSourceDeleted ? "Source deleted" : sourceIndex }}
+        </span>
       </div>
       <span
         class="invalid-json-format-error text-danger"
@@ -135,16 +135,20 @@ export default {
 }
 .spaces-form-text {
   margin-right: 5px;
+  font-size: 12px;
 }
 .error-msg-area {
   margin-bottom: 10px;
 }
 .source-name {
   font-weight: bold;
+  font-size: 13px;
 }
 .sourc-placeholder {
   font-size: 10px;
   margin-right: 5px;
+  margin-left: 10px;
+  font-size: 12px;
 }
 /* .source-tab-area {
   margin-bottom: 5px;
@@ -153,7 +157,7 @@ export default {
   width: 217px;
   font-weight: bold;
 }
-.copy-icon {
-  /* height: 1.3rem; */
-}
+/* .copy-icon {
+  height: 1.3rem;
+} */
 </style>
