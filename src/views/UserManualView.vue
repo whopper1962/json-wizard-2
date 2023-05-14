@@ -3,18 +3,17 @@
     <div class="title-area">
       <img :src="`json-wizard-logo.png`" class="wizard-logo" />
       <h1 class="title">
-        <span class="that-font">Welcome to JSON WIZARD, My friend!</span>
+        <span class="that-font">Welcome to JSON WIZARD, my friend!</span>
       </h1>
       <!-- <h1 class="title"><span class="that-font">JSON WIZARD へようこそ！友よ！</span></h1> -->
       <div class="main-content">
         <p>
-          JSON Wizard is a tool for people who want to create JSON from XLSX or
-          CSV.
+          JSON Wizard is a tool that can generate JSON from XLSX or CSV files.
         </p>
         <!-- <p>JSON WizardはXLSXまたはCSVを元にJSONを作成するツールです。</p> -->
         <div class="converter-link">
           <button class="btn first" @click="jumpToConverter()">
-            CONVERT YOURSELF<font-awesome-icon :icon="['fas', 'wand-sparkles']" class="convert-icon" />
+            Let's try converting it right away!<font-awesome-icon :icon="['fas', 'wand-sparkles']" class="convert-icon" />
           </button>
         </div>
       </div>
@@ -162,7 +161,7 @@ export default {
   width: 100%;
 }
 .converter-link {
-  margin-top: 30px;
+  margin-top: 10px;
   text-align: center;
 }
 .convert-button {
