@@ -68,9 +68,13 @@
 
     <div class="lang-select-area">
       <font-awesome-icon :icon="['fas', 'globe']" class="lang-icon" />
-      <select class="form-control lang-select">
-        <option>English</option>
-        <option>Japanese</option>
+      <select
+        class="form-control lang-select"
+        v-model="selectedLang"
+        @change="changeLang()"
+      >
+        <option value="en">{{ $t("lang.en") }}</option>
+        <option value="ja">{{ $t("lang.ja") }}</option>
       </select>
     </div>
   </nav>
@@ -85,10 +89,12 @@ export default {
       repoStars: null,
       repoUrl: "",
       wizardHatColor: "logo",
+      selectedLang: 'ja'
     };
   },
   created() {
     this.setWizardHatColor();
+    this.selectedLang = localStorage.getItem('language') || 'en';
     // this.getRepositoryDetials();
   },
   computed: {
@@ -99,6 +105,10 @@ export default {
     },
   },
   methods: {
+    changeLang () {
+      localStorage.setItem('language', this.selectedLang);
+      this.$i18n.locale = localStorage.getItem('language');
+    },
     setWizardHatColor() {
       const colors = ["red", "green", "orange", "blue"];
       const randomIndex = Math.floor(Math.random() * (3 - 0 + 1) + 0);
@@ -181,6 +191,7 @@ export default {
 .lang-select-area {
   display: flex;
   margin-right: 30px;
+  width: 150px;
 }
 .lang-icon {
   margin-top: 0px;

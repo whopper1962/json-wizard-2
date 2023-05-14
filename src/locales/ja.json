@@ -1,0 +1,11 @@
+{
+  "manual": {
+    "title": "JSON WIZARDへようこそ、友よ!",
+    "explanation": "JSON WizardはXLSXまたはCSVを元にJSONを作成するツールです。",
+    "toConverter": "さっそく、変換してみましょう!"
+  },
+  "lang": {
+    "ja": "日本語",
+    "en": "英語"
+  }
+}

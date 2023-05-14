@@ -1,0 +1,11 @@
+{
+  "manual": {
+    "title": "Welcome to JSON WIZARD, my friend!",
+    "explanation": "JSON Wizard is a tool that can generate JSON from XLSX or CSV files.",
+    "toConverter": "Let's try converting it right away!"
+  },
+  "lang": {
+    "ja": "Japanese",
+    "en": "English"
+  }
+}

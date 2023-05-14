@@ -19,6 +19,23 @@ Vue.directive('focus', {
   }
 });
 
+// i18n
+import VueI18n from 'vue-i18n';
+
+Vue.use(VueI18n);
+
+const messages = {
+  en: require('@/locales/en.json'),
+  ja: require('@/locales/ja.json')
+};
+
+const locale = localStorage.getItem('language') || 'en';
+
+const i18n = new VueI18n({
+  locale,
+  messages
+});
+
 import Toasted from 'vue-toasted';
 
 Vue.use(Toasted, {
@@ -54,5 +71,6 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app');
