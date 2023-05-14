@@ -1,74 +1,65 @@
 <template>
-  <div class="card json-card">
-    <div class="card-header card-header-title">
-      JSON
+  <div>
+    <div class="form-inline option-button-wrapper">
+      <span class="sourc-placeholder">Source:</span>
+      <span class="source-name">
+        {{ isSourceDeleted ? "Source deleted" : sourceIndex }}
+      </span>
     </div>
-    <div class="card-body">
-      <div class="form-inline option-button-wrapper">
-        <span class="sourc-placeholder">Source:</span>
-        <span class="source-name">
-          {{ isSourceDeleted ? 'Source deleted' : sourceIndex }}
-        </span>
-      </div>
-      <div class="form-inline option-button-wrapper">
-        <button
-          class="btn btn-secondary copy-button"
-          @click="copyToClipboard()"
+    <div class="form-inline option-button-wrapper">
+      <button
+        class="btn btn-secondary copy-button"
+        @click="copyToClipboard()"
+        :disabled="invalidJsonFormat"
+      >
+        Copy to Clipboard
+        <font-awesome-icon :icon="['far', 'clipboard']" class="copy-icon" />
+      </button>
+      <div class="form-group mx-sm-3">
+        <span class="spaces-form-text"> Number of spaces: </span>
+        <input
+          type="number"
+          class="form-control"
+          placeholder="Number of spaces"
+          min="1"
+          max="10"
+          v-model="numberOfSpaces"
           :disabled="invalidJsonFormat"
-        >
-          Copy to Clipboard
-          <font-awesome-icon :icon="['far', 'clipboard']" class="copy-icon" />
-        </button>
-        <div class="form-group mx-sm-3">
-          <span class="spaces-form-text">
-            Number of spaces:
-          </span>
-          <input
-            type="number"
-            class="form-control"
-            placeholder="Number of spaces"
-            min="1"
-            max="10"
-            v-model="numberOfSpaces"
-            :disabled="invalidJsonFormat"
-            onKeyDown="return false"
-          >
-        </div>
-        <span
-          class="invalid-json-format-error text-danger"
-          v-if="invalidJsonFormat"
-        >
-          Invalid JSON format!
-        </span>
+          onKeyDown="return false"
+        />
       </div>
-      <JsonEditor
-        v-model="inputedJson"
-      />
+      <span
+        class="invalid-json-format-error text-danger"
+        v-if="invalidJsonFormat"
+      >
+        Invalid JSON format!
+      </span>
     </div>
+    <JsonEditor v-model="inputedJson" />
   </div>
 </template>
 
 <script>
-import JsonEditor from '@/components/CodeEditor.vue';
+import JsonEditor from "@/components/CodeEditor.vue";
 export default {
   components: {
-    JsonEditor
+    JsonEditor,
   },
-  data () {
+  data() {
     return {
-      inputedJson: '',
-      sourceIndex: '',
+      inputedJson: "",
+      sourceIndex: "",
       invalidJsonFormat: false,
       isSourceDeleted: false,
-      numberOfSpaces: 4
+      numberOfSpaces: 4,
     };
   },
-  created () {
+  created() {
     this.inputedJson = this.generatedJson;
     this.sourceIndex = this.sourceInStore.tabName;
   },
   watch: {
-    inputedJson (inputed) {
+    inputedJson(inputed) {
       try {
         this.invalidJsonFormat = false;
         JSON.parse(inputed);
@@ -76,51 +67,54 @@ export default {
         this.invalidJsonFormat = true;
       }
     },
-    generatedJson (json) {
-      this.inputedJson = json; 
+    generatedJson(json) {
+      this.inputedJson = json;
     },
     sourceInStore: {
-      handler (source) {
+      handler(source) {
         this.sourceIndex = source.tabName;
         this.isSourceDeleted = source.isSourceDeleted;
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   computed: {
-    generatedJson () {
-      const json = this.$store.getters['getGeneratedJson'].json;
+    generatedJson() {
+      const json = this.$store.getters["getGeneratedJson"].json;
       return JSON.stringify(json, null, Number(this.numberOfSpaces));
     },
-    sourceInStore () {
-      return this.$store.getters.getSpecificIndexSourceInfo(this.sourceIndexInStore);
+    sourceInStore() {
+      return this.$store.getters.getSpecificIndexSourceInfo(
+        this.sourceIndexInStore
+      );
     },
     sourceIndexInStore() {
-      return this.$store.getters['getGeneratedJson'].sourceIndex;
+      return this.$store.getters["getGeneratedJson"].sourceIndex;
     },
   },
   methods: {
-    copyToClipboard () {
+    copyToClipboard() {
       const jsonToCopy = JSON.stringify(
         JSON.parse(this.inputedJson),
         null,
         Number(this.numberOfSpaces)
       );
-      navigator.clipboard.writeText(jsonToCopy)
-      .then(() => {
-        console.log("Copied!");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      navigator.clipboard
+        .writeText(jsonToCopy)
+        .then(() => {
+          console.log("Copied!");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
 .card-header-title {
-  font-family: 'Trattatello';
+  font-family: "Trattatello";
   background-color: #b3b3b3;
   font-size: 15px;
   font-weight: bold;
