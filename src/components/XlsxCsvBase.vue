@@ -52,11 +52,11 @@
     <!-- Main xlsx csv area -->
     <div class="current-tab container-fluid">
       <div class="row" v-if="xlsxCsvInputed">
-        <div class="col-9 pad-0">
+        <div class="col-7 pad-0">
           <XlsxCsvOptions />
           <XlsxCsvTable :mouseOveredColumn="mouseOveredColumn" />
         </div>
-        <div class="col-3 pad-0">
+        <div class="col-2 pad-0">
           <XlsxCsvColumnSelector
             v-model="currentXlsxCsvTab"
             @updateHighlightedColumn="updateHighlightedColumn"
@@ -71,6 +71,9 @@
               <font-awesome-icon :icon="['fas', 'rotate-left']" />
             </button>
           </div>
+        </div>
+        <div class="col-3 pad-0">
+          <ConversionLog/>
         </div>
       </div>
       <div class="source-file-form-wrapper" v-else>
@@ -89,6 +92,7 @@ import XlsxCsvOptions from "@/components/XlsxCsvOptions.vue";
 import XlsxCsvExternalFilesInfo from "@/components/XlsxCsvExternalFilesInfo.vue";
 import SourceFileForm from "@/components/SourceFileForm.vue";
 import ContextMenu from "vue-context-menu";
+import ConversionLog from './ConversionLog.vue';
 
 export default {
   components: {
@@ -98,6 +102,7 @@ export default {
     XlsxCsvOptions,
     ContextMenu,
     SourceFileForm,
+    ConversionLog,
   },
   data() {
     return {

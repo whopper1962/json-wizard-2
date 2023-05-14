@@ -122,7 +122,7 @@ export default {
 }
 .xlsx-csv-column-selector-outer {
   margin-bottom: 2%;
-  height: 47%;
+  height: 45%;
 }
 .xlsx-csv-column-selector-inner {
   height: 200px;

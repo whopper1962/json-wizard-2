@@ -44,7 +44,8 @@
     "columnOrderSelect": "キーの順序を選択",
     "referingOtherTab": "外部タブをバリューとして選択",
     "valueAt": "バリュー行",
-    "externalTab": "外部タブ名"
+    "externalTab": "外部タブ名",
+    "log": "ログ"
   },
   "lang": {
     "ja": "日本語",
