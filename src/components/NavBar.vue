@@ -44,7 +44,7 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" :class="{ active: isActiveRoute('HOME_VIEW') }">
+        <li class="nav-item" :class="{ active: isActiveRoute('CONVERTER_VIEW') }">
           <router-link
             class="nav-link"
             :to="{

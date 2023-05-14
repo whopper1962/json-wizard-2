@@ -37,7 +37,14 @@
     "numberOfRows": "列の数",
     "numberOfTrashedRows": "変換対象から外されている列の数",
     "removeFromOrder": "順序から外す",
-    "addToOrdere": "順序に追加"
+    "addToOrdere": "順序に追加",
+    "convertedSuccesssfully": "正常に変換されました!",
+    "conversionError": "エラーが発生しました! エラーメッセージを確認して再度実行してください。",
+    "selectOtherFile": "他のファイルを選択",
+    "columnOrderSelect": "キーの順序を選択",
+    "referingOtherTab": "外部タブをバリューとして選択",
+    "valueAt": "バリュー行",
+    "externalTab": "外部タブ名"
   },
   "lang": {
     "ja": "日本語",

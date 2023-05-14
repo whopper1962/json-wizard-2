@@ -1,12 +1,12 @@
 <template>
   <div class="xlsx-csv-external-files-info-main card">
-    <div class="card-header">Cells refering to external tab</div>
+    <div class="card-header title">{{ $t("app.referingOtherTab") }}</div>
     <div class="card-body">
       <div class="table-wrapper">
         <table class="table">
           <thead>
-            <th>Value at...</th>
-            <th>External tab</th>
+            <th>{{ $t("app.valueAt") }}</th>
+            <th>{{ $t("app.externalTab") }}</th>
             <th></th>
           </thead>
           <tbody>
@@ -51,13 +51,17 @@ export default {
   },
   methods: {
     remove(info) {
-      this.$store.dispatch('removeExTabInfo', info.rowIndex);
+      this.$store.dispatch("removeExTabInfo", info.rowIndex);
     },
   },
 };
 </script>
 
 <style scoped>
+.title {
+  font-weight: bold;
+  font-size: 12px;
+}
 .xlsx-csv-external-files-info-main {
   height: 47%;
 }

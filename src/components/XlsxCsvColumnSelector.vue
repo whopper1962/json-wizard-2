@@ -1,7 +1,7 @@
 <template>
   <div class="xlsx-csv-column-selector-outer card">
-    <div class="card-header">
-      Drag and choose the column order
+    <div class="card-header title">
+      {{ $t("app.columnOrderSelect") }}
     </div>
     <div
       v-if="columnOrder.length > 0"
@@ -13,7 +13,7 @@
             class="card column-card-outer"
             :class="{
               'bg-warning': index === 0,
-              'bg-yellowgreen': index > 0
+              'bg-yellowgreen': index > 0,
             }"
             :key="`elem_${index}`"
             @mouseenter="onMouseenter(column)"
@@ -35,79 +35,84 @@
         </template>
       </Draggable>
     </div>
-    <div
-      v-else
-      class="area-placeholder"
-    >
+    <div v-else class="area-placeholder">
       Click "Add to order" to add column here.
     </div>
   </div>
 </template>
 
 <script>
-import Draggable from 'vuedraggable';
+import Draggable from "vuedraggable";
 
 export default {
   components: {
-    Draggable
+    Draggable,
   },
-  data () {
+  data() {
     return {
-      isMoving: false
+      isMoving: false,
     };
   },
   props: {
     value: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   computed: {
     columnOrder: {
-      get () {
+      get() {
         return this.value;
       },
-      set (order) {
+      set(order) {
         this.isMoving = false;
         const isValueChanged = this.value[0] !== order[0];
         if (isValueChanged) {
-          const result = confirm('External file info will be discarded. You sure want to change the value column?');
+          const result = confirm(
+            "External file info will be discarded. You sure want to change the value column?"
+          );
           if (!result) return;
         }
-        this.$emit('input', {
+        this.$emit("input", {
           isValueChanged,
-          order
+          order,
         });
-      }
-    }
+      },
+    },
   },
   methods: {
-    onMoveCallback (){
+    onMoveCallback() {
       this.isMoving = true;
       setTimeout(() => {
         this.isMoving = false;
       }, 100);
     },
-    reset () {
+    reset() {
       if (this.isMoving) return;
-      this.$emit('updateHighlightedColumn', null);
+      this.$emit("updateHighlightedColumn", null);
     },
-    onMouseenter (column) {
+    onMouseenter(column) {
       if (this.isMoving) return;
-      this.$emit('updateHighlightedColumn', column);
+      this.$emit("updateHighlightedColumn", column);
     },
-    remove (columnIndex) {
+    remove(columnIndex) {
       if (this.value[0] === columnIndex) {
-        const result = confirm('External file info will be discarded. You sure want to delete the value column?');
+        const result = confirm(
+          "External file info will be discarded. You sure want to delete the value column?"
+        );
         if (!result) return;
       }
-      this.$store.dispatch('removeColumnFromOrder', columnIndex);
-    }
-  }
-}
+      this.$store.dispatch("removeColumnFromOrder", columnIndex);
+    },
+  },
+};
 </script>
 
 <style scoped>
+.title {
+  font-weight: bold;
+  font-size: 12px;
+}
 .xlsx-csv-column-selector-outer {
   margin-bottom: 2%;
   height: 47%;

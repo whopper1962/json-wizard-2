@@ -37,7 +37,12 @@
     "numberOfRows": "Number of rows",
     "numberOfTrashedRows": "Number of trashed rows",
     "removeFromOrder": "Remove from order",
-    "addToOrdere": "Add to order"
+    "addToOrdere": "Add to order",
+    "convertedSuccesssfully": "Converted Successfully!",
+    "conversionError": "Error occured! Check the error message and convert again.",
+    "selectOtherFile": "Select other file",
+    "columnOrderSelect": "Drag and choose the key order",
+    "referingOtherTab": "Cells refering to external tab"
   },
   "lang": {
     "ja": "Japanese",

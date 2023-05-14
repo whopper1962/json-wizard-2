@@ -65,7 +65,7 @@
               class="btn btn-secondary mb-2 font-weight-bold select-other-file-button"
               @click="selectOtherFile()"
             >
-              Select other file
+              {{ $t("app.selectOtherFile") }}
               <font-awesome-icon :icon="['fas', 'rotate-left']" />
             </button>
           </div>
