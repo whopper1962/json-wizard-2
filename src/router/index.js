@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 // components
 import HomeView from '@/views/HomeView';
 import UserManualView from '@/views/UserManualView.vue'
+import ManualIndexVue from '@/components/ManualIndex.vue';
 
 Vue.use(VueRouter);
 
@@ -17,6 +18,11 @@ const routes = [
     path: '/converter',
     name: 'CONVERTER_VIEW',
     component: HomeView
+  },
+  {
+    path: '/manuals/:manualCategory',
+    name: 'MANUAL_INDEX',
+    component: ManualIndexVue
   },
   {
     path: '*',

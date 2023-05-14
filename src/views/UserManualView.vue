@@ -9,7 +9,8 @@
         <p>{{ $t("manual.explanation") }}</p>
         <div class="converter-link">
           <button class="btn first" @click="jumpToConverter()">
-            {{ $t("manual.toConverter") }}<font-awesome-icon
+            {{ $t("manual.toConverter")
+            }}<font-awesome-icon
               :icon="['fas', 'wand-sparkles']"
               class="convert-icon"
             />
@@ -18,10 +19,23 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">{{ $t('manual.convertXlsxToJson.title') }}</h1>
+      <h1 class="how-to-use-title">
+        {{ $t("manual.convertXlsxToJson.title") }}
+      </h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content how-to-use-content">
-          fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdj<br />saklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
+          <pre class="manual-pre" lang="json">
+{
+  "hello": "World",
+  "name": "Steve"
+}</pre>
+          <p>上記のようなJSONを作成する場合を想定します。<br/>その場合、こちらのようなCSVまたはXLSXファイルを用意します。画面からXLSXファイルをアップロードし、「READ」を</p>では、以下のように複数のキーがある場合にはどうすればよいでしょうか？<pre class="manual-pre" lang="json">
+{
+  "hello": {
+    "world": "JSON Wizard"
+  },
+  "name": "Steve"
+}</pre>
         </div>
         <div class="col-md-6 col-sm-12 left-content">
           <img src="manuals/sample.jpg" class="manual-image" />
@@ -29,29 +43,7 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">{{ $t('manual.convertAsArray.title') }}</h1>
-      <div class="row">
-        <div class="col-md-6 col-sm-12 left-content">
-          <img src="manuals/sample.jpg" class="manual-image" />
-        </div>
-        <div class="col-md-6 col-sm-12 left-content how-to-use-content">
-          fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkd<br />ljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
-        </div>
-      </div>
-    </div>
-    <div class="how-to-use">
-      <h1 class="how-to-use-title">{{ $t('manual.multipleFiles.title') }}</h1>
-      <div class="row">
-        <div class="col-md-6 col-sm-12 left-content how-to-use-content">
-          fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdj<br />saklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
-        </div>
-        <div class="col-md-6 col-sm-12 left-content">
-          <img src="manuals/sample.jpg" class="manual-image" />
-        </div>
-      </div>
-    </div>
-    <div class="how-to-use">
-      <h1 class="how-to-use-title">{{ $t('manual.refertToExternalTab.title') }}</h1>
+      <h1 class="how-to-use-title">{{ $t("manual.convertAsArray.title") }}</h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content">
           <img src="manuals/sample.jpg" class="manual-image" />
@@ -62,7 +54,33 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">{{ $t('manual.convertJsonToXlsx.title') }}</h1>
+      <h1 class="how-to-use-title">{{ $t("manual.multipleFiles.title") }}</h1>
+      <div class="row">
+        <div class="col-md-6 col-sm-12 left-content how-to-use-content">
+          fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdj<br />saklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
+        </div>
+        <div class="col-md-6 col-sm-12 left-content">
+          <img src="manuals/sample.jpg" class="manual-image" />
+        </div>
+      </div>
+    </div>
+    <div class="how-to-use">
+      <h1 class="how-to-use-title">
+        {{ $t("manual.refertToExternalTab.title") }}
+      </h1>
+      <div class="row">
+        <div class="col-md-6 col-sm-12 left-content">
+          <img src="manuals/sample.jpg" class="manual-image" />
+        </div>
+        <div class="col-md-6 col-sm-12 left-content how-to-use-content">
+          fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkd<br />ljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
+        </div>
+      </div>
+    </div>
+    <div class="how-to-use">
+      <h1 class="how-to-use-title">
+        {{ $t("manual.convertJsonToXlsx.title") }}
+      </h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content how-to-use-content">
           fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdlj<br />sakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
@@ -73,7 +91,9 @@
       </div>
     </div>
     <div class="how-to-use">
-      <h1 class="how-to-use-title">{{ $t('manual.saveStateAndShare.title') }}</h1>
+      <h1 class="how-to-use-title">
+        {{ $t("manual.saveStateAndShare.title") }}
+      </h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content">
           <img src="manuals/sample.jpg" class="manual-image" />
@@ -84,7 +104,7 @@
       </div>
     </div>
     <div class="how-to-use bottom">
-      <h1 class="how-to-use-title">{{ $t('manual.importState.title') }}</h1>
+      <h1 class="how-to-use-title">{{ $t("manual.importState.title") }}</h1>
       <div class="row">
         <div class="col-md-6 col-sm-12 left-content how-to-use-content">
           fdjsaklfjdskalfjdksalfjdkdljsakfldjsak<br />flfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdlj<br />sakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsak<br />sakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakflfdjsaklfjdskalf<br />jdksalfjdkdljsakfldjsakflfdjsaklfjdskalfjdksalfjdkdljsakfldjsakfl
@@ -218,5 +238,13 @@ export default {
 }
 .convert-icon {
   margin-left: 7px;
+}
+.manual-pre {
+  /* text-align: left !important; */
+  background-color: #393939;
+  padding: 20px;
+  border-radius: 5px;
+  max-height: fit-content;
+  color: white;
 }
 </style>

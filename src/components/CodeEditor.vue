@@ -4,9 +4,9 @@
     font_size="10px"
     :language_selector="false"
     :hide_header="true"
-    height="600px"
+    :height="height"
     v-model="inputedCode"
-    :read_only="true"
+    :read_only="readOnly"
   />
 </template>
 
@@ -19,6 +19,14 @@ export default {
   props: {
     value: {
       type: [String]
+    },
+    height: {
+      type: String,
+      default: '600px'
+    },
+    readOnly: {
+      type: Boolean,
+      default: true
     }
   },
   computed: {

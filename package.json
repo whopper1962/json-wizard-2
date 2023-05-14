@@ -17,6 +17,8 @@
     "axios": "^1.4.0",
     "bootstrap": "^4.6.0",
     "core-js": "^3.8.3",
+    "marked": "^5.0.2",
+    "raw-loader": "^4.0.2",
     "read-excel-file": "^5.5.3",
     "simple-code-editor": "^1.2.2",
     "uuid": "^9.0.0",
