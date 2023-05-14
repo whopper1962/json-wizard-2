@@ -22,7 +22,8 @@ const defaultTabData = {
   externalTabColumnInfo: [],
   isExecutable: false,
   isError: false,
-  errorData: []
+  errorData: [],
+  isExecuted: false
 };
 
 export default new Vuex.Store({
@@ -50,7 +51,8 @@ export default new Vuex.Store({
         externalTabColumnInfo: [],
         isExecutable: false,
         isError: false,
-        errorData: []
+        errorData: [],
+        isExecuted: false
       },
     ],
     selectedTabIndex: 0,
@@ -136,6 +138,7 @@ export default new Vuex.Store({
       if (ordersInfo.isValueChanged)
         state.xlsxCsvTabs[state.selectedTabIndex].externalTabColumnInfo = [];
       state.xlsxCsvTabs[state.selectedTabIndex].columnOrders = ordersInfo.order;
+      state.xlsxCsvTabs[state.selectedTabIndex].isExecuted = false;
     },
     MODIFY_COLUMN_ORDER(state, columnOrders) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
@@ -146,6 +149,7 @@ export default new Vuex.Store({
     SET_GENERATED_JSON(state, json) {
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       currentTabContents.isError = false;
+      currentTabContents.isExecuted = true;
       state.generatedJson = {
         sourceIndex: state.selectedTabIndex,
         isSourceDeleted: false,

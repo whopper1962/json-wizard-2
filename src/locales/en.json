@@ -42,7 +42,9 @@
     "conversionError": "Error occured! Check the error message and convert again.",
     "selectOtherFile": "Select other file",
     "columnOrderSelect": "Drag and choose the key order",
-    "referingOtherTab": "Cells refering to external tab"
+    "referingOtherTab": "Cells refering to external tab",
+    "valueAt": "Value at...",
+    "externalTab": "External tab name"
   },
   "lang": {
     "ja": "Japanese",

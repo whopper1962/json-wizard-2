@@ -25,6 +25,7 @@
           >
             {{ xlsxCsc.tabName }}
             <font-awesome-icon v-if="xlsxCsc.isError" :icon="['fas', 'triangle-exclamation']" class="error-icon" />
+            <font-awesome-icon v-else-if="xlsxCsc.isExecuted && xlsxCsc.isExecutable" :icon="['fas', 'thumbs-up']" class="success-icon" />
           </div>
         </li>
       </template>
@@ -356,5 +357,8 @@ export default {
 }
 .error-icon {
   color: rgb(242, 76, 76);
+}
+.success-icon {
+  color: rgb(54, 172, 0);
 }
 </style>
