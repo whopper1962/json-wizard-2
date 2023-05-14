@@ -97,9 +97,9 @@ export default {
 </script>
 
 <style scoped>
-/* .read-button-wrapper {
+.read-button-wrapper {
   margin-top: 20px;
-} */
+}
 .read-button {
   width: 217px;
 }
