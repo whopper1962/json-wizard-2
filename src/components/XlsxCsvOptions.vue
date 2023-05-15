@@ -147,7 +147,7 @@ export default {
         });
         this.$store.dispatch("addLog", {
           logtype: "success",
-          message: "Converted successfully!",
+          message: "success",
           details: [],
           datetime,
         });
@@ -163,7 +163,26 @@ export default {
         });
         this.$store.dispatch("addLog", {
           logtype: "error",
-          message: "[Error] Key must not be duplicated.",
+          message: "keyDuplicationError",
+          details: [
+            {
+              row: 1,
+              column: 1,
+            },
+            {
+              row: 1,
+              column: 2,
+            },
+            {
+              row: 1,
+              column: 3,
+            }
+          ],
+          datetime,
+        });
+        this.$store.dispatch("addLog", {
+          logtype: "error",
+          message: "keyNullError",
           details: [
             {
               row: 1,

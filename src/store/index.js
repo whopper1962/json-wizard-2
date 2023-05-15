@@ -150,6 +150,7 @@ export default new Vuex.Store({
       const currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       if (!currentTabContents) return;
       currentTabContents.columnOrders = columnOrders;
+      currentTabContents.isExecuted = false;
       currentTabContents.isExecutable = columnOrders.length > 1;
     },
     SET_GENERATED_JSON(state, json) {
@@ -309,9 +310,7 @@ export default new Vuex.Store({
       currentColumnOrder.splice(foundIndex, 1);
     },
     ADD_LOG(state, log) {
-      console.error('LOG:', log);
       let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
-      console.error(currentTabContents);
       currentTabContents.logs.push(log);
     }
   },

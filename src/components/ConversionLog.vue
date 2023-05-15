@@ -14,7 +14,7 @@
             'error-log': log.logtype === 'error',
           }"
         >
-          <span>> {{ log.message }} [{{ log.datetime }}]</span>
+          <span>> {{ $t(`logMessage.${log.message}`) }} [{{ log.datetime }}]</span>
           <template v-if="log.details.length > 0">
             <ul v-for="(detail, index) in log.details" :key="`detail_${index}`">
               <li>Column:{{ detail.column }}, Row:{{ detail.row }}</li>
@@ -22,7 +22,7 @@
           </template>
         </div>
       </template>
-      <br v-for="num of 10" :key="num" />
+      <br v-for="num of 20" :key="num" />
     </div>
   </div>
 </template>

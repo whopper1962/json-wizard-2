@@ -47,6 +47,11 @@
     "externalTab": "External tab name",
     "log": "Log"
   },
+  "logMessage": {
+    "success": "Converted successfully!",
+    "keyDuplicationError": "Key duplication detected. Check below values.",
+    "keyNullError": "Key must not be null. Check below values"
+  },
   "lang": {
     "ja": "Japanese",
     "en": "English"

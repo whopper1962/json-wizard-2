@@ -49,7 +49,6 @@ module.exports = class JsonGenerator {
       if (this.excludes.includes(index)) continue;
       let masterObj = this.json;
       let keyPath = [];
-      console.error('keys.entries():', keys);
       for (const [keyIndex, currentKey] of keys.entries()) {
         keyPath.push(currentKey);
         if (keyIndex === keys.length - 1) {
