@@ -23,6 +23,7 @@ const defaultTabData = {
   isExecutable: false,
   isError: false,
   errorData: [],
+  logs: [],
   isExecuted: false,
 };
 
@@ -52,6 +53,7 @@ export default new Vuex.Store({
         isExecutable: false,
         isError: false,
         errorData: [],
+        logs: [],
         isExecuted: false,
       },
     ],
@@ -114,6 +116,10 @@ export default new Vuex.Store({
       const currentTab = state.xlsxCsvTabs[state.selectedTabIndex];
       return currentTab.errorData;
     },
+    getLogs (state) {
+      const current = state.xlsxCsvTabs[state.selectedTabIndex];
+      return current.logs;
+    }
   },
   mutations: {
     SET_CURRENT_TAB_CONTENTS(state, selectedTabIndex) {
@@ -302,6 +308,12 @@ export default new Vuex.Store({
       );
       currentColumnOrder.splice(foundIndex, 1);
     },
+    ADD_LOG(state, log) {
+      console.error('LOG:', log);
+      let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
+      console.error(currentTabContents);
+      currentTabContents.logs.push(log);
+    }
   },
   actions: {
     setCurrentTabContents(context, selectedTabIndex) {
@@ -364,6 +376,9 @@ export default new Vuex.Store({
     removeColumnFromOrder(context, columnIndex) {
       context.commit("REMOVE_COLUMN_FROM_ORDER", columnIndex);
     },
+    addLog(context, log) {
+      context.commit("ADD_LOG", log);
+    }
   },
 });
 

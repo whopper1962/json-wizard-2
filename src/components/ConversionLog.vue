@@ -5,21 +5,52 @@
       <font-awesome-icon :icon="['fas', 'cubes-stacked']" />
       <!-- <font-awesome-icon :icon="['fas', 'broom']" class="clean-logs" /> -->
     </div>
-    <div class="card-body log-area">
-      <span>> Change column order. [2023/08/26 17:30:00]</span><br/>
-      <span class="succeed-log">> Converted sucessfully! [2023/08/26 17:30:05]</span><br/>
-      <span class="error-log">> Error occured! [2023/08/26 17:30:32]</span><br/>
-      <span class="succeed-log">> Converted sucessfully! [2023/08/26 17:30:55]</span><br/>
+    <div class="card-body log-area" id="log-area">
+      <template v-for="(log, index) in logs">
+        <div
+          :key="`log_${index}`"
+          :class="{
+            'succeed-log': log.logtype === 'success',
+            'error-log': log.logtype === 'error',
+          }"
+        >
+          <span>> {{ log.message }} [{{ log.datetime }}]</span>
+          <template v-if="log.details.length > 0">
+            <ul v-for="(detail, index) in log.details" :key="`detail_${index}`">
+              <li>Column:{{ detail.column }}, Row:{{ detail.row }}</li>
+            </ul>
+          </template>
+        </div>
+      </template>
+      <br v-for="num of 10" :key="num" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {};
-  }
-}
+  },
+  computed: {
+    logs() {
+      return this.$store.getters["getLogs"];
+    },
+  },
+  mounted() {
+    this.toBottom();
+  },
+  watch: {
+    logs() {
+      this.toBottom();
+    },
+  },
+  methods: {
+    toBottom() {
+      document.getElementById("log-area").scrollTop = 9999999999999999999999;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -28,10 +59,13 @@ export default {
   font-size: 12px;
 }
 .conversion-log-wrapper {
-  height: 100%;
   margin-left: 5px;
 }
 .log-area {
+  /* height: 100%; */
+  min-height: 450px;
+  max-height: 450px;
+  overflow: scroll;
   background-color: rgb(67, 65, 65);
   border-radius: 0px 0px 3px 3px;
   color: white;

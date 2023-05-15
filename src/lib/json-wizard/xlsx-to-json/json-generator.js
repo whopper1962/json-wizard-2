@@ -49,11 +49,15 @@ module.exports = class JsonGenerator {
       if (this.excludes.includes(index)) continue;
       let masterObj = this.json;
       let keyPath = [];
+      console.error('keys.entries():', keys);
       for (const [keyIndex, currentKey] of keys.entries()) {
         keyPath.push(currentKey);
         if (keyIndex === keys.length - 1) {
           if (currentKey === "") {
-            this.nullKeys.push(index);
+            this.nullKeys.push({
+              rowIndex: index,
+              columnIndex: keyIndex
+            });
             continue;
           }
           const locationObj = this.isToSetExternalJson(index);

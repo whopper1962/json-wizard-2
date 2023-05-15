@@ -120,6 +120,23 @@ export default {
       };
     },
     executeConversion() {
+      Number.prototype.padLeft = function (base, chr) {
+        var len = String(base || 10).length - String(this).length + 1;
+        return len > 0 ? new Array(len).join(chr || "0") + this : this;
+      };
+      const d = new Date();
+      const datetime =
+        [
+          (d.getMonth() + 1).padLeft(),
+          d.getDate().padLeft(),
+          d.getFullYear(),
+        ].join("/") +
+        " " +
+        [
+          d.getHours().padLeft(),
+          d.getMinutes().padLeft(),
+          d.getSeconds().padLeft(),
+        ].join(":");
       try {
         this.$store.dispatch("setErrorRows", []);
         const props = this.currentXlsxCsv();
@@ -127,6 +144,12 @@ export default {
         this.$store.dispatch("setGeneratedJson", generatedJson);
         this.$toasted.show(this.$t("app.convertedSuccesssfully"), {
           type: "success",
+        });
+        this.$store.dispatch("addLog", {
+          logtype: "success",
+          message: "Converted successfully!",
+          details: [],
+          datetime,
         });
         window.scrollTo({
           top: document.body.scrollHeight,
@@ -137,6 +160,25 @@ export default {
         this.$store.dispatch("setErrorRows", error.body);
         this.$toasted.show(this.$t("app.conversionError"), {
           type: "error",
+        });
+        this.$store.dispatch("addLog", {
+          logtype: "error",
+          message: "[Error] Key must not be duplicated.",
+          details: [
+            {
+              row: 1,
+              column: 1,
+            },
+            {
+              row: 1,
+              column: 2,
+            },
+            {
+              row: 1,
+              column: 3,
+            }
+          ],
+          datetime,
         });
       }
     },
