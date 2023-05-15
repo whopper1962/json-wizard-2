@@ -70,6 +70,9 @@ export default new Vuex.Store({
     getCurrentTabContents(state) {
       return state.xlsxCsvTabs[state.selectedTabIndex];
     },
+    getSelectedTabIndex(state) {
+      return state.selectedTabIndex;
+    },
     getExternalTabInfo(state) {
       return function (externalTabColumnInfo) {
         if (!externalTabColumnInfo) return [];
@@ -116,10 +119,10 @@ export default new Vuex.Store({
       const currentTab = state.xlsxCsvTabs[state.selectedTabIndex];
       return currentTab.errorData;
     },
-    getLogs (state) {
+    getLogs(state) {
       const current = state.xlsxCsvTabs[state.selectedTabIndex];
       return current.logs;
-    }
+    },
   },
   mutations: {
     SET_CURRENT_TAB_CONTENTS(state, selectedTabIndex) {
@@ -234,9 +237,17 @@ export default new Vuex.Store({
       if (
         currentTabContents.trashedRows.length ===
         currentTabContents.currentXlsxCsvContents.length
-      ) return;
-      for (const [index] of currentTabContents.currentXlsxCsvContents.entries()) {
-        if (currentTabContents.trashedRows.some((trashedIndex) => trashedIndex === index)) continue;
+      )
+        return;
+      for (const [
+        index,
+      ] of currentTabContents.currentXlsxCsvContents.entries()) {
+        if (
+          currentTabContents.trashedRows.some(
+            (trashedIndex) => trashedIndex === index
+          )
+        )
+          continue;
         currentTabContents.trashedRows.push(index);
       }
     },
@@ -290,6 +301,7 @@ export default new Vuex.Store({
       currentTabContents.isExecutable = false;
       currentTabContents.isError = false;
       currentTabContents.errorData = [];
+      currentTabContents.logs = [];
       currentTabContents.numberOfElements = 1;
       currentTabContents.externalTabColumnInfo = [];
     },
@@ -312,7 +324,7 @@ export default new Vuex.Store({
     ADD_LOG(state, log) {
       let currentTabContents = state.xlsxCsvTabs[state.selectedTabIndex];
       currentTabContents.logs.push(log);
-    }
+    },
   },
   actions: {
     setCurrentTabContents(context, selectedTabIndex) {
@@ -377,7 +389,7 @@ export default new Vuex.Store({
     },
     addLog(context, log) {
       context.commit("ADD_LOG", log);
-    }
+    },
   },
 });
 

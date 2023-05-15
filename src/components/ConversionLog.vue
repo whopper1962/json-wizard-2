@@ -14,7 +14,9 @@
             'error-log': log.logtype === 'error',
           }"
         >
-          <span>> {{ $t(`logMessage.${log.message}`) }} [{{ log.datetime }}]</span>
+          <span
+            >> {{ $t(`logMessage.${log.message}`) }} [{{ log.datetime }}]</span
+          >
           <template v-if="log.details.length > 0">
             <ul v-for="(detail, index) in log.details" :key="`detail_${index}`">
               <li>Column:{{ detail.column }}, Row:{{ detail.row }}</li>
@@ -36,12 +38,18 @@ export default {
     logs() {
       return this.$store.getters["getLogs"];
     },
+    selectedTab() {
+      return this.$store.getters["getSelectedTabIndex"];
+    },
   },
   mounted() {
     this.toBottom();
   },
   watch: {
     logs() {
+      this.toBottom();
+    },
+    selectedTab() {
       this.toBottom();
     },
   },
