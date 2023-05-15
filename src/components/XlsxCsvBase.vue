@@ -235,6 +235,7 @@ export default {
   padding: 20px 30px 30px 30px;
   border-radius: 0px 10px 10px 10px;
   background-color: rgb(255, 255, 255);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 .execute-conversion-button-wrapper {
   text-align: left;
