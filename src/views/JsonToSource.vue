@@ -86,6 +86,7 @@ export default {
 <style scoped>
 .json-to-source-wrapper {
   padding: 20px;
+  background-color: rgb(187, 187, 187);
 }
 .json-input-area {
   /* border: solid rgb(98, 98, 98); */
