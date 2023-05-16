@@ -46,12 +46,22 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" :class="{ active: isActiveRoute('CONVERTER_VIEW') }">
           <router-link
-            class="nav-link"
+            class="nav-link system-link"
             :to="{
               name: 'CONVERTER_VIEW',
             }"
           >
-            Converter
+            SOURCE TO JSON
+          </router-link>
+        </li>
+        <li class="nav-item" :class="{ active: isActiveRoute('JSON_TO_SOURCE') }">
+          <router-link
+            class="nav-link system-link"
+            :to="{
+              name: 'JSON_TO_SOURCE',
+            }"
+          >
+            JSON TO SOURCE
           </router-link>
         </li>
       </ul>
@@ -201,5 +211,8 @@ export default {
 }
 .lang-select {
   cursor: pointer;
+}
+.system-link {
+  font-family: "Trattatello";
 }
 </style>

@@ -1,41 +1,47 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Vue from "vue";
+import VueRouter from "vue-router";
 
 // components
-import HomeView from '@/views/HomeView';
-import UserManualView from '@/views/UserManualView.vue'
-import ManualIndexVue from '@/components/ManualIndex.vue';
+import HomeView from "@/views/HomeView";
+import UserManualView from "@/views/UserManualView.vue";
+import ManualIndexVue from "@/components/ManualIndex.vue";
+import JsonToSource from "@/views/JsonToSource.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'HOME_VIEW',
-    component: UserManualView
+    path: "/",
+    name: "HOME_VIEW",
+    component: UserManualView,
   },
   {
-    path: '/converter',
-    name: 'CONVERTER_VIEW',
-    component: HomeView
+    path: "/soure-to-json",
+    name: "CONVERTER_VIEW",
+    component: HomeView,
   },
   {
-    path: '/manuals/:manualCategory',
-    name: 'MANUAL_INDEX',
-    component: ManualIndexVue
+    path: "/json-to-source",
+    name: "JSON_TO_SOURCE",
+    component: JsonToSource,
   },
   {
-    path: '*',
+    path: "/manuals/:manualCategory",
+    name: "MANUAL_INDEX",
+    component: ManualIndexVue,
+  },
+  {
+    path: "*",
     redirect: {
-      name: 'HOME_VIEW'
-    }
-  }
+      name: "HOME_VIEW",
+    },
+  },
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 export default router;
