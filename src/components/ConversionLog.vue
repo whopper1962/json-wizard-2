@@ -24,7 +24,7 @@
           </template>
         </div>
       </template>
-      <br v-for="num of 20" :key="num" />
+      <br v-for="num of 20" :key="num"  />
     </div>
   </div>
 </template>
@@ -43,19 +43,24 @@ export default {
     },
   },
   mounted() {
-    this.toBottom();
+    this.toBottomInit();
   },
   watch: {
     logs() {
       this.toBottom();
     },
     selectedTab() {
-      this.toBottom();
+      this.toBottomInit();
     },
   },
   methods: {
     toBottom() {
       document.getElementById("log-area").scrollTop = 9999999999999999999999;
+    },
+    toBottomInit() {
+      this.$nextTick(function() {
+        document.getElementById("log-area").scrollTop = 9999999999999999999999;
+      });
     },
   },
 };

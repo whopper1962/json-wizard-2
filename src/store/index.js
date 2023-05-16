@@ -70,9 +70,6 @@ export default new Vuex.Store({
     getCurrentTabContents(state) {
       return state.xlsxCsvTabs[state.selectedTabIndex];
     },
-    getSelectedTabIndex(state) {
-      return state.selectedTabIndex;
-    },
     getExternalTabInfo(state) {
       return function (externalTabColumnInfo) {
         if (!externalTabColumnInfo) return [];

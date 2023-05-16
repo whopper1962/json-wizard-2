@@ -180,25 +180,6 @@ export default {
           ],
           datetime,
         });
-        this.$store.dispatch("addLog", {
-          logtype: "error",
-          message: "keyNullError",
-          details: [
-            {
-              row: 1,
-              column: 1,
-            },
-            {
-              row: 1,
-              column: 2,
-            },
-            {
-              row: 1,
-              column: 3,
-            }
-          ],
-          datetime,
-        });
       }
     },
   },

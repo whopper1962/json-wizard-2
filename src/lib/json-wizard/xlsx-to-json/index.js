@@ -33,7 +33,6 @@ function generateMultipleJson(xlsxObj) {
 function generateJson(jsonGenerator) {
   jsonGenerator.generate();
   jsonGenerator.checkDuplicates();
-  console.error('jsonGenerator.nullKeys', jsonGenerator.nullKeys);
   if (jsonGenerator.nullKeys.length > 0) {
     throw {
       status: 429,
