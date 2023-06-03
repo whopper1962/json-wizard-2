@@ -32,7 +32,7 @@
     "vuedraggable": "^2.24.3",
     "vuex": "^3.6.2",
     "vuex-persistedstate": "^4.1.0",
-    "write-excel-file": "^1.4.17",
+    "write-excel-file": "^1.4.27",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

@@ -29,6 +29,7 @@
 <script>
 import JsonEditor from "@/components/CodeEditor.vue";
 import jsonToXlsx from "@/lib/json-wizard/json-to-xlsx";
+import writeXlsxFile from 'write-excel-file';
 export default {
   components: {
     JsonEditor,
@@ -40,7 +41,7 @@ export default {
       encodedUri: '',
       csvFileName: '',
       sourceFileName: '',
-      downloadFileType: 'csv',
+      downloadFileType: 'xlsx',
       inputedJson: '',
       isInputJsonMode: false,
       isArrayRoot: false,
@@ -82,6 +83,23 @@ export default {
       } catch (error) {
         console.error(error);
       }
+    },
+    async createXlsx () {
+      let xlsxColumns = [];
+      for (const row of this.jsonObj) {
+        let column = [];
+        for (const elem of row) {
+          column.push({
+            value: elem
+          });
+        }
+        xlsxColumns.push(column);
+      }
+      writeXlsxFile(xlsxColumns, {
+        fileName: this.csvFileName.length > 0
+          ? `${this.csvFileName}.xlsx`
+          : 'json-wizard.xlsx'
+      });
     },
     async jsonInputed(fileContents) {
       if (!fileContents) return;
