@@ -55,7 +55,7 @@ module.exports = class JsonGenerator {
           if (currentKey === "") {
             this.nullKeys.push({
               rowIndex: index,
-              columnIndex: keyIndex
+              columnIndex: keyIndex,
             });
             continue;
           }
@@ -63,7 +63,7 @@ module.exports = class JsonGenerator {
           if (locationObj) {
             this.valuesToSetExternalObj.push({
               referingId: locationObj.referingTabId,
-              key: keyPath.filter(Boolean).join('.')
+              key: keyPath.filter(Boolean).join("."),
             });
           }
           masterObj[currentKey] = this.contents[index][this.valueIndex];
@@ -90,7 +90,9 @@ module.exports = class JsonGenerator {
 
   setExternalJsonToValue() {
     for (const obj of this.valuesToSetExternalObj) {
-      const referedJson = this.generatedJson.find((json) => json.id === obj.referingId);
+      const referedJson = this.generatedJson.find(
+        (json) => json.id === obj.referingId
+      );
       if (!referedJson) throw new Error();
       const str = `this.json.${obj.key} = referedJson.json`;
       eval(str);
@@ -131,7 +133,7 @@ module.exports = class JsonGenerator {
       return [];
     }
   }
-  isToSetExternalJson (rowIndex) {
+  isToSetExternalJson(rowIndex) {
     return this.locationInfo.find((info) => {
       return info.rowIndex === rowIndex;
     });

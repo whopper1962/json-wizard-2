@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div class="form-inline option-button-wrapper">
-    </div>
+    <div class="form-inline option-button-wrapper"></div>
     <div class="form-inline option-button-wrapper">
       <button
         class="btn btn-secondary copy-button"

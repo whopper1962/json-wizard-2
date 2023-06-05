@@ -1,23 +1,21 @@
 <template>
   <div class="json-to-source-wrapper">
-    <div class="json-input-area">
-      <div class="drag-n-drop-area" @dragover.prevent @drop.prevent="dragFile">
-        <div class="form-wrapper">
-          <input type="file" @change="uploadFile" />
+    <div class="row form-area-container">
+      <div class="json-input-area col-sm-8">
+        <div class="drag-n-drop-area" @dragover.prevent @drop.prevent="dragFile">
+          <div class="form-wrapper">
+            <input type="file" @change="uploadFile" />
+          </div>
         </div>
       </div>
-    </div>
-    <div class="json-input-area">
-      <div class="drag-n-drop-area no-border">
-        <div class="form-wrapper">
-          <button
-            class="btn btn-primary execute-button"
-            @click="execDownload()"
-            :disabled="isInvalidJson"
-          >
-            Download
-          </button>
-        </div>
+      <div class="json-input-area col-sm-4">
+        <button
+          class="btn btn-primary execute-button"
+          @click="execDownload()"
+          :disabled="isInvalidJson"
+        >
+          Download
+        </button>
       </div>
     </div>
     <div class="json-editor-area">
@@ -29,7 +27,7 @@
 <script>
 import JsonEditor from "@/components/CodeEditor.vue";
 import jsonToXlsx from "@/lib/json-wizard/json-to-xlsx";
-import writeXlsxFile from 'write-excel-file';
+import writeXlsxFile from "write-excel-file";
 export default {
   components: {
     JsonEditor,
@@ -38,11 +36,11 @@ export default {
     return {
       isInvalidJson: true,
       jsonObj: {},
-      encodedUri: '',
-      csvFileName: '',
-      sourceFileName: '',
-      downloadFileType: 'xlsx',
-      inputedJson: '',
+      encodedUri: "",
+      csvFileName: "",
+      sourceFileName: "",
+      downloadFileType: "xlsx",
+      inputedJson: "",
       isInputJsonMode: false,
       isArrayRoot: false,
       numberOfElements: 1,
@@ -61,21 +59,22 @@ export default {
     },
     execDownload() {
       try {
-        if (this.downloadFileType === 'xlsx') {
+        if (this.downloadFileType === "xlsx") {
           this.createXlsx();
         } else {
           let csvContent = "data:text/csv;charset=utf-8,";
-          this.jsonObj.forEach(function(rowArray) {
+          this.jsonObj.forEach(function (rowArray) {
             let row = rowArray.join(",");
             csvContent += row + "\r\n";
           });
           this.encodedUri = encodeURI(csvContent);
-          const link = document.createElement('a');
-          link.setAttribute('href', this.encodedUri);
-          link.setAttribute('download',
+          const link = document.createElement("a");
+          link.setAttribute("href", this.encodedUri);
+          link.setAttribute(
+            "download",
             this.csvFileName.length > 0
-            ? `${this.csvFileName}.csv`
-            : 'json-wizard.csv'
+              ? `${this.csvFileName}.csv`
+              : "json-wizard.csv"
           );
           document.body.appendChild(link);
           link.click();
@@ -84,21 +83,22 @@ export default {
         console.error(error);
       }
     },
-    async createXlsx () {
+    async createXlsx() {
       let xlsxColumns = [];
       for (const row of this.jsonObj) {
         let column = [];
         for (const elem of row) {
           column.push({
-            value: elem
+            value: elem,
           });
         }
         xlsxColumns.push(column);
       }
       writeXlsxFile(xlsxColumns, {
-        fileName: this.csvFileName.length > 0
-          ? `${this.csvFileName}.xlsx`
-          : 'json-wizard.xlsx'
+        fileName:
+          this.csvFileName.length > 0
+            ? `${this.csvFileName}.xlsx`
+            : "json-wizard.xlsx",
       });
     },
     async jsonInputed(fileContents) {
@@ -132,6 +132,11 @@ export default {
 </script>
 
 <style scoped>
+.form-area-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 20px;
+}
 .form-wrapper {
   position: absolute;
   top: 50%;
@@ -148,7 +153,7 @@ export default {
 }
 .json-input-area {
   border-radius: 14px;
-  height: 100px;
+  height: 150px;
   margin-bottom: 10px;
 }
 .json-editor-area {
