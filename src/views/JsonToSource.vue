@@ -2,15 +2,42 @@
   <div class="json-to-source-wrapper">
     <div class="row form-area-container">
       <div class="json-input-area col-sm-8">
-        <div class="drag-n-drop-area" @dragover.prevent @drop.prevent="dragFile">
+        <div
+          class="drag-n-drop-area"
+          @dragover.prevent
+          @drop.prevent="dragFile"
+        >
           <div class="form-wrapper">
             <input type="file" @change="uploadFile" />
           </div>
         </div>
       </div>
       <div class="json-input-area col-sm-4">
+        <div class="mb-3">
+          <label class="form-label select-title"> Download file name </label>
+        </div>
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Recipient's username"
+            aria-label="Recipient's username"
+            aria-describedby="basic-addon2"
+            v-model="downloadFileName"
+          />
+          <span class="input-group-text extension-area" id="basic-addon2">{{
+            downloadFileType === "xlsx" ? ".xlsx" : ".csv"
+          }}</span>
+        </div>
+        <div class="mb-3">
+          <label class="form-label select-title"> Download file format </label>
+          <select class="form-control type-select" v-model="downloadFileType">
+            <option value="xlsx">XLSX</option>
+            <option value="csv">CSV</option>
+          </select>
+        </div>
         <button
-          class="btn btn-primary execute-button"
+          class="btn btn-primary execute-button w-100"
           @click="execDownload()"
           :disabled="isInvalidJson"
         >
@@ -37,7 +64,7 @@ export default {
       isInvalidJson: true,
       jsonObj: {},
       encodedUri: "",
-      csvFileName: "",
+      downloadFileName: "json-wizard",
       sourceFileName: "",
       downloadFileType: "xlsx",
       inputedJson: "",
@@ -72,8 +99,8 @@ export default {
           link.setAttribute("href", this.encodedUri);
           link.setAttribute(
             "download",
-            this.csvFileName.length > 0
-              ? `${this.csvFileName}.csv`
+            this.downloadFileName.length > 0
+              ? `${this.downloadFileName}.csv`
               : "json-wizard.csv"
           );
           document.body.appendChild(link);
@@ -96,8 +123,8 @@ export default {
       }
       writeXlsxFile(xlsxColumns, {
         fileName:
-          this.csvFileName.length > 0
-            ? `${this.csvFileName}.xlsx`
+          this.downloadFileName.length > 0
+            ? `${this.downloadFileName}.xlsx`
             : "json-wizard.xlsx",
       });
     },
@@ -111,7 +138,7 @@ export default {
       } catch (error) {
         console.error(error);
         this.isInvalidJson = true;
-        this.csvFileName = "";
+        this.downloadFileName = "";
         this.encodedUri = "";
         this.isInvalidJson = true;
       }
@@ -172,6 +199,17 @@ export default {
   outline: none !important;
 }
 .execute-button {
+  margin-top: 10px;
   width: 180px;
+}
+.select-title {
+  float: left;
+  font-size: 12px;
+}
+.extension-area {
+  width: 30px;
+}
+.type-select {
+  cursor: pointer;
 }
 </style>
