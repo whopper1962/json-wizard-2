@@ -7,6 +7,9 @@
           @dragover.prevent
           @drop.prevent="dragFile"
         >
+          <span class="file-form-notice">
+            Drop awesome JSON file here or select manually.
+          </span>
           <div class="form-wrapper">
             <input type="file" @change="uploadFile" />
           </div>
@@ -46,7 +49,19 @@
       </div>
     </div>
     <div class="json-editor-area">
-      <JsonEditor height="100%" :readOnly="false" v-model="json" />
+      <div class="json-editor-area-title">
+        <span class="float-start">Edit JSON</span>
+      </div>
+      <p
+        class="json-format-check-notice"
+        :class="{
+          'text-red': isInvalidJson,
+          'text-green': !isInvalidJson,
+        }"
+      >
+        {{ isInvalidJson ? "Invalid JSON" : "It's executable!'" }}
+      </p>
+      <JsonEditor height="500px" :readOnly="false" v-model="json" />
     </div>
   </div>
 </template>
@@ -74,6 +89,16 @@ export default {
       json: "",
       isInputed: false,
     };
+  },
+  watch: {
+    json(inputed) {
+      try {
+        this.isInvalidJson = false;
+        JSON.parse(inputed);
+      } catch {
+        this.isInvalidJson = true;
+      }
+    },
   },
   methods: {
     uploadFile(e) {
@@ -211,5 +236,29 @@ export default {
 }
 .type-select {
   cursor: pointer;
+}
+.file-form-notice {
+  font-size: 15px;
+}
+.json-editor-area-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: black solid;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+.json-format-check-notice {
+  text-align: left;
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: bold;
+}
+.text-green {
+  color: rgb(0, 0, 0);
+}
+.text-red {
+  color: red;
 }
 </style>
